@@ -17,7 +17,6 @@ func pull_mag(blade: RigidBody2D) -> float:
 	return d_curve(blade.global_position.distance_to(univ_ctr))
 
 func pull_dir(blade: RigidBody2D) -> Vector2:
-	print(blade.get_parent().position)
 	return (univ_ctr - blade.global_position).normalized()
 	
 func apply_pull(blade: RigidBody2D) -> void:
