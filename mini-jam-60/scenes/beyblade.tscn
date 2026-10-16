@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bharswpihsav5"]
 
+[ext_resource type="Script" uid="uid://w3r5hv2h3d0j" path="res://scenes/beyblade.gd" id="1_fykyv"]
 [ext_resource type="Texture2D" uid="uid://b7hfmukyal6uw" path="res://assets/Pieces of Trash, Trash Can Lid, and Trash Bag.png" id="1_nyra1"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fykyv"]
@@ -23,6 +24,7 @@ animations = [{
 }]
 
 [node name="Beyblade" type="Node2D" unique_id=1377562879]
+script = ExtResource("1_fykyv")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=158517162]
 sprite_frames = SubResource("SpriteFrames_0y7vr")
