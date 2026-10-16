@@ -1,0 +1,150 @@
+[gd_scene format=3 uid="uid://ch0n3j3n2eyev"]
+
+[ext_resource type="Texture2D" uid="uid://deg5pfwy3xxtq" path="res://assets/trashscreen.png" id="1_6uexj"]
+[ext_resource type="Texture2D" uid="uid://q874wj723li" path="res://assets/sign.png" id="2_ojm1d"]
+[ext_resource type="Script" uid="uid://dgh8qbld8u3ei" path="res://scenes/mainu_btn.gd" id="3_ojm1d"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_mq0dr"]
+
+[node name="mainu" type="Node2D" unique_id=2047232991]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1839580195]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=208821046]
+shape = SubResource("WorldBoundaryShape2D_mq0dr")
+
+[node name="TextureRect" type="TextureRect" parent="Area2D/CollisionShape2D" unique_id=1158499125]
+offset_left = 252.0
+offset_top = 3.0
+offset_right = 892.0
+offset_bottom = 643.0
+texture = ExtResource("1_6uexj")
+
+[node name="Play" type="TextureRect" parent="Area2D/CollisionShape2D" unique_id=1526536601]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 438.0
+offset_top = 147.0
+offset_right = 630.0
+offset_bottom = 211.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ojm1d")
+script = ExtResource("3_ojm1d")
+
+[node name="Label" type="Label" parent="Area2D/CollisionShape2D/Play" unique_id=2082363222]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -184.0
+offset_top = -55.0
+offset_right = 184.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.72823787, 0.13939273, 0.9484629, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 33
+text = "LET IT RIP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="Area2D/CollisionShape2D/Play" unique_id=624506968]
+layout_mode = 0
+offset_left = 2.9999962
+offset_right = 42.999996
+offset_bottom = 40.0
+scale = Vector2(4.648671, 1.600504)
+
+[node name="Settings" type="TextureRect" parent="Area2D/CollisionShape2D" unique_id=1400937145]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 574.0
+offset_top = 339.0
+offset_right = 766.0
+offset_bottom = 403.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ojm1d")
+script = ExtResource("3_ojm1d")
+
+[node name="Label" type="Label" parent="Area2D/CollisionShape2D/Settings" unique_id=1923524679]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -184.0
+offset_top = -55.0
+offset_right = 184.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.35114843, 0.9495668, 0.4031567, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 33
+text = "SETTINGS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="Area2D/CollisionShape2D/Settings" unique_id=390527066]
+layout_mode = 0
+offset_left = 2.9999962
+offset_right = 42.999996
+offset_bottom = 40.0
+scale = Vector2(4.648671, 1.600504)
+
+[node name="Exit" type="TextureRect" parent="Area2D/CollisionShape2D" unique_id=681107295]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 350.0
+offset_top = 431.0
+offset_right = 542.0
+offset_bottom = 495.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ojm1d")
+script = ExtResource("3_ojm1d")
+
+[node name="Label" type="Label" parent="Area2D/CollisionShape2D/Exit" unique_id=1588733502]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -184.0
+offset_top = -55.0
+offset_right = 184.0
+offset_bottom = 55.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.87926185, 0.20065817, 0.37481073, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 6
+theme_override_font_sizes/font_size = 33
+text = "QUIT"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="TextureButton" type="TextureButton" parent="Area2D/CollisionShape2D/Exit" unique_id=1307678673]
+layout_mode = 0
+offset_left = 2.9999962
+offset_right = 42.999996
+offset_bottom = 40.0
+scale = Vector2(4.648671, 1.600504)
