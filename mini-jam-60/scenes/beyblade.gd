@@ -11,6 +11,8 @@ const MAX_HEALTH = 100
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	fysic = self.get_child(0)
+	fysic.contact_monitor = true
+	fysic.max_contacts_reported = 10
 	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
