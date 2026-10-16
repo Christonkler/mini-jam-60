@@ -9,6 +9,8 @@ var push_temp: Vector2
 var univ_ctr: Vector2
 
 
+
+
 func d_curve(dist: float) -> float:
 	# how does the arena pull force diminish with distance
 	return dist
@@ -36,6 +38,12 @@ func _ready() -> void:
 	fysic_2.set_axis_velocity(push_temp)
 	univ_ctr.x = 0
 	univ_ctr.y = 0
+	
+	fysic_1.contact_monitor = true
+	fysic_1.max_contacts_reported = 1
+	
+	fysic_2.contact_monitor = true
+	fysic_2.max_contacts_reported = 1
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

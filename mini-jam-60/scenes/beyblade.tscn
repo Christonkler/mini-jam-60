@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://w3r5hv2h3d0j" path="res://scenes/beyblade.gd" id="1_fykyv"]
 [ext_resource type="Texture2D" uid="uid://c0d3gkbw4krlm" path="res://assets/Trash Can Lid.png" id="2_qfx1t"]
+[ext_resource type="Script" uid="uid://du3padgbnc5mn" path="res://scenes/fysic.gd" id="2_v4apf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dxqae"]
 radius = 16.0
@@ -11,6 +12,7 @@ script = ExtResource("1_fykyv")
 
 [node name="fysic" type="RigidBody2D" parent="." unique_id=263942990]
 gravity_scale = 0.0
+script = ExtResource("2_v4apf")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="fysic" unique_id=131790039]
 shape = SubResource("CircleShape2D_dxqae")
