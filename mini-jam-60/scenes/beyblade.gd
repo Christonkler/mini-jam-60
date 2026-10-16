@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 @export_group("Blade Properties")
 @export var health: int
@@ -14,7 +14,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	self.rotation += delta
 	
 func take_damage(damage: int):
 	health -= damage

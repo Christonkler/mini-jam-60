@@ -1,33 +1,37 @@
 [gd_scene format=3 uid="uid://bharswpihsav5"]
 
 [ext_resource type="Script" uid="uid://w3r5hv2h3d0j" path="res://scenes/beyblade.gd" id="1_fykyv"]
-[ext_resource type="Texture2D" uid="uid://b7hfmukyal6uw" path="res://assets/Pieces of Trash, Trash Can Lid, and Trash Bag.png" id="1_nyra1"]
+[ext_resource type="Texture2D" uid="uid://c0d3gkbw4krlm" path="res://assets/Trash Can Lid.png" id="2_qfx1t"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fykyv"]
-atlas = ExtResource("1_nyra1")
-region = Rect2(0, 0, 32, 32)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_0y7vr"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_fykyv")
-}],
-"loop": 1,
-"name": &"beyblade_spinning",
-"speed": 5.0
-}, {
-"frames": [],
-"loop": 1,
-"name": &"default",
-"speed": 5.0
-}]
+[sub_resource type="CircleShape2D" id="CircleShape2D_dxqae"]
+radius = 295.71777
 
 [node name="Beyblade" type="Node2D" unique_id=1377562879]
+position = Vector2(581, 333)
+
+[node name="Control" type="Control" parent="." unique_id=1288573569]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=1088663836]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -7.75
+anchor_top = -7.225
+anchor_right = 6.1
+anchor_bottom = 6.625
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_qfx1t")
 script = ExtResource("1_fykyv")
+metadata/_edit_use_anchors_ = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=158517162]
-sprite_frames = SubResource("SpriteFrames_0y7vr")
-animation = &"beyblade_spinning"
+[node name="Area2D" type="Area2D" parent="Control/TextureRect" unique_id=1068212963]
+position = Vector2(311, 290)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=947571727]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/TextureRect/Area2D" unique_id=131790039]
+position = Vector2(-3, 3)
+shape = SubResource("CircleShape2D_dxqae")
