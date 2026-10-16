@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bytft6bvditoc"]
+
+[ext_resource type="Texture2D" uid="uid://dcmxqy8u75i4j" path="res://assets/Basic Arena.png" id="1_e05a3"]
+[ext_resource type="Script" uid="uid://cn4gbe1btt5gq" path="res://scenes/arena.gd" id="1_olpmc"]
+[ext_resource type="PackedScene" uid="uid://bharswpihsav5" path="res://scenes/beyblade.tscn" id="2_wl4x5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mq0dr"]
+radius = 126.00397
+
+[node name="Arena" type="Node2D" unique_id=1970999258]
+
+[node name="Control" type="Control" parent="." unique_id=1075877202]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_olpmc")
+
+[node name="TextureRect" type="TextureRect" parent="Control" unique_id=960757923]
+layout_mode = 0
+offset_left = -128.0
+offset_top = -128.0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("1_e05a3")
+expand_mode = 1
+
+[node name="Area2D" type="Area2D" parent="Control/TextureRect" unique_id=1144856986]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Control/TextureRect/Area2D" unique_id=1149927039]
+position = Vector2(128, 128)
+shape = SubResource("CircleShape2D_mq0dr")
+disabled = true
+
+[node name="Beyblade" parent="Control" unique_id=1377562879 instance=ExtResource("2_wl4x5")]
+z_index = 2
+position = Vector2(27, -102)
+
+[node name="Beyblade2" parent="Control" unique_id=312525177 instance=ExtResource("2_wl4x5")]
+z_index = 2
+position = Vector2(-37, 96)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=396469902]
+zoom = Vector2(2, 2)
