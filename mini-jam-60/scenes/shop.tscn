@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://123fj8apn028"]
+
+[ext_resource type="Texture2D" uid="uid://jss11q2b1gcn" path="res://assets/Shop Graphics.png" id="1_xfvoa"]
+[ext_resource type="Texture2D" uid="uid://x4oj2ol7vkwt" path="res://assets/Guy in Trash Can.png" id="2_1l46r"]
+[ext_resource type="Script" uid="uid://bvxksqx4avq6p" path="res://scenes/Oscar's Intro.tscn.gd" id="3_1l46r"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dxqae"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_032fp"]
+atlas = ExtResource("2_1l46r")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2fc2m"]
+atlas = ExtResource("2_1l46r")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8r1wq"]
+atlas = ExtResource("2_1l46r")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dxqae"]
+animations = [{
+"frames": [],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_032fp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2fc2m")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8r1wq")
+}],
+"loop": 0,
+"name": &"oscar_greeting",
+"speed": 3.0
+}]
+
+[node name="Shop" type="Node2D" unique_id=603100037]
+
+[node name="Area2D" type="Area2D" parent="." unique_id=365175581]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2119509834]
+shape = SubResource("RectangleShape2D_dxqae")
+
+[node name="Background2" type="TextureRect" parent="Area2D/CollisionShape2D" unique_id=341868381]
+anchors_preset = -1
+anchor_left = 0.45898438
+anchor_top = 0.025390625
+anchor_right = 1.2089844
+anchor_bottom = 0.7753906
+offset_left = 284.0
+offset_top = 5.0
+offset_right = 924.0
+offset_bottom = 645.0
+texture = ExtResource("1_xfvoa")
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D/CollisionShape2D/Background2" unique_id=698367952]
+position = Vector2(109, 525)
+scale = Vector2(5.0156255, 5.0156255)
+sprite_frames = SubResource("SpriteFrames_dxqae")
+animation = &"oscar_greeting"
+autoplay = "oscar_greeting"
+
+[node name="Oscar\'s Intro" type="RichTextLabel" parent="Area2D/CollisionShape2D/Background2" unique_id=441906237]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.378125
+anchor_top = 0.525
+anchor_right = 0.7277344
+anchor_bottom = 0.6851562
+offset_left = 52.0
+offset_top = 86.0
+offset_right = 128.0
+offset_bottom = 116.0
+theme_override_font_sizes/normal_font_size = 31
+text = "One man's trash 
+is another man's 
+treasure"
+scroll_active = false
+script = ExtResource("3_1l46r")
+metadata/_edit_use_anchors_ = true
+
+[node name="Shop Items" type="Node" parent="." unique_id=1333998334]
