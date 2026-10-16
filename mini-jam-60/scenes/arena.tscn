@@ -1,11 +1,61 @@
 [gd_scene format=3 uid="uid://bytft6bvditoc"]
 
-[ext_resource type="Texture2D" uid="uid://dcmxqy8u75i4j" path="res://assets/Basic Arena.png" id="1_e05a3"]
 [ext_resource type="Script" uid="uid://cn4gbe1btt5gq" path="res://scenes/arena.gd" id="1_olpmc"]
+[ext_resource type="Texture2D" uid="uid://c11mpxgpm7aa8" path="res://assets/rocket_start.png" id="2_olpmc"]
 [ext_resource type="PackedScene" uid="uid://bharswpihsav5" path="res://scenes/beyblade.tscn" id="2_wl4x5"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdvfk"]
+atlas = ExtResource("2_olpmc")
+region = Rect2(0, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7ft05"]
+atlas = ExtResource("2_olpmc")
+region = Rect2(256, 0, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4ag8t"]
+atlas = ExtResource("2_olpmc")
+region = Rect2(0, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dpxgc"]
+atlas = ExtResource("2_olpmc")
+region = Rect2(256, 256, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oexds"]
+atlas = ExtResource("2_olpmc")
+region = Rect2(0, 512, 256, 256)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_naajo"]
+atlas = ExtResource("2_olpmc")
+region = Rect2(256, 512, 256, 256)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7dvla"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xdvfk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7ft05")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4ag8t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dpxgc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oexds")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_naajo")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 12.0
+}]
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_mq0dr"]
-radius = 126.00397
+radius = 63.387695
 
 [node name="Arena" type="Node2D" unique_id=1970999258]
 
@@ -16,19 +66,15 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_olpmc")
 
-[node name="TextureRect" type="TextureRect" parent="Control" unique_id=960757923]
-layout_mode = 0
-offset_left = -128.0
-offset_top = -128.0
-offset_right = 128.0
-offset_bottom = 128.0
-texture = ExtResource("1_e05a3")
-expand_mode = 1
+[node name="TextureRect" type="AnimatedSprite2D" parent="Control" unique_id=519051354]
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_7dvla")
+autoplay = "default"
 
 [node name="Area2D" type="Area2D" parent="Control/TextureRect" unique_id=1144856986]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Control/TextureRect/Area2D" unique_id=1149927039]
-position = Vector2(128, 128)
+position = Vector2(0.5, 0)
 shape = SubResource("CircleShape2D_mq0dr")
 disabled = true
 
