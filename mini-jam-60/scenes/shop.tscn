@@ -1,8 +1,13 @@
 [gd_scene format=3 uid="uid://123fj8apn028"]
 
+[ext_resource type="Script" uid="uid://t70c8dj1pm4d" path="res://scenes/shop.gd" id="1_032fp"]
 [ext_resource type="Texture2D" uid="uid://jss11q2b1gcn" path="res://assets/Shop Graphics.png" id="1_xfvoa"]
 [ext_resource type="Texture2D" uid="uid://x4oj2ol7vkwt" path="res://assets/Guy in Trash Can.png" id="2_1l46r"]
 [ext_resource type="Script" uid="uid://bvxksqx4avq6p" path="res://scenes/Oscar's Intro.tscn.gd" id="3_1l46r"]
+[ext_resource type="Script" uid="uid://5k10t40o3rv" path="res://scripts/shop_background.gd" id="3_y6sft"]
+[ext_resource type="Script" uid="uid://8vqujgxwy0d" path="res://scenes/oscar's_outro.gd" id="5_2fc2m"]
+[ext_resource type="PackedScene" uid="uid://ds54bpi64an78" path="res://scenes/shop_item.tscn" id="6_8r1wq"]
+[ext_resource type="Script" uid="uid://baleftnhifqql" path="res://scripts/shop_items.gd" id="6_ajxib"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dxqae"]
 
@@ -41,13 +46,14 @@ animations = [{
 }]
 
 [node name="Shop" type="Node2D" unique_id=603100037]
+script = ExtResource("1_032fp")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=365175581]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2119509834]
 shape = SubResource("RectangleShape2D_dxqae")
 
-[node name="Background2" type="TextureRect" parent="Area2D/CollisionShape2D" unique_id=341868381]
+[node name="Shop Background" type="TextureRect" parent="Area2D/CollisionShape2D" unique_id=341868381]
 anchors_preset = -1
 anchor_left = 0.45898438
 anchor_top = 0.025390625
@@ -58,16 +64,17 @@ offset_top = 5.0
 offset_right = 924.0
 offset_bottom = 645.0
 texture = ExtResource("1_xfvoa")
+script = ExtResource("3_y6sft")
 metadata/_edit_use_anchors_ = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Area2D/CollisionShape2D/Background2" unique_id=698367952]
+[node name="Oscar Animated Sprite" type="AnimatedSprite2D" parent="Area2D/CollisionShape2D/Shop Background" unique_id=698367952]
 position = Vector2(109, 525)
 scale = Vector2(5.0156255, 5.0156255)
 sprite_frames = SubResource("SpriteFrames_dxqae")
 animation = &"oscar_greeting"
 autoplay = "oscar_greeting"
 
-[node name="Oscar\'s Intro" type="RichTextLabel" parent="Area2D/CollisionShape2D/Background2" unique_id=441906237]
+[node name="Oscar\'s Intro" type="RichTextLabel" parent="Area2D/CollisionShape2D/Shop Background" unique_id=441906237]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.378125
@@ -86,4 +93,42 @@ scroll_active = false
 script = ExtResource("3_1l46r")
 metadata/_edit_use_anchors_ = true
 
+[node name="Shop Instructions" type="Label" parent="Area2D/CollisionShape2D/Shop Background" unique_id=475798743]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 9.0
+offset_right = 642.0
+offset_bottom = 149.0
+theme_override_colors/font_shadow_color = Color(0.078431375, 0.07058824, 0.2, 1)
+theme_override_colors/font_outline_color = Color(0.7414494, 0.41293433, 0.3155123, 1)
+theme_override_font_sizes/font_size = 102
+text = "SELECT ONE"
+
+[node name="Oscar\'s Outro" type="RichTextLabel" parent="Area2D/CollisionShape2D/Shop Background" unique_id=1683066730]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.346875
+anchor_top = 0.55
+anchor_right = 0.734375
+anchor_bottom = 0.71015626
+offset_left = 52.0
+offset_top = 86.0
+offset_right = 128.0
+offset_bottom = 116.0
+theme_override_font_sizes/normal_font_size = 31
+text = "Don’t worry sweetie, you’re treasure to me"
+scroll_active = false
+script = ExtResource("5_2fc2m")
+metadata/_edit_use_anchors_ = true
+
 [node name="Shop Items" type="Node" parent="." unique_id=1333998334]
+script = ExtResource("6_ajxib")
+
+[node name="ShopItem" parent="Shop Items" unique_id=96194411 instance=ExtResource("6_8r1wq")]
+position = Vector2(736, 171)
+
+[node name="ShopItem2" parent="Shop Items" unique_id=519855894 instance=ExtResource("6_8r1wq")]
+position = Vector2(522, 165)
+
+[node name="ShopItem3" parent="Shop Items" unique_id=519441591 instance=ExtResource("6_8r1wq")]
+position = Vector2(314, 167)

@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://ds54bpi64an78"]
+
+[ext_resource type="Script" uid="uid://pqadbbht67gp" path="res://scenes/shop_item.gd" id="1_6gmg1"]
+[ext_resource type="Texture2D" uid="uid://dvk5igrlrf7q2" path="res://assets/Item Background.png" id="1_btjjm"]
+[ext_resource type="Script" uid="uid://kngl15ru041o" path="res://scenes/check_button.gd" id="1_lrx6i"]
+
+[node name="ShopItem" type="Node2D" unique_id=96194411]
+script = ExtResource("1_6gmg1")
+
+[node name="TextureButton" type="TextureButton" parent="." unique_id=414863713]
+offset_right = 168.0
+offset_bottom = 189.0
+texture_normal = ExtResource("1_btjjm")
+stretch_mode = 0
+script = ExtResource("1_lrx6i")

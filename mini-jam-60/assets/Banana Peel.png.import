@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b7hfmukyal6uw"
-path="res://.godot/imported/Pieces of Trash, Trash Can Lid, and Trash Bag.png-aabc2615030761b4bdc7374925bb38bf.ctex"
+uid="uid://tqshibr7mp7d"
+path="res://.godot/imported/Banana Peel.png-7deff1d503a4b6f88e6dcc51e127749f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Pieces of Trash, Trash Can Lid, and Trash Bag.png"
-dest_files=["res://.godot/imported/Pieces of Trash, Trash Can Lid, and Trash Bag.png-aabc2615030761b4bdc7374925bb38bf.ctex"]
+source_file="res://assets/Banana Peel.png"
+dest_files=["res://.godot/imported/Banana Peel.png-7deff1d503a4b6f88e6dcc51e127749f.ctex"]
 
 [params]
 
