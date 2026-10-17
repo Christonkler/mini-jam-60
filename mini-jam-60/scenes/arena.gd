@@ -65,7 +65,7 @@ func proc_blade(blade: RigidBody2D) -> void:
 		blade.get_parent().dead = true
 	if blade.angular_velocity < 3:
 		blade.get_parent().dead = true
-		
+
 
 
 func _process(delta: float) -> void:
