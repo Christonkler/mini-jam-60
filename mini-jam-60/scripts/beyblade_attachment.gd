@@ -1,8 +1,6 @@
 extends Node2D
 class_name Attaché
 
-signal item_attached
-
 var use_this_texture: Resource
 
 

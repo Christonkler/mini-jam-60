@@ -14,10 +14,10 @@ class_name MapData
 func nodes_connected(node1: Vector2, node2: Vector2) -> bool:
 	var found_connection : bool = false
 	var node_level : int
-	for level in range(len(trash_heap_nodes)):
-		for node in trash_heap_nodes[level]:
+	for this_level in range(len(trash_heap_nodes)):
+		for node in trash_heap_nodes[this_level]:
 			if node == node1:
-				node_level = level
+				node_level = this_level
 				break
 				
 	var current_map : Dictionary

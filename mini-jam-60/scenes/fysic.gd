@@ -5,7 +5,7 @@ var hit = false
 func _ready() -> void:
 	pass
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if (get_colliding_bodies().size() > 0):
 		on_body_entered()
 

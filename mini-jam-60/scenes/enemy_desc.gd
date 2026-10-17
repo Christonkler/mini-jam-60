@@ -15,8 +15,8 @@ func make_visible(enemy_picture: Texture2D, enemy_description: Texture2D):
 func make_invisible() -> void:
 	self.visible = false
 	
-func move_desc(position : String) -> void:
-	if position == "Left":
+func move_desc(desc_position : String) -> void:
+	if desc_position == "Left":
 		self.set_anchors_and_offsets_preset(Control.PRESET_CENTER_LEFT)
-	elif position == "Right":
+	elif desc_position == "Right":
 		self.set_anchors_and_offsets_preset(Control.PRESET_CENTER_RIGHT)
