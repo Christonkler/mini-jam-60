@@ -276,7 +276,7 @@ func start_battle(node) -> void:
 	
 	arena.get_node("Control").enemy = enemy
 	
-	get_tree().root.add_child(enemy)
+	arena.get_node("Control").add_child(enemy)
 	get_tree().root.add_child(arena)
 	queue_free()
 		
