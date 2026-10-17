@@ -14,6 +14,9 @@ const X_SPACE : float = (1.0 / NUM_LEVELS)
 
 const NUM_TRASH_HEAP_TEXTURES = 3
 
+signal node_visible
+signal node_invisible
+
 var trash_heap_sprites = {
 	1: preload("res://assets/TrashHeap1.png"),
 	2: preload("res://assets/TrashHeap2.png"),
@@ -172,8 +175,11 @@ func _ready() -> void:
 				elif i < map_data.level:
 					new_node = create_button(node, map_used_battle_button, map_used_battle_button)
 				elif map_data.nodes_connected(node, map_data.beaten_nodes[-1]):
+					# TODO: Add a callback to the hover function that displays enemy data texture rect
 					new_node = create_button(node, map_battle_button_hover, map_battle_button)
 					new_node.pressed.connect(start_battle.bind(node))
+					new_node.mouse_entered.connect(make_visible.bind(node))
+					new_node.mouse_exited.connect(make_invisible.bind(node))
 				else:
 					new_node = create_button(node, map_used_battle_button, map_used_battle_button)
 				self.add_child(new_node)
@@ -185,6 +191,14 @@ func _ready() -> void:
 		generate_nodes()
 		generate_map()
 		print(ResourceSaver.save(map_data, "user://map_data.res"))
+
+func make_visible(node) -> void:
+	var enemy_picture = load("res://assets/Oscar the Grouch.png")
+	var enemy_description = load("res://assets/Apple Core.png")
+	node_visible.emit(enemy_picture, enemy_description)
+	
+func make_invisible(node) -> void:
+	node_invisible.emit()
 
 func _draw():
 	draw_multiline(map_data.trash_heap_map, Color.DARK_RED, 5)
