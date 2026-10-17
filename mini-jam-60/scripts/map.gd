@@ -1,9 +1,12 @@
 extends Control
 
+# Packed vector array to draw
 var trash_heap_map : PackedVector2Array
 var trash_heap_nodes : Array[Array]
 var level_map : Array[Dictionary]
-var rng = RandomNumberGenerator.new()	
+var rng = RandomNumberGenerator.new()
+var level : int = 0
+var texture_button_data : Array[Array]
 
 var number_of_paths = [1, 2, 3]
 var path_weights = PackedFloat32Array([0.5, 2, 0.5])
@@ -20,6 +23,9 @@ var trash_heap_sprites = {
 	2: preload("res://assets/TrashHeap2.png"),
 	3: preload("res://assets/TrashHeap3.png")
 }
+var map_battle_button = preload("res://assets/map_battle_button.png")
+var map_used_battle_button = preload("res://assets/used_map_battle_button.png")
+var map_battle_button_hover = preload("res://assets/map_battle_button_hover.png")
 
 const path_map_options : Array[Array] = [
 	[ # 1 input node
@@ -155,17 +161,59 @@ const path_map_options : Array[Array] = [
 ]
 
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:	
+func _ready() -> void:
 	# Wait for the scene to finish loading so we have the size given to us by the container
 	await get_tree().process_frame
 	
-	self.generate_nodes()
-	self.generate_map()
+	if load_from_file():
+		self.queue_redraw()
+	else:
+		self.generate_nodes()
+		self.generate_map()
 	
 func _draw():
 	draw_multiline(trash_heap_map, Color.DARK_RED, 5)
 	draw_multiline(trash_heap_map, Color.BLACK, 3)
 	
+func save_to_file():
+	var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
+	save_file.store_line(JSON.stringify(save()))
+	
+func save():
+	var save_dict = {
+		"filename" : get_scene_file_path(),
+		"map_vectors": trash_heap_map,
+		"map_nodes": trash_heap_nodes,
+		"level": level
+	}
+	return save_dict
+	
+func load_from_file():
+	var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
+	var map_name : String = get_scene_file_path()
+	var map_data_found : bool = false
+
+	while save_file and save_file.get_position() < save_file.get_length():
+		var json_string = save_file.get_line()
+
+		# Creates the helper class to interact with JSON.
+		var json = JSON.new()
+		
+		var parse_result = json.parse(json_string)
+		if not parse_result == OK:
+			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
+			continue
+
+		# Get the data from the JSON object.
+		var node_data = json.data
+		
+		if node_data["filename"] == map_name:
+			trash_heap_map = node_data["map_vectors"]
+			trash_heap_nodes = node_data["map_nodes"]
+			map_data_found = true
+			
+	return map_data_found
+
 func generate_nodes() -> void:
 	var x_location : int # Final x position
 	var y_location : int # Final y position
@@ -175,18 +223,21 @@ func generate_nodes() -> void:
 	
 	var num_nodes_in_level : int
 	var level_nodes : Array[Vector2]
-	var new_node : Panel
+	var new_node : TextureButton
 	var new_style_box = StyleBoxFlat.new()
 	new_style_box.bg_color=Color.ALICE_BLUE
 
 	# Iterate through each 'level' of the map
 	for level in range(1, NUM_LEVELS+1):
 		
-		# Pick a random number of nodes based on a weight rng function
+		# If this is the first level or the last, only use one node.
+		# Good for boss fights / intro level
 		if level == 1 or level == NUM_LEVELS:
 			num_nodes_in_level = 1
 		else:
+			# Pick a random number of nodes based on a weight rng function
 			num_nodes_in_level = number_of_paths[rng.rand_weighted(path_weights)]
+
 		x_static = self.size.x * (X_SPACE*(level-1))
 		y_static = self.size.y / num_nodes_in_level
 		
@@ -204,12 +255,15 @@ func generate_nodes() -> void:
 			
 			# Instantiate a new node to be visible here.
 			# TODO: Replace these with some sort of interface to show the enemy (or not?)
-			new_node = Panel.new()
-			new_node.position = Vector2(x_location, y_location)
-			new_node.add_theme_stylebox_override('panel', new_style_box)
-			new_node.size = Vector2(10,10)
+			new_node = TextureButton.new()
+			new_node.texture_normal = map_battle_button
+			new_node.texture_hover = map_battle_button_hover
+			new_node.size = map_battle_button.get_size()
+			new_node.position = Vector2(x_location - (new_node.size.x / 2), y_location - (new_node.size.y / 2))
+			#new_node.stretch_mode=TextureButton.STRETCH_KEEP_CENTERED
 			
 			self.add_child(new_node)
+
 			level_nodes.append(Vector2(x_location, y_location))
 		trash_heap_nodes.append(level_nodes)
 
@@ -270,7 +324,6 @@ func add_random_trash_heaps() -> void:
 				if len(points) > 2:
 					fill_triangle_with_trash(points)
 					points.remove_at(0)
-				
 
 func fill_triangle_with_trash(points: Array[Vector2]):
 	var point1 : Vector2 = points[0]
