@@ -38,7 +38,7 @@ func walk_dir(blade: RigidBody2D) -> Vector2:
 	return Vector2(-ctr_dir.y, ctr_dir.x)
 	
 func apply_pull(blade: RigidBody2D) -> void:
-	if not blade.dead:
+	if not blade.get_parent().dead:
 		blade.apply_central_force(pull_mag(blade) * pull_dir(blade))
 		blade.apply_central_force(walk_mag(blade) * walk_dir(blade))
 
