@@ -66,12 +66,9 @@ func _ready() -> void:
 	hitbox = $TextureRect/Area2D
 	$needle.pivot_offset = Vector2(64, 20)
 	$needle2.pivot_offset = Vector2(64, 20)
-	$PlayerBeyblade.fysic.linear_velocity = Vector2(80, 0)
-	enemy.fysic.linear_velocity = Vector2(-80, 0)
-	$PlayerBeyblade.fysic.angular_velocity = 50
-	$Beyblade.fysic.linear_velocity = Vector2(180, 0)
+	$PlayerBeyblade.fysic.linear_velocity = Vector2(180, 0)
 	enemy.fysic.linear_velocity = Vector2(-180, 0)
-	$Beyblade.fysic.angular_velocity = 50
+	$PlayerBeyblade.fysic.angular_velocity = 50
 	enemy.fysic.angular_velocity = 50
 	enemy.position = Vector2(84,-93)
 	init_avel = $PlayerBeyblade.fysic.angular_velocity
