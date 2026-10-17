@@ -9,7 +9,8 @@ var itemTextures: Array[Resource] = [
 	preload("res://assets/Moldy Cheese.png"),
 	preload("res://assets/Old Can.png"),
 	preload("res://assets/Pistachio.png"),
-	preload("res://assets/Wad of Paper.png")
+	preload("res://assets/Wad of Paper.png"),
+	preload("res://assets/Straw.png")
 ]
 
 var item_purchased = false
