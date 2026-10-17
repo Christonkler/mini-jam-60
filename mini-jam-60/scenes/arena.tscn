@@ -1,16 +1,17 @@
 [gd_scene format=3 uid="uid://bytft6bvditoc"]
 
-[ext_resource type="Script" uid="uid://cn4gbe1btt5gq" path="res://scenes/arena.gd" id="1_olpmc"]
-[ext_resource type="Texture2D" uid="uid://c11mpxgpm7aa8" path="res://assets/rocket_start.png" id="2_olpmc"]
+[ext_resource type="Script" uid="uid://c57ua401f4nie" path="res://scenes/arena.gd" id="1_olpmc"]
+[ext_resource type="Texture2D" uid="uid://d3cyax1a3jl7g" path="res://assets/rocket_start.png" id="2_olpmc"]
 [ext_resource type="PackedScene" uid="uid://bharswpihsav5" path="res://scenes/beyblade.tscn" id="2_wl4x5"]
 [ext_resource type="PackedScene" uid="uid://dnmqwrrhrsmp7" path="res://scenes/PlayerBeyblade.tscn" id="3_k1k1x"]
-[ext_resource type="Script" uid="uid://b1u1po8dveuhs" path="res://scenes/match_result_screen.gd" id="4_xdvfk"]
-[ext_resource type="Texture2D" uid="uid://bs8vb4l42fspa" path="res://assets/Fast Forward Unpressed.png" id="5_4ag8t"]
-[ext_resource type="Texture2D" uid="uid://cr8lvkkt6w2re" path="res://assets/Fast Forward Pressed.png" id="6_dpxgc"]
+[ext_resource type="Script" uid="uid://cxqex0veyb565" path="res://scenes/match_result_screen.gd" id="4_xdvfk"]
+[ext_resource type="Texture2D" uid="uid://c0lydgamjatuc" path="res://assets/Fast Forward Unpressed.png" id="5_4ag8t"]
+[ext_resource type="Texture2D" uid="uid://dwh7i2m60eypl" path="res://assets/EndText/victory.png" id="6_ajq0i"]
+[ext_resource type="Texture2D" uid="uid://dq8flng8tdwdr" path="res://assets/Fast Forward Pressed.png" id="6_dpxgc"]
 [ext_resource type="Script" uid="uid://b2bp7pe331p0x" path="res://scenes/fast_forward_button.gd" id="7_dpxgc"]
-[ext_resource type="Texture2D" uid="uid://b7e8ixjhhyyys" path="res://assets/Tacho/TachoTopLeft.png" id="8_naajo"]
-[ext_resource type="Texture2D" uid="uid://8a0ln5yiwbtm" path="res://assets/Tacho/TachoNeedle.png" id="9_41jku"]
-[ext_resource type="Texture2D" uid="uid://0wiy4vgqdfgg" path="res://assets/Tacho/TachoBottomRight.png" id="10_41jku"]
+[ext_resource type="Texture2D" uid="uid://b6vl2bykbwg0d" path="res://assets/Tacho/TachoTopLeft.png" id="8_naajo"]
+[ext_resource type="Texture2D" uid="uid://dvykomf6acy00" path="res://assets/Tacho/TachoNeedle.png" id="9_41jku"]
+[ext_resource type="Texture2D" uid="uid://vav5ptsltj8u" path="res://assets/Tacho/TachoBottomRight.png" id="10_41jku"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xdvfk"]
 atlas = ExtResource("2_olpmc")
@@ -86,6 +87,7 @@ position = Vector2(0.5, 0)
 shape = SubResource("CircleShape2D_mq0dr")
 
 [node name="PlayerBeyblade" parent="Control" unique_id=1012626383 instance=ExtResource("3_k1k1x")]
+position = Vector2(-88, 81)
 
 [node name="Beyblade2" parent="Control" unique_id=312525177 instance=ExtResource("2_wl4x5")]
 z_index = 2
@@ -98,15 +100,12 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("4_xdvfk")
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Control/MatchResultScreen" unique_id=357556839]
+[node name="TextureRect" type="TextureRect" parent="Control/MatchResultScreen" unique_id=96813502]
 layout_mode = 0
-offset_left = -53.0
-offset_top = -39.0
-offset_right = 80.0
-offset_bottom = 22.0
-theme_override_colors/font_shadow_color = Color(0.2627451, 0.1764706, 0.02745098, 1)
-theme_override_font_sizes/normal_font_size = 25
-text = "YOU LOST"
+offset_left = -128.0
+offset_top = -64.0
+scale = Vector2(2, 2)
+texture = ExtResource("6_ajq0i")
 
 [node name="FastForwardButton" type="TextureButton" parent="Control" unique_id=1010230549]
 layout_mode = 0

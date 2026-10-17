@@ -3,9 +3,12 @@ extends TextureRect
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	$RichTextLabel.visible = false
+	$TextureRect.visible = false
 
 
 func displayMatchResultMessage(matchResult: String):
-	$RichTextLabel.visible = true
-	$RichTextLabel.text = matchResult
+	$TextureRect.visible = true
+	if matchResult == "WINNER":
+		$TextureRect.texture = preload("res://assets/EndText/victory.png")
+	else:
+		$TextureRect.texture = preload("res://assets/EndText/defeat.png")
