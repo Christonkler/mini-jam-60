@@ -1,13 +1,9 @@
 extends Control
 
 # Packed vector array to draw
-var trash_heap_map : PackedVector2Array
-var trash_heap_nodes : Array[Array]
-var level_map : Array[Dictionary]
-var rng = RandomNumberGenerator.new()
-var level : int = 0
-var texture_button_data : Array[Array]
+@export var map_data : MapData
 
+var rng = RandomNumberGenerator.new()
 var number_of_paths = [1, 2, 3]
 var path_weights = PackedFloat32Array([0.5, 2, 0.5])
 
@@ -26,6 +22,7 @@ var trash_heap_sprites = {
 var map_battle_button = preload("res://assets/map_battle_button.png")
 var map_used_battle_button = preload("res://assets/used_map_battle_button.png")
 var map_battle_button_hover = preload("res://assets/map_battle_button_hover.png")
+var map_battle_beaten_button = preload("res://assets/beaten_map_battle_button.png")
 
 const path_map_options : Array[Array] = [
 	[ # 1 input node
@@ -164,55 +161,34 @@ const path_map_options : Array[Array] = [
 func _ready() -> void:
 	# Wait for the scene to finish loading so we have the size given to us by the container
 	await get_tree().process_frame
-	
-	if load_from_file():
+	map_data = ResourceLoader.load("user://map_data.res")
+	if map_data:
+		var new_node : TextureButton
+		var i : int = 0
+		for level in map_data.trash_heap_nodes:
+			for node in level:
+				if node in map_data.beaten_nodes:
+					new_node = create_button(node, map_battle_beaten_button, map_battle_beaten_button)
+				elif i < map_data.level:
+					new_node = create_button(node, map_used_battle_button, map_used_battle_button)
+				elif map_data.nodes_connected(node, map_data.beaten_nodes[-1]):
+					new_node = create_button(node, map_battle_button_hover, map_battle_button)
+					new_node.pressed.connect(start_battle.bind(node))
+				else:
+					new_node = create_button(node, map_used_battle_button, map_used_battle_button)
+				self.add_child(new_node)
+			i += 1
+			
 		self.queue_redraw()
 	else:
-		self.generate_nodes()
-		self.generate_map()
-	
+		map_data = MapData.new()
+		generate_nodes()
+		generate_map()
+		print(ResourceSaver.save(map_data, "user://map_data.res"))
+
 func _draw():
-	draw_multiline(trash_heap_map, Color.DARK_RED, 5)
-	draw_multiline(trash_heap_map, Color.BLACK, 3)
-	
-func save_to_file():
-	var save_file = FileAccess.open("user://savegame.save", FileAccess.WRITE)
-	save_file.store_line(JSON.stringify(save()))
-	
-func save():
-	var save_dict = {
-		"filename" : get_scene_file_path(),
-		"map_vectors": trash_heap_map,
-		"map_nodes": trash_heap_nodes,
-		"level": level
-	}
-	return save_dict
-	
-func load_from_file():
-	var save_file = FileAccess.open("user://savegame.save", FileAccess.READ)
-	var map_name : String = get_scene_file_path()
-	var map_data_found : bool = false
-
-	while save_file and save_file.get_position() < save_file.get_length():
-		var json_string = save_file.get_line()
-
-		# Creates the helper class to interact with JSON.
-		var json = JSON.new()
-		
-		var parse_result = json.parse(json_string)
-		if not parse_result == OK:
-			print("JSON Parse Error: ", json.get_error_message(), " in ", json_string, " at line ", json.get_error_line())
-			continue
-
-		# Get the data from the JSON object.
-		var node_data = json.data
-		
-		if node_data["filename"] == map_name:
-			trash_heap_map = node_data["map_vectors"]
-			trash_heap_nodes = node_data["map_nodes"]
-			map_data_found = true
-			
-	return map_data_found
+	draw_multiline(map_data.trash_heap_map, Color.DARK_RED, 5)
+	draw_multiline(map_data.trash_heap_map, Color.BLACK, 3)
 
 func generate_nodes() -> void:
 	var x_location : int # Final x position
@@ -255,17 +231,31 @@ func generate_nodes() -> void:
 			
 			# Instantiate a new node to be visible here.
 			# TODO: Replace these with some sort of interface to show the enemy (or not?)
-			new_node = TextureButton.new()
-			new_node.texture_normal = map_battle_button
-			new_node.texture_hover = map_battle_button_hover
-			new_node.size = map_battle_button.get_size()
-			new_node.position = Vector2(x_location - (new_node.size.x / 2), y_location - (new_node.size.y / 2))
-			#new_node.stretch_mode=TextureButton.STRETCH_KEEP_CENTERED
+			if level == 1:
+				new_node = create_button(Vector2(x_location, y_location), map_battle_button_hover, map_battle_button)
+				new_node.pressed.connect(start_battle.bind(Vector2(x_location, y_location)))
+			else:
+				new_node = create_button(Vector2(x_location, y_location), map_used_battle_button, map_used_battle_button)
 			
 			self.add_child(new_node)
 
 			level_nodes.append(Vector2(x_location, y_location))
-		trash_heap_nodes.append(level_nodes)
+		map_data.trash_heap_nodes.append(level_nodes)
+		
+func start_battle(node) -> void:
+	map_data.level += 1
+	map_data.beaten_nodes.append(node)
+	ResourceSaver.save(map_data, "user://map_data.res")
+	get_tree().change_scene_to_file("res://scenes/arena.tscn")
+		
+func create_button(pos: Vector2, texture_hover: Texture2D, texture_normal: Texture2D) -> TextureButton:
+	var new_node : TextureButton
+	new_node = TextureButton.new()
+	new_node.texture_normal = texture_normal
+	new_node.texture_hover = texture_hover
+	new_node.size = map_battle_button.get_size()
+	new_node.position = Vector2(pos.x - (new_node.size.x / 2), pos.y - (new_node.size.y / 2))
+	return new_node
 
 func generate_map() -> void:
 	var cur_level_nodes : int
@@ -278,29 +268,29 @@ func generate_map() -> void:
 	var chosen_end_points : Array
 	
 	# Iterate through all the levels
-	for level in range(len(trash_heap_nodes)-1):
-		cur_level_nodes = len(trash_heap_nodes[level])
-		next_level_nodes = len(trash_heap_nodes[level+1])
+	for level in range(len(map_data.trash_heap_nodes)-1):
+		cur_level_nodes = len(map_data.trash_heap_nodes[level])
+		next_level_nodes = len(map_data.trash_heap_nodes[level+1])
 		
 		# Get all map options for this input / output combination
 		map_options = path_map_options[cur_level_nodes-1][next_level_nodes-1] # -1 since we're 0 indexed
 		
 		# Randomly choose a map
 		chosen_map = map_options[rng.randf_range(0, len(map_options))]
-		level_map.append(chosen_map)
+		map_data.level_map.append(chosen_map)
 		
 		# Iterate through the dictionary and create the vectors
 		for key in chosen_map.keys():
-			line_start = trash_heap_nodes[level][key-1]
+			line_start = map_data.trash_heap_nodes[level][key-1]
 			
 			# Get the list of endpoints this starting node maps to
 			chosen_end_points = chosen_map[key]
 			
 			# Append each vector
 			for end_point in chosen_end_points:
-				line_end = trash_heap_nodes[level+1][end_point-1] # -1 since we're 0 indexed
-				trash_heap_map.append(line_start)
-				trash_heap_map.append(line_end)
+				line_end = map_data.trash_heap_nodes[level+1][end_point-1] # -1 since we're 0 indexed
+				map_data.trash_heap_map.append(line_start)
+				map_data.trash_heap_map.append(line_end)
 	
 	#self.add_random_trash_heaps()
 	self.queue_redraw()
@@ -309,18 +299,18 @@ func add_random_trash_heaps() -> void:
 	var points : Array[Vector2]
 	var current_map : Dictionary
 	
-	for i in range(len(trash_heap_nodes)-1):
-		current_map = level_map[i]
+	for i in range(len(map_data.trash_heap_nodes)-1):
+		current_map = map_data.level_map[i]
 		points = []
 		
-		if len(trash_heap_nodes[i]) == 1 and len(trash_heap_nodes[i+1]) == 1:
+		if len(map_data.trash_heap_nodes[i]) == 1 and len(map_data.trash_heap_nodes[i+1]) == 1:
 			continue
 
-		for input_node in level_map[i].keys():
-			points.append(trash_heap_nodes[i][input_node-1])
+		for input_node in map_data.level_map[i].keys():
+			points.append(map_data.trash_heap_nodes[i][input_node-1])
 				
-			for output_node in level_map[i][input_node]:
-				points.append(trash_heap_nodes[i+1][output_node-1])
+			for output_node in map_data.level_map[i][input_node]:
+				points.append(map_data.trash_heap_nodes[i+1][output_node-1])
 				if len(points) > 2:
 					fill_triangle_with_trash(points)
 					points.remove_at(0)

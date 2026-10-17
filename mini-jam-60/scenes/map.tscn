@@ -2,9 +2,14 @@
 
 [ext_resource type="Script" uid="uid://dh6454vx7wyb3" path="res://scripts/margin_container.gd" id="1_paxxb"]
 [ext_resource type="Script" uid="uid://dtxatga6wftfv" path="res://scripts/map.gd" id="2_gldc4"]
+[ext_resource type="Script" uid="uid://b2k7gq6bm0mn8" path="res://scripts/map_resource.gd" id="3_gldc4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wijl4"]
 bg_color = Color(0.2136743, 0.08445477, 0.0036598383, 1)
+
+[sub_resource type="Resource" id="Resource_paxxb"]
+script = ExtResource("3_gldc4")
+metadata/_custom_type_script = "uid://b2k7gq6bm0mn8"
 
 [node name="Panel" type="Panel" unique_id=1700366192 groups=["map_data"]]
 anchors_preset = 15
@@ -30,3 +35,4 @@ script = ExtResource("1_paxxb")
 [node name="Control" type="Control" parent="MarginContainer" unique_id=1016642362]
 layout_mode = 2
 script = ExtResource("2_gldc4")
+map_data = SubResource("Resource_paxxb")

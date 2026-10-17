@@ -8,8 +8,8 @@ func press_button():
 	var labl: Label = self.get_child(0)
 	var txt: String = labl.text
 	if txt == "LET IT RIP":
-		if FileAccess.file_exists("user://savegame.save"):
-			DirAccess.remove_absolute("user://savegame.save")
+		if FileAccess.file_exists("user://map_data.res"):
+			DirAccess.remove_absolute("user://map_data.res")
 		get_tree().change_scene_to_file("res://scenes/map.tscn")
 	elif txt == "SETTINGS":
 		get_tree().change_scene_to_file("res://scenes/shop.tscn")
