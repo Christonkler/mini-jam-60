@@ -16,6 +16,7 @@ const NUM_TRASH_HEAP_TEXTURES = 3
 
 signal node_visible
 signal node_invisible
+signal move_desc
 
 var trash_heap_sprites = {
 	1: preload("res://assets/TrashHeap1.png"),
@@ -173,8 +174,9 @@ func _ready() -> void:
 				if node in map_data.beaten_nodes:
 					new_node = create_button(node, map_battle_beaten_button, map_battle_beaten_button)
 				elif i < map_data.level:
-					new_node = create_button(node, map_used_battle_button, map_used_battle_button)
-				elif map_data.nodes_connected(node, map_data.beaten_nodes[-1]):
+					new_node = create_button(node, map_used_battle_button, map_used_battle_button)					
+				elif (len(map_data.beaten_nodes) == 0 and i == 0) or \
+					 (len(map_data.beaten_nodes) and map_data.nodes_connected(node, map_data.beaten_nodes[-1])):
 					# TODO: Add a callback to the hover function that displays enemy data texture rect
 					new_node = create_button(node, map_battle_button_hover, map_battle_button)
 					new_node.pressed.connect(start_battle.bind(node))
@@ -185,6 +187,11 @@ func _ready() -> void:
 				self.add_child(new_node)
 			i += 1
 			
+		if map_data.level > 3:
+			move_desc.emit("Left")
+		elif map_data.level <= 3:
+			move_desc.emit("Right")
+			
 		self.queue_redraw()
 	else:
 		map_data = MapData.new()
@@ -192,17 +199,18 @@ func _ready() -> void:
 		generate_map()
 		print(ResourceSaver.save(map_data, "user://map_data.res"))
 
-func make_visible(node) -> void:
+func make_visible(_node) -> void:
 	var enemy_picture = load("res://assets/Oscar the Grouch.png")
 	var enemy_description = load("res://assets/Apple Core.png")
 	node_visible.emit(enemy_picture, enemy_description)
 	
-func make_invisible(node) -> void:
+func make_invisible(_node) -> void:
 	node_invisible.emit()
 
 func _draw():
-	draw_multiline(map_data.trash_heap_map, Color.DARK_RED, 5)
-	draw_multiline(map_data.trash_heap_map, Color.BLACK, 3)
+	if len(map_data.trash_heap_map):
+		draw_multiline(map_data.trash_heap_map, Color.DARK_RED, 5)
+		draw_multiline(map_data.trash_heap_map, Color.BLACK, 3)
 
 func generate_nodes() -> void:
 	var x_location : int # Final x position
@@ -311,10 +319,10 @@ func generate_map() -> void:
 	
 func add_random_trash_heaps() -> void:
 	var points : Array[Vector2]
-	var current_map : Dictionary
+	var _current_map : Dictionary
 	
 	for i in range(len(map_data.trash_heap_nodes)-1):
-		current_map = map_data.level_map[i]
+		_current_map = map_data.level_map[i]
 		points = []
 		
 		if len(map_data.trash_heap_nodes[i]) == 1 and len(map_data.trash_heap_nodes[i+1]) == 1:
@@ -348,7 +356,7 @@ func fill_triangle_with_trash(points: Array[Vector2]):
 				trash_heap.position = Vector2(x,y)
 				trash_heap.size = Vector2(1,1)
 				
-				random_trash_heap_texture = rng.randf_range(1, NUM_TRASH_HEAP_TEXTURES+1)
+				random_trash_heap_texture = int(rng.randf_range(1, NUM_TRASH_HEAP_TEXTURES))
 				trash_heap.texture = trash_heap_sprites[random_trash_heap_texture]
 				self.add_child(trash_heap)
 	
