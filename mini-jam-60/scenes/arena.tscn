@@ -133,7 +133,7 @@ offset_left = -320.0
 offset_top = -275.0
 offset_right = -192.0
 offset_bottom = -147.0
-offset_transform_enabled = true
+pivot_offset = Vector2(64, 20)
 offset_transform_pivot = Vector2(0, -45)
 texture = ExtResource("9_41jku")
 
@@ -144,8 +144,13 @@ offset_bottom = 40.0
 
 [node name="needle2" type="TextureRect" parent="Control" unique_id=1457756583]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 191.0
+offset_top = 237.0
+offset_right = 319.0
+offset_bottom = 365.0
+offset_transform_enabled = true
+offset_transform_rotation = -4.712389
+offset_transform_pivot = Vector2(0, -45)
 texture = ExtResource("9_41jku")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=396469902]

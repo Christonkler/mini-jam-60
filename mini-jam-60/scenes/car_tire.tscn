@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://do74i7tc48cte"]
+
+[ext_resource type="Script" uid="uid://w3r5hv2h3d0j" path="res://scenes/beyblade.gd" id="1_66vps"]
+[ext_resource type="Script" uid="uid://du3padgbnc5mn" path="res://scenes/fysic.gd" id="2_kshxw"]
+[ext_resource type="Texture2D" uid="uid://cqgml8tadogwq" path="res://assets/Car tire.png" id="3_mc2mw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lpt20"]
+radius = 16.0
+
+[node name="Node2D" type="Node2D" unique_id=181163382]
+z_index = 2
+script = ExtResource("1_66vps")
+health = 100
+weight = 1.0
+metadata/_custom_type_script = "uid://w3r5hv2h3d0j"
+
+[node name="fysic" type="RigidBody2D" parent="." unique_id=699081317]
+gravity_scale = 0.0
+linear_damp_mode = 1
+linear_damp = 0.3
+angular_damp_mode = 1
+angular_damp = 0.05
+script = ExtResource("2_kshxw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fysic" unique_id=1879848281]
+shape = SubResource("CircleShape2D_lpt20")
+
+[node name="TextureRect" type="TextureRect" parent="fysic" unique_id=1606072580]
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+pivot_offset = Vector2(16, 16)
+texture = ExtResource("3_mc2mw")
+metadata/_edit_use_anchors_ = true

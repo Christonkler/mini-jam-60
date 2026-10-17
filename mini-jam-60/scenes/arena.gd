@@ -8,6 +8,7 @@ var death_time: int = 0
 var univ_ctr: Vector2
 var hitbox: Area2D
 
+var enemy : Blade
 
 func mse(tim: int) -> int:
 	return Time.get_ticks_msec() - tim
@@ -45,12 +46,17 @@ func apply_pull(blade: RigidBody2D) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if enemy == null:
+		enemy = $Beyblade2
+	else:
+		remove_child($Beyblade2)
 	start_time = Time.get_ticks_msec()
 	hitbox = $TextureRect/Area2D
 	$Beyblade.fysic.linear_velocity = Vector2(80, 0)
-	$Beyblade2.fysic.linear_velocity = Vector2(-80, 0)
+	enemy.fysic.linear_velocity = Vector2(-80, 0)
 	$Beyblade.fysic.angular_velocity = 50
-	$Beyblade2.fysic.angular_velocity = 50
+	enemy.fysic.angular_velocity = 50
+	enemy.position = Vector2(84,-93)
 	univ_ctr.x = 0
 	univ_ctr.y = 0
 	for upgrade in Global.upgrades:

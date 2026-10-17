@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dhk7vdc4lfl6u"
-path="res://.godot/imported/Eraser.png-83abec4537a7aa825094cadb3cd15be4.ctex"
+uid="uid://cqgml8tadogwq"
+path="res://.godot/imported/Car tire.png-bb5bdc972fcdb8d1bbbccb02945fc042.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Tips/Eraser.png"
-dest_files=["res://.godot/imported/Eraser.png-83abec4537a7aa825094cadb3cd15be4.ctex"]
+source_file="res://assets/Car tire.png"
+dest_files=["res://.godot/imported/Car tire.png-bb5bdc972fcdb8d1bbbccb02945fc042.ctex"]
 
 [params]
 
