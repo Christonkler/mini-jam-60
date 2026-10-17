@@ -13,8 +13,6 @@ func _ready() -> void:
 	
 func purchaseItemRequest():
 	item_purchase_request.emit()
-	await get_tree().create_timer(1.8).timeout
-	get_tree().change_scene_to_file("res://scenes/mainu.tscn")
 
 func purchaseItem():
 	print("item purchased")
