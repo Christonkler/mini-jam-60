@@ -25,6 +25,8 @@ func setPhysicsForAttachments():
 func on_body_entered():
 	if not hit:
 		print("Collision")
-		self.add_child(load("res://scenes/beyblade_attachment.tscn").instantiate())
+		var attachment = load("res://scenes/beyblade_attachment.tscn").instantiate()
+		self.add_child(attachment)
+		setPhysicsForAttachments()
 		hit = true
 	pass

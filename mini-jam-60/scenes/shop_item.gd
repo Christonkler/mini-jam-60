@@ -1,6 +1,7 @@
 extends Node2D
 
 signal item_purchase_request(Node2D)
+signal purchase_complete
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,3 +18,4 @@ func purchaseItemRequest():
 
 func purchaseItem():
 	print("item purchased")
+	purchase_complete.emit()

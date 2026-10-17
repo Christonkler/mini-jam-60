@@ -1,11 +1,13 @@
 [gd_scene format=3 uid="uid://bm850mruhohu0"]
 
+[ext_resource type="Script" uid="uid://dpweodj0x5lne" path="res://scripts/beyblade_attachment.gd" id="1_88731"]
 [ext_resource type="Texture2D" uid="uid://cu7r0ovmt5e8l" path="res://assets/Apple Core.png" id="1_rojun"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dxqae"]
 size = Vector2(20, 31)
 
 [node name="BeybladeAttachment" type="Node2D" unique_id=190399952]
+script = ExtResource("1_88731")
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1743486454]
 
