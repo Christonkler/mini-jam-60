@@ -3,13 +3,14 @@ extends Control
 @export var win: bool
 
 # process vars
-var start_time: int
+var start_time: int = 0
+var death_time: int = 0
 var univ_ctr: Vector2
 var hitbox: Area2D
 
 
-func ms_elapsed() -> int:
-	return Time.get_ticks_msec() - start_time
+func mse(tim: int) -> int:
+	return Time.get_ticks_msec() - tim
 
 func d_curve(dist: float) -> float:
 	# how does the arena pull force diminish with distance
@@ -40,13 +41,20 @@ func _ready() -> void:
 
 func proc_blade(blade: RigidBody2D) -> void:
 	apply_pull(blade)
-	if ms_elapsed() > 50 and not hitbox.overlaps_body(blade):
+	if mse(start_time) > 50 and not hitbox.overlaps_body(blade):
 		blade.get_parent().falling = true
 		blade.get_parent().dead = true
 
 
 func _process(delta: float) -> void:
+	var dead_flag: bool = false
 	for child in self.get_children():
 		if is_instance_of(child, Blade):
 			child.fysic.apply_torque(30000 * delta)
 			proc_blade(child.fysic)
+			if child.dead:
+				dead_flag = true
+	if dead_flag and not death_time:
+		death_time = Time.get_ticks_msec()
+	if dead_flag and mse(death_time) > 5000:
+		get_tree().change_scene_to_file("res://scenes/map.tscn")
