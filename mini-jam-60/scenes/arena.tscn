@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cn4gbe1btt5gq" path="res://scenes/arena.gd" id="1_olpmc"]
 [ext_resource type="Texture2D" uid="uid://c11mpxgpm7aa8" path="res://assets/rocket_start.png" id="2_olpmc"]
 [ext_resource type="PackedScene" uid="uid://bharswpihsav5" path="res://scenes/beyblade.tscn" id="2_wl4x5"]
+[ext_resource type="Script" uid="uid://b1u1po8dveuhs" path="res://scenes/match_result_screen.gd" id="4_xdvfk"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xdvfk"]
 atlas = ExtResource("2_olpmc")
@@ -84,6 +85,23 @@ position = Vector2(-109, 1)
 [node name="Beyblade2" parent="Control" unique_id=312525177 instance=ExtResource("2_wl4x5")]
 z_index = 2
 position = Vector2(-37, 30)
+
+[node name="MatchResultScreen" type="TextureRect" parent="Control" unique_id=160340308]
+z_index = 5
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("4_xdvfk")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/MatchResultScreen" unique_id=357556839]
+layout_mode = 0
+offset_left = -53.0
+offset_top = -39.0
+offset_right = 80.0
+offset_bottom = 22.0
+theme_override_colors/font_shadow_color = Color(0.2627451, 0.1764706, 0.02745098, 1)
+theme_override_font_sizes/normal_font_size = 25
+text = "YOU LOST"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=396469902]
 zoom = Vector2(2, 2)
