@@ -1,15 +1,15 @@
 extends VBoxContainer
 
 var enemy_picture_rect : TextureRect
-var enemy_description_rect : TextureRect
+var enemy_description_rect : RichTextLabel
 
 func _ready():
-	enemy_description_rect = $TextureRect2
-	enemy_picture_rect = $TextureRect
+	enemy_description_rect = get_node("Character Description/MarginContainer/Description")
+	enemy_picture_rect = get_node("Character Picture/MarginContainer/Image")
 
-func make_visible(enemy_picture: Texture2D, enemy_description: Texture2D):
+func make_visible(enemy_picture: Texture2D, enemy_description: String):
 	enemy_picture_rect.texture = enemy_picture
-	enemy_description_rect.texture = enemy_description
+	enemy_description_rect.text = enemy_description
 	self.visible = true
 	
 func make_invisible() -> void:

@@ -163,52 +163,71 @@ const path_map_options : Array[Array] = [
 
 const enemy_options = [
 	[ # Level 0
-		#"res://scenes/car_tire.tscn",
-		#"res://scenes/inception_top.tscn",
-		#"res://scenes/gem.tscn",
-		#"res://scenes/scooter_wheel.tscn",
-		#"res://scenes/pineapple.tscn",
-		"res://scenes/apple.tscn"
+		{
+			"character_image" : "res://assets/people/charlie.png",
+			"blade": "res://scenes/scooter_wheel.tscn",
+			"description": "Mommy's boyfriend broke my scooter, but I found another use for it!"
+		},
+		{
+			"character_image" : "res://assets/people/charlie.png",
+			"blade": "res://scenes/apple.tscn",
+			"description": "I was going to have this for lunch... but beating you is more important!"
+		},
 	],
 	[ # Level 1
-		"res://scenes/car_tire.tscn",
-		"res://scenes/inception_top.tscn",
-		"res://scenes/gem.tscn",
-		"res://scenes/scooter_wheel.tscn",
-		"res://scenes/pineapple.tscn",
-		"res://scenes/apple.tscn"
+		{
+			"character_image" : "res://assets/people/charlie.png",
+			"blade": "res://scenes/car_tire.tscn",
+			"description": "People say vandalism isn't for kids, but I thought it was great!"
+		},
+		{
+			"character_image" : "res://assets/people/charlie.png",
+			"blade": "res://scenes/pineapple.tscn",
+			"description": "I HATE pineapples"
+		}
 	],
-	[
-		"res://scenes/car_tire.tscn",
-		"res://scenes/inception_top.tscn",
-		"res://scenes/gem.tscn",
-		"res://scenes/scooter_wheel.tscn",
-		"res://scenes/pineapple.tscn",
-		"res://scenes/apple.tscn"
+	[ # Level 2
+		{
+			"character_image" : "res://assets/people/hatman.png",
+			"blade": "res://scenes/gem.tscn",
+			"description": "I have a lot of tricks, see?"
+		},
+		{
+			"character_image" : "res://assets/people/hatman.png",
+			"blade": "res://scenes/car_tire.tscn",
+			"description": ""
+		}
 	],
-	[
-		"res://scenes/car_tire.tscn",
-		"res://scenes/inception_top.tscn",
-		"res://scenes/gem.tscn",
-		"res://scenes/scooter_wheel.tscn",
-		"res://scenes/pineapple.tscn",
-		"res://scenes/apple.tscn"
+	[ # Level 3
+		{
+			"character_image" : "res://assets/people/hatman.png",
+			"blade": "res://scenes/gem.tscn",
+			"description": ""
+		},
+		{
+			"character_image" : "res://assets/people/hatman.png",
+			"blade": "res://scenes/car_tire.tscn",
+			"description": ""
+		}
 	],
-	[
-		"res://scenes/car_tire.tscn",
-		"res://scenes/inception_top.tscn",
-		"res://scenes/gem.tscn",
-		"res://scenes/scooter_wheel.tscn",
-		"res://scenes/pineapple.tscn",
-		"res://scenes/apple.tscn"
+	[ # Level 4
+		{
+			"character_image" : "res://assets/people/hatman.png",
+			"blade": "res://scenes/gem.tscn",
+			"description": ""
+		},
+		{
+			"character_image" : "res://assets/people/OldMan.png",
+			"blade": "res://scenes/inception_top.tscn",
+			"description": "Leo would be proud"
+		}
 	],
-	[
-		"res://scenes/car_tire.tscn",
-		"res://scenes/inception_top.tscn",
-		"res://scenes/gem.tscn",
-		"res://scenes/scooter_wheel.tscn",
-		"res://scenes/pineapple.tscn",
-		"res://scenes/apple.tscn"
+	[ # Final boss
+		{
+			"character_image" : "res://assets/people/OldMan.png",
+			"blade": "res://scenes/inception_top.tscn",
+			"description": ""
+		}
 	]
 ]
 
@@ -232,7 +251,7 @@ func _ready() -> void:
 					new_node = create_button(node, map_battle_button_hover, map_battle_button)
 					new_node.pressed.connect(start_battle.bind(node))
 					new_node.mouse_entered.connect(make_visible.bind(node))
-					new_node.mouse_exited.connect(make_invisible.bind(node))
+					new_node.mouse_exited.connect(make_invisible.bind())
 				else:
 					new_node = create_button(node, map_used_battle_button, map_used_battle_button)
 				self.add_child(new_node)
@@ -250,12 +269,12 @@ func _ready() -> void:
 		generate_map()
 		print(ResourceSaver.save(map_data, "user://map_data.res"))
 
-func make_visible(_node) -> void:
-	var enemy_picture = load("res://assets/Oscar the Grouch.png")
-	var enemy_description = load("res://assets/Apple Core.png")
+func make_visible(node) -> void:
+	var enemy_picture = load(map_data.enemy_data[node]["character_image"])
+	var enemy_description = map_data.enemy_data[node]["description"]
 	node_visible.emit(enemy_picture, enemy_description)
 	
-func make_invisible(_node) -> void:
+func make_invisible() -> void:
 	node_invisible.emit()
 
 func _draw():
@@ -307,19 +326,23 @@ func generate_nodes() -> void:
 			if level == 1:
 				new_node = create_button(Vector2(x_location, y_location), map_battle_button_hover, map_battle_button)
 				new_node.pressed.connect(start_battle.bind(Vector2(x_location, y_location)))
+				new_node.mouse_entered.connect(make_visible.bind(Vector2(x_location, y_location)))
+				new_node.mouse_exited.connect(make_invisible.bind())
 			else:
 				new_node = create_button(Vector2(x_location, y_location), map_used_battle_button, map_used_battle_button)
 			
 			self.add_child(new_node)
 
 			level_nodes.append(Vector2(x_location, y_location))
+			var chosen_enemy = int(rng.randf_range(0, len(enemy_options[level-1])))
+			map_data.enemy_data.set(Vector2(x_location, y_location), enemy_options[level-1][chosen_enemy])
 		map_data.trash_heap_nodes.append(level_nodes)
 		
 func start_battle(node) -> void:
 	var arena_pack = load("res://scenes/arena.tscn")
 	var arena = arena_pack.instantiate()
 	var enemies_available = len(enemy_options[map_data.level])
-	var enemy = load(enemy_options[map_data.level][int(rng.randf_range(0, enemies_available))]).instantiate()
+	var enemy = load(map_data.enemy_data[node]["blade"]).instantiate()
 
 	arena.get_node("Control").enemy = enemy
 	arena.get_node("Control").add_child(enemy)
