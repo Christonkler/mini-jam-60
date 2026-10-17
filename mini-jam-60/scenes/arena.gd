@@ -9,8 +9,8 @@ var univ_ctr: Vector2
 var hitbox: Area2D
 var init_avel: float
 var init_avel2: float
-
 var enemy : Blade
+var dead_flag: bool = false
 
 
 func mse(tim: int) -> int:
@@ -24,7 +24,7 @@ func d_curve(dist: float) -> float:
 		curve = dist
 	else:
 		curve = (R - sqrt(R**2 - dist**2))
-	return 4 * curve
+	return 6 * curve
 
 func pull_mag(blade: RigidBody2D) -> float:
 	return d_curve(blade.global_position.distance_to(univ_ctr))
@@ -33,9 +33,10 @@ func pull_dir(blade: RigidBody2D) -> Vector2:
 	return (univ_ctr - blade.global_position).normalized()
 
 func walk_mag(blade: RigidBody2D) -> float:
-	return 0
 	if not randi() % 30:
-		return 30 * blade.angular_velocity
+		return 20 * blade.angular_velocity
+	if not randi() % 40:
+		return -20 * blade.angular_velocity
 	return 0
 
 func walk_dir(blade: RigidBody2D) -> Vector2:
@@ -50,6 +51,10 @@ func apply_pull(blade: RigidBody2D) -> void:
 		blade.apply_central_force(pull_mag(blade) * pull_dir(blade))
 		blade.apply_central_force(walk_mag(blade) * walk_dir(blade))
 
+func apply_joik(blade: RigidBody2D, other: RigidBody2D) -> void:
+	var outward_dir = (other.global_position - blade.global_position).normalized()
+	outward_dir = Vector2.from_angle(outward_dir.angle() + 0.1*(randf()-0.5))
+	blade.apply_central_force(20 * abs(blade.angular_velocity) * outward_dir)
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -61,9 +66,15 @@ func _ready() -> void:
 	hitbox = $TextureRect/Area2D
 	$needle.pivot_offset = Vector2(64, 20)
 	$needle2.pivot_offset = Vector2(64, 20)
+<<<<<<< Updated upstream
 	$PlayerBeyblade.fysic.linear_velocity = Vector2(80, 0)
 	enemy.fysic.linear_velocity = Vector2(-80, 0)
 	$PlayerBeyblade.fysic.angular_velocity = 50
+=======
+	$Beyblade.fysic.linear_velocity = Vector2(180, 0)
+	enemy.fysic.linear_velocity = Vector2(-180, 0)
+	$Beyblade.fysic.angular_velocity = 50
+>>>>>>> Stashed changes
 	enemy.fysic.angular_velocity = 50
 	enemy.position = Vector2(84,-93)
 	init_avel = $PlayerBeyblade.fysic.angular_velocity
@@ -77,10 +88,17 @@ func _ready() -> void:
 
 func proc_blade(blade: RigidBody2D) -> void:
 	apply_pull(blade)
+<<<<<<< Updated upstream
 	var blade_parent = blade.get_parent()
 	if (blade_parent.name == "PlayerAndAttachedItem"):
 		blade_parent = blade_parent.get_parent()
 
+=======
+	var others = blade.get_colliding_bodies()
+	for other in others:
+		if other.get_parent() is Blade:
+			apply_joik(blade, other)
+>>>>>>> Stashed changes
 	if mse(start_time) > 50 and not hitbox.overlaps_body(blade):
 		blade_parent.falling = true
 		blade_parent.dead = true
@@ -90,22 +108,26 @@ func proc_blade(blade: RigidBody2D) -> void:
 
 
 func _process(delta: float) -> void:
-	var dead_flag: bool = false
 	for child in self.get_children():
 		if is_instance_of(child, Blade):
 			proc_blade(child.fysic)
 			if child.dead:
-				if not dead_flag and child.name == "Beyblade":
-					$MatchResultScreen.displayMatchResultMessage('LOSER')
-				elif not dead_flag:
-					$MatchResultScreen.displayMatchResultMessage('WINNER')
 				dead_flag = true
 	$needle.rotation_degrees = -90 * abs($PlayerBeyblade.fysic.angular_velocity / init_avel)
 	$needle2.rotation_degrees = 90 + 90 * abs(enemy.fysic.angular_velocity / init_avel2)
 
+	if dead_flag:
+		if enemy.dead:
+			$MatchResultScreen.displayMatchResultMessage('WINNER')
+		else:
+			$MatchResultScreen.displayMatchResultMessage('LOSER')
 	if dead_flag and not death_time:
 		death_time = Time.get_ticks_msec()
 	if dead_flag and mse(death_time) > 5000:
 		Engine.time_scale = 1 # Resets game speed if fast forwarding
 		Global.reset_arena_stuf()
-		get_tree().change_scene_to_file("res://scenes/map.tscn")
+		if enemy.dead:
+			get_tree().change_scene_to_file("res://scenes/map.tscn")
+		else:
+			get_tree().change_scene_to_file("res://scenes/mainu.tscn")
+			

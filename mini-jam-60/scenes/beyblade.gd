@@ -11,9 +11,6 @@ class_name Blade
 var death_pos: Array[Vector2] = []
 var death_vcs: Array[Vector2] = []
 
-
-const MAX_HEALTH = 100
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	fysic = $fysic
@@ -39,12 +36,3 @@ func _process(delta: float) -> void:
 		for skin in skins:
 			if skin.scale.x > 0 and skin.scale.y > 0:
 				skin.scale -= delta / 5 * Vector2(1, 1)
-	
-func take_damage(damage: int):
-	health -= damage
-
-func heal(heal_amount: int):
-	health += heal_amount
-
-func resetHealth():
-	health = MAX_HEALTH
