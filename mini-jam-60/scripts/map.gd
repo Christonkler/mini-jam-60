@@ -277,8 +277,7 @@ func start_battle(node) -> void:
 	arena.get_node("Control").enemy = enemy
 	
 	arena.get_node("Control").add_child(enemy)
-	get_tree().root.add_child(arena)
-	queue_free()
+	get_tree().change_scene_to_node(arena)
 		
 func create_button(pos: Vector2, texture_hover: Texture2D, texture_normal: Texture2D) -> TextureButton:
 	var new_node : TextureButton
