@@ -9,7 +9,8 @@ var univ_ctr: Vector2
 var hitbox: Area2D
 var init_avel: float
 var init_avel2: float
-var enemy : Blade
+var playa: Blade
+var enemy: Blade
 var dead_flag: bool = false
 var music_started: bool = false
 
@@ -66,22 +67,23 @@ func _ready() -> void:
 		enemy = $Beyblade2
 	else:
 		remove_child($Beyblade2)
+	playa = $PlayerBeyblade
 	start_time = Time.get_ticks_msec()
 	hitbox = $TextureRect/Area2D
 	$needle.pivot_offset = Vector2(64, 20)
 	$needle2.pivot_offset = Vector2(64, 20)
-	$PlayerBeyblade.fysic.linear_velocity = Vector2(40, 0)
-	enemy.fysic.linear_velocity = Vector2(-40, 0)
-	$PlayerBeyblade.fysic.angular_velocity = 50
-	enemy.fysic.angular_velocity = 50
+	playa.fysic.linear_velocity = playa.init_vel * Vector2(1, 0)
+	enemy.fysic.linear_velocity = enemy.init_vel * Vector2(-1, 0)
+	playa.fysic.angular_velocity = playa.init_spin
+	enemy.fysic.angular_velocity = enemy.init_spin
 	enemy.position = Vector2(84,-93)
-	init_avel = $PlayerBeyblade.fysic.angular_velocity
+	init_avel = playa.fysic.angular_velocity
 	init_avel2 = enemy.fysic.angular_velocity
 	univ_ctr.x = 0
 	univ_ctr.y = 0
 	for upgrade in Global.upgrades:
-		$PlayerBeyblade.fysic.add_child(upgrade)
-		$PlayerBeyblade.fysic.setPhysicsForAttachment(upgrade)
+		playa.fysic.add_child(upgrade)
+		playa.fysic.setPhysicsForAttachment(upgrade)
 
 func proc_blade(blade: RigidBody2D) -> void:
 	apply_pull(blade)
@@ -108,7 +110,7 @@ func _process(delta: float) -> void:
 			if child.dead:
 				dead_flag = true
 
-	$needle.rotation_degrees = -90 * abs($PlayerBeyblade.fysic.angular_velocity / init_avel)
+	$needle.rotation_degrees = -90 * abs(playa.fysic.angular_velocity / init_avel)
 	$needle2.rotation_degrees = 90 + 90 * abs(enemy.fysic.angular_velocity / init_avel2)
 
 	if dead_flag:
