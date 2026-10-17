@@ -12,8 +12,9 @@ func _process(_delta: float) -> void:
 
 func setPhysicsForAttachment(attachment: Attaché):
 	# Good enough for a start
-	self.get_parent().skins.append(attachment.get_child(0).get_child(0).get_child(0))
-	attachment.get_child(0).get_child(0).reparent(self)
+	if get_parent().name == "PlayerAndAttachedItem":
+		self.get_parent().get_parent().skins.append(attachment.get_child(0).get_child(0).get_child(0))
+		get_parent().node_b = attachment.get_path()
 
 
 # Example function of how to add an attachment to a beyblade. The add child would happen in the shop, and

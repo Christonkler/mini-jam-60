@@ -43,7 +43,10 @@ func walk_dir(blade: RigidBody2D) -> Vector2:
 	return Vector2(-ctr_dir.y, ctr_dir.x)
 	
 func apply_pull(blade: RigidBody2D) -> void:
-	if not blade.get_parent().dead:
+	var blade_parent = blade.get_parent()
+	if (blade_parent.name == "PlayerAndAttachedItem"):
+		blade_parent = blade_parent.get_parent()
+	if not blade_parent.dead:
 		blade.apply_central_force(pull_mag(blade) * pull_dir(blade))
 		blade.apply_central_force(walk_mag(blade) * walk_dir(blade))
 
@@ -58,27 +61,31 @@ func _ready() -> void:
 	hitbox = $TextureRect/Area2D
 	$needle.pivot_offset = Vector2(64, 20)
 	$needle2.pivot_offset = Vector2(64, 20)
-	$Beyblade.fysic.linear_velocity = Vector2(80, 0)
+	$PlayerBeyblade.fysic.linear_velocity = Vector2(80, 0)
 	enemy.fysic.linear_velocity = Vector2(-80, 0)
-	$Beyblade.fysic.angular_velocity = 50
+	$PlayerBeyblade.fysic.angular_velocity = 50
 	enemy.fysic.angular_velocity = 50
 	enemy.position = Vector2(84,-93)
-	init_avel = $Beyblade.fysic.angular_velocity
+	init_avel = $PlayerBeyblade.fysic.angular_velocity
 	init_avel2 = enemy.fysic.angular_velocity
 	univ_ctr.x = 0
 	univ_ctr.y = 0
 	for upgrade in Global.upgrades:
-		$Beyblade.fysic.add_child(upgrade)
-		$Beyblade.fysic.setPhysicsForAttachment(upgrade)
+		$PlayerBeyblade.fysic.add_child(upgrade)
+		$PlayerBeyblade.fysic.setPhysicsForAttachment(upgrade)
 
 
 func proc_blade(blade: RigidBody2D) -> void:
 	apply_pull(blade)
+	var blade_parent = blade.get_parent()
+	if (blade_parent.name == "PlayerAndAttachedItem"):
+		blade_parent = blade_parent.get_parent()
+
 	if mse(start_time) > 50 and not hitbox.overlaps_body(blade):
-		blade.get_parent().falling = true
-		blade.get_parent().dead = true
+		blade_parent.falling = true
+		blade_parent.dead = true
 	if blade.angular_velocity < 3:
-		blade.get_parent().dead = true
+		blade_parent.dead = true
 
 
 
@@ -93,7 +100,7 @@ func _process(delta: float) -> void:
 				elif not dead_flag:
 					$MatchResultScreen.displayMatchResultMessage('WINNER')
 				dead_flag = true
-	$needle.rotation_degrees = -90 * abs($Beyblade.fysic.angular_velocity / init_avel)
+	$needle.rotation_degrees = -90 * abs($PlayerBeyblade.fysic.angular_velocity / init_avel)
 	$needle2.rotation_degrees = 90 + 90 * abs(enemy.fysic.angular_velocity / init_avel2)
 
 	if dead_flag and not death_time:

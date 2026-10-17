@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://b5p1esl8qucg0"]
+
+[ext_resource type="Texture2D" uid="uid://ogspj1o117at" path="res://assets/Straw.png" id="1_tb0m5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dxqae"]
+size = Vector2(13, 63)
+
+[node name="Node2D" type="RigidBody2D" unique_id=890965100]
+gravity_scale = 0.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1777862876]
+position = Vector2(3.5, 24.5)
+shape = SubResource("RectangleShape2D_dxqae")
+
+[node name="TextureRect" type="TextureRect" parent="CollisionShape2D" unique_id=320568709]
+offset_left = -20.0
+offset_top = -32.5
+offset_right = 20.0
+offset_bottom = 31.5
+texture = ExtResource("1_tb0m5")
+metadata/_edit_use_anchors_ = true

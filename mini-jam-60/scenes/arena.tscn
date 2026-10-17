@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://cn4gbe1btt5gq" path="res://scenes/arena.gd" id="1_olpmc"]
 [ext_resource type="Texture2D" uid="uid://c11mpxgpm7aa8" path="res://assets/rocket_start.png" id="2_olpmc"]
 [ext_resource type="PackedScene" uid="uid://bharswpihsav5" path="res://scenes/beyblade.tscn" id="2_wl4x5"]
+[ext_resource type="PackedScene" uid="uid://dnmqwrrhrsmp7" path="res://scenes/PlayerBeyblade.tscn" id="3_k1k1x"]
 [ext_resource type="Script" uid="uid://b1u1po8dveuhs" path="res://scenes/match_result_screen.gd" id="4_xdvfk"]
 [ext_resource type="Texture2D" uid="uid://bs8vb4l42fspa" path="res://assets/Fast Forward Unpressed.png" id="5_4ag8t"]
 [ext_resource type="Texture2D" uid="uid://cr8lvkkt6w2re" path="res://assets/Fast Forward Pressed.png" id="6_dpxgc"]
@@ -84,9 +85,7 @@ autoplay = "default"
 position = Vector2(0.5, 0)
 shape = SubResource("CircleShape2D_mq0dr")
 
-[node name="Beyblade" parent="Control" unique_id=1377562879 instance=ExtResource("2_wl4x5")]
-z_index = 2
-position = Vector2(-81, 94)
+[node name="PlayerBeyblade" parent="Control" unique_id=1012626383 instance=ExtResource("3_k1k1x")]
 
 [node name="Beyblade2" parent="Control" unique_id=312525177 instance=ExtResource("2_wl4x5")]
 z_index = 2
