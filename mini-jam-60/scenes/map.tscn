@@ -27,6 +27,7 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_wijl4")
 script = ExtResource("1_0cso3")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1161221415]
+z_index = 1
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -45,6 +46,7 @@ script = ExtResource("2_gldc4")
 map_data = SubResource("Resource_paxxb")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=715582902]
+visible = false
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -59,13 +61,11 @@ grow_vertical = 2
 script = ExtResource("5_2klcf")
 
 [node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=1302284026]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 texture = SubResource("NoiseTexture2D_pv71u")
 
 [node name="TextureRect2" type="TextureRect" parent="VBoxContainer" unique_id=1690726805]
-visible = false
 layout_mode = 2
 size_flags_vertical = 3
 texture = SubResource("NoiseTexture2D_gldc4")

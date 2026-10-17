@@ -21,19 +21,19 @@ func nodes_connected(node1: Vector2, node2: Vector2) -> bool:
 				break
 				
 	var current_map : Dictionary
-	if level != 0:
-		current_map = level_map[level-1]
+	if node_level != 0:
+		current_map = level_map[node_level-1]
 		for node in current_map.keys():
-			if trash_heap_nodes[level-1][node-1] == node2:
+			if trash_heap_nodes[node_level-1][node-1] == node2:
 				for connection in current_map[node]:
-					if trash_heap_nodes[level][connection-1] == node1:
+					if trash_heap_nodes[node_level][connection-1] == node1:
 						found_connection = true
 						break
 				
-	if not found_connection and level < len(trash_heap_nodes):
-		current_map = level_map[level]
+	if not found_connection and node_level < len(trash_heap_nodes)-1:
+		current_map = level_map[node_level]
 		for node in current_map.keys():
-			if trash_heap_nodes[level][node-1] == node2:
+			if trash_heap_nodes[node_level][node-1] == node2:
 				for connection in current_map[node]:
 					if trash_heap_nodes[level+1][connection-1] == node1:
 						found_connection = true

@@ -8,11 +8,15 @@ func _ready():
 	enemy_picture_rect = $TextureRect
 
 func make_visible(enemy_picture: Texture2D, enemy_description: Texture2D):
-	enemy_picture_rect.visible = true
 	enemy_picture_rect.texture = enemy_picture
-	enemy_description_rect.visible = true
 	enemy_description_rect.texture = enemy_description
+	self.visible = true
 	
 func make_invisible() -> void:
-	enemy_picture_rect.visible = false
-	enemy_description_rect.visible = false
+	self.visible = false
+	
+func move_desc(position : String) -> void:
+	if position == "Left":
+		self.set_anchors_and_offsets_preset(Control.PRESET_CENTER_LEFT)
+	elif position == "Right":
+		self.set_anchors_and_offsets_preset(Control.PRESET_CENTER_RIGHT)

@@ -16,6 +16,7 @@ const NUM_TRASH_HEAP_TEXTURES = 3
 
 signal node_visible
 signal node_invisible
+signal move_desc
 
 var trash_heap_sprites = {
 	1: preload("res://assets/TrashHeap1.png"),
@@ -173,8 +174,9 @@ func _ready() -> void:
 				if node in map_data.beaten_nodes:
 					new_node = create_button(node, map_battle_beaten_button, map_battle_beaten_button)
 				elif i < map_data.level:
-					new_node = create_button(node, map_used_battle_button, map_used_battle_button)
-				elif map_data.nodes_connected(node, map_data.beaten_nodes[-1]):
+					new_node = create_button(node, map_used_battle_button, map_used_battle_button)					
+				elif (len(map_data.beaten_nodes) == 0 and i == 0) or \
+					 (len(map_data.beaten_nodes) and map_data.nodes_connected(node, map_data.beaten_nodes[-1])):
 					# TODO: Add a callback to the hover function that displays enemy data texture rect
 					new_node = create_button(node, map_battle_button_hover, map_battle_button)
 					new_node.pressed.connect(start_battle.bind(node))
@@ -184,6 +186,11 @@ func _ready() -> void:
 					new_node = create_button(node, map_used_battle_button, map_used_battle_button)
 				self.add_child(new_node)
 			i += 1
+			
+		if map_data.level > 3:
+			move_desc.emit("Left")
+		elif map_data.level <= 3:
+			move_desc.emit("Right")
 			
 		self.queue_redraw()
 	else:
