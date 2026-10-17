@@ -1,8 +1,9 @@
 extends Node2D
+class_name Attaché
 
 signal item_attached
 
-var itemTextures: Array[Resource] = [
+const itemTextures: Array[Resource] = [
 	preload("res://assets/Banana Peel.png"),
 	preload("res://assets/Apple Core.png"),
 	preload("res://assets/Garbage Bag.png"),

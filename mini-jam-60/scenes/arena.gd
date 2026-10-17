@@ -39,6 +39,7 @@ func proc_blade(blade: RigidBody2D) -> void:
 	apply_pull(blade)
 	if ms_elapsed() > 50 and not hitbox.overlaps_body(blade):
 		blade.get_parent().falling = true
+		blade.get_parent().dead = true
 
 
 func _process(delta: float) -> void:
