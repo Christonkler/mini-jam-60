@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://kawikisgykye"]
 
-[ext_resource type="Script" uid="uid://dtxatga6wftfv" path="res://scripts/map.gd" id="1_c7s6e"]
-[ext_resource type="Script" uid="uid://dh6454vx7wyb3" path="res://scripts/margin_container.gd" id="1_wijl4"]
+[ext_resource type="Script" uid="uid://dh6454vx7wyb3" path="res://scripts/margin_container.gd" id="1_sugyo"]
+[ext_resource type="Script" uid="uid://dtxatga6wftfv" path="res://scripts/map.gd" id="2_is8c4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wijl4"]
+bg_color = Color(0.2136743, 0.08445477, 0.0036598383, 1)
 
 [node name="Panel" type="Panel" unique_id=1700366192]
 anchors_preset = 15
@@ -24,16 +25,8 @@ theme_override_constants/margin_left = 100
 theme_override_constants/margin_top = 60
 theme_override_constants/margin_right = 100
 theme_override_constants/margin_bottom = 60
-script = ExtResource("1_wijl4")
+script = ExtResource("1_sugyo")
 
 [node name="Control" type="Control" parent="MarginContainer" unique_id=1016642362]
 layout_mode = 2
-script = ExtResource("1_c7s6e")
-
-[node name="Container2" type="Container" parent="MarginContainer/Control" unique_id=916835259]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+script = ExtResource("2_is8c4")

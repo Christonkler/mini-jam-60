@@ -2,6 +2,7 @@ extends Control
 
 var trash_heap_map : PackedVector2Array
 var trash_heap_nodes : Array[Array]
+var level_map : Array[Dictionary]
 var rng = RandomNumberGenerator.new()	
 
 var number_of_paths = [1, 2, 3]
@@ -11,6 +12,14 @@ const NUM_LEVELS : int = 6
 const X_NODE_VARIABILITY : float = 0.02
 const Y_NODE_VARIABILITY : float = 0.1
 const X_SPACE : float = (1.0 / NUM_LEVELS)
+
+const NUM_TRASH_HEAP_TEXTURES = 3
+
+var trash_heap_sprites = {
+	1: preload("res://assets/TrashHeap1.png"),
+	2: preload("res://assets/TrashHeap2.png"),
+	3: preload("res://assets/TrashHeap3.png")
+}
 
 const path_map_options : Array[Array] = [
 	[ # 1 input node
@@ -154,7 +163,8 @@ func _ready() -> void:
 	self.generate_map()
 	
 func _draw():
-	draw_multiline(trash_heap_map, Color.PINK, 5)
+	draw_multiline(trash_heap_map, Color.DARK_RED, 5)
+	draw_multiline(trash_heap_map, Color.BLACK, 3)
 	
 func generate_nodes() -> void:
 	var x_location : int # Final x position
@@ -223,6 +233,7 @@ func generate_map() -> void:
 		
 		# Randomly choose a map
 		chosen_map = map_options[rng.randf_range(0, len(map_options))]
+		level_map.append(chosen_map)
 		
 		# Iterate through the dictionary and create the vectors
 		for key in chosen_map.keys():
@@ -236,8 +247,72 @@ func generate_map() -> void:
 				line_end = trash_heap_nodes[level+1][end_point-1] # -1 since we're 0 indexed
 				trash_heap_map.append(line_start)
 				trash_heap_map.append(line_end)
-		
+	
+	#self.add_random_trash_heaps()
 	self.queue_redraw()
+	
+func add_random_trash_heaps() -> void:
+	var points : Array[Vector2]
+	var current_map : Dictionary
+	
+	for i in range(len(trash_heap_nodes)-1):
+		current_map = level_map[i]
+		points = []
+		
+		if len(trash_heap_nodes[i]) == 1 and len(trash_heap_nodes[i+1]) == 1:
+			continue
+
+		for input_node in level_map[i].keys():
+			points.append(trash_heap_nodes[i][input_node-1])
+				
+			for output_node in level_map[i][input_node]:
+				points.append(trash_heap_nodes[i+1][output_node-1])
+				if len(points) > 2:
+					fill_triangle_with_trash(points)
+					points.remove_at(0)
+				
+
+func fill_triangle_with_trash(points: Array[Vector2]):
+	var point1 : Vector2 = points[0]
+	var point2 : Vector2 = points[1]
+	var point3 : Vector2 = points[2]
+	var trash_heap : TextureRect 
+	var random_trash_heap_texture : int
+	
+	var start_x = min(point1.x, point2.x, point3.x) + 20
+	var end_x = max(point1.x, point2.x, point3.x) - 20
+	var start_y = min(point1.y, point2.y, point3.y) + 20
+	var end_y = max(point1.y, point2.y, point3.y) - 20
+	
+	for x in range(start_x, end_x, 30):
+		for y in range(start_y, end_y, 30):
+			if in_bounds(Vector2(x,y), point1, point2, point3):
+				trash_heap = TextureRect.new()
+				trash_heap.position = Vector2(x,y)
+				trash_heap.size = Vector2(1,1)
+				
+				random_trash_heap_texture = rng.randf_range(1, NUM_TRASH_HEAP_TEXTURES+1)
+				trash_heap.texture = trash_heap_sprites[random_trash_heap_texture]
+				self.add_child(trash_heap)
+	
+func in_bounds (pt: Vector2, v1: Vector2, v2: Vector2, v3: Vector2) -> bool:
+	var d1 : float
+	var d2 : float 
+	var d3 : float 
+	var has_neg : bool
+	var has_pos : bool
+
+	d1 = get_sign(pt, v1, v2);
+	d2 = get_sign(pt, v2, v3);
+	d3 = get_sign(pt, v3, v1);
+
+	has_neg = (d1 < 0) || (d2 < 0) || (d3 < 0);
+	has_pos = (d1 > 0) || (d2 > 0) || (d3 > 0);
+
+	return !(has_neg && has_pos);
+	
+func get_sign (p1: Vector2, p2: Vector2, p3: Vector2) -> float:
+	return (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
