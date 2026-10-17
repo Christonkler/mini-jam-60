@@ -62,4 +62,5 @@ func _process(delta: float) -> void:
 	if dead_flag and not death_time:
 		death_time = Time.get_ticks_msec()
 	if dead_flag and mse(death_time) > 5000:
+		Engine.time_scale = 1 # Resets game speed if fast forwarding
 		get_tree().change_scene_to_file("res://scenes/map.tscn")

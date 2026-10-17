@@ -4,6 +4,9 @@
 [ext_resource type="Texture2D" uid="uid://c11mpxgpm7aa8" path="res://assets/rocket_start.png" id="2_olpmc"]
 [ext_resource type="PackedScene" uid="uid://bharswpihsav5" path="res://scenes/beyblade.tscn" id="2_wl4x5"]
 [ext_resource type="Script" uid="uid://b1u1po8dveuhs" path="res://scenes/match_result_screen.gd" id="4_xdvfk"]
+[ext_resource type="Texture2D" uid="uid://bs8vb4l42fspa" path="res://assets/Fast Forward Unpressed.png" id="5_4ag8t"]
+[ext_resource type="Texture2D" uid="uid://cr8lvkkt6w2re" path="res://assets/Fast Forward Pressed.png" id="6_dpxgc"]
+[ext_resource type="Script" uid="uid://b2bp7pe331p0x" path="res://scenes/fast_forward_button.gd" id="7_dpxgc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xdvfk"]
 atlas = ExtResource("2_olpmc")
@@ -103,5 +106,18 @@ theme_override_colors/font_shadow_color = Color(0.2627451, 0.1764706, 0.02745098
 theme_override_font_sizes/normal_font_size = 25
 text = "YOU LOST"
 
+[node name="FastForwardButton" type="TextureButton" parent="Control" unique_id=1010230549]
+layout_mode = 0
+offset_left = -16.0
+offset_top = 129.0
+offset_right = 16.0
+offset_bottom = 161.0
+toggle_mode = true
+texture_normal = ExtResource("5_4ag8t")
+texture_pressed = ExtResource("6_dpxgc")
+script = ExtResource("7_dpxgc")
+
 [node name="Camera2D" type="Camera2D" parent="." unique_id=396469902]
 zoom = Vector2(2, 2)
+
+[connection signal="pressed" from="Control/FastForwardButton" to="Control/FastForwardButton" method="_on_pressed"]
