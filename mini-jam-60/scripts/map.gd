@@ -166,37 +166,43 @@ const enemy_options = [
 		"res://scenes/car_tire.tscn",
 		"res://scenes/inception_top.tscn",
 		"res://scenes/gem.tscn",
-		"res://scenes/scooter_wheel.tscn"
+		"res://scenes/scooter_wheel.tscn",
+		"res://scenes/pineapple.tscn"
 	],
 	[ # Level 1
 		"res://scenes/car_tire.tscn",
 		"res://scenes/inception_top.tscn",
 		"res://scenes/gem.tscn",
-		"res://scenes/scooter_wheel.tscn"
+		"res://scenes/scooter_wheel.tscn",
+		"res://scenes/pineapple.tscn"
 	],
 	[
 		"res://scenes/car_tire.tscn",
 		"res://scenes/inception_top.tscn",
 		"res://scenes/gem.tscn",
-		"res://scenes/scooter_wheel.tscn"
+		"res://scenes/scooter_wheel.tscn",
+		"res://scenes/pineapple.tscn"
 	],
 	[
 		"res://scenes/car_tire.tscn",
 		"res://scenes/inception_top.tscn",
 		"res://scenes/gem.tscn",
-		"res://scenes/scooter_wheel.tscn"
+		"res://scenes/scooter_wheel.tscn",
+		"res://scenes/pineapple.tscn"
 	],
 	[
 		"res://scenes/car_tire.tscn",
 		"res://scenes/inception_top.tscn",
 		"res://scenes/gem.tscn",
-		"res://scenes/scooter_wheel.tscn"
+		"res://scenes/scooter_wheel.tscn",
+		"res://scenes/pineapple.tscn"
 	],
 	[
 		"res://scenes/car_tire.tscn",
 		"res://scenes/inception_top.tscn",
 		"res://scenes/gem.tscn",
-		"res://scenes/scooter_wheel.tscn"
+		"res://scenes/scooter_wheel.tscn",
+		"res://scenes/pineapple.tscn"
 	]
 ]
 
