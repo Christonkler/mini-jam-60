@@ -6,8 +6,11 @@
 [ext_resource type="Script" uid="uid://bvxksqx4avq6p" path="res://scenes/Oscar's Intro.tscn.gd" id="3_1l46r"]
 [ext_resource type="Script" uid="uid://5k10t40o3rv" path="res://scripts/shop_background.gd" id="3_y6sft"]
 [ext_resource type="Script" uid="uid://8vqujgxwy0d" path="res://scenes/oscar's_outro.gd" id="5_2fc2m"]
+[ext_resource type="Script" uid="uid://bm4xjhooisggd" path="res://scenes/oscar_animated_sprite.gd" id="5_m4ofw"]
 [ext_resource type="PackedScene" uid="uid://ds54bpi64an78" path="res://scenes/shop_item.tscn" id="6_8r1wq"]
 [ext_resource type="Script" uid="uid://baleftnhifqql" path="res://scripts/shop_items.gd" id="6_ajxib"]
+[ext_resource type="Texture2D" uid="uid://d4gvm6fgywdha" path="res://assets/Trash Can Rocket Ship.png" id="8_heatd"]
+[ext_resource type="Script" uid="uid://w7s7l6gqtqy7" path="res://scenes/oscar_rocket.gd" id="9_1v8qu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dxqae"]
 
@@ -45,6 +48,71 @@ animations = [{
 "speed": 3.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_1v8qu"]
+atlas = ExtResource("8_heatd")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_44xle"]
+atlas = ExtResource("8_heatd")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_24it5"]
+atlas = ExtResource("8_heatd")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mqwv"]
+atlas = ExtResource("8_heatd")
+region = Rect2(0, 32, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bgiuf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1v8qu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_44xle")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_24it5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7mqwv")
+}],
+"loop": 0,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gobkm"]
+atlas = ExtResource("8_heatd")
+region = Rect2(32, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j14q8"]
+atlas = ExtResource("8_heatd")
+region = Rect2(64, 32, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5u241"]
+atlas = ExtResource("8_heatd")
+region = Rect2(0, 64, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_invmw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gobkm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j14q8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5u241")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 6.0
+}]
+
 [node name="Shop" type="Node2D" unique_id=603100037]
 script = ExtResource("1_032fp")
 
@@ -73,6 +141,13 @@ scale = Vector2(5.0156255, 5.0156255)
 sprite_frames = SubResource("SpriteFrames_dxqae")
 animation = &"oscar_greeting"
 autoplay = "oscar_greeting"
+script = ExtResource("5_m4ofw")
+
+[node name="TextureButton" type="TextureButton" parent="Area2D/CollisionShape2D/Shop Background/Oscar Animated Sprite" unique_id=279688924]
+offset_left = -16.14953
+offset_top = -15.750782
+offset_right = 15.950155
+offset_bottom = 15.950153
 
 [node name="Oscar\'s Intro" type="RichTextLabel" parent="Area2D/CollisionShape2D/Shop Background" unique_id=441906237]
 layout_mode = 1
@@ -119,6 +194,19 @@ theme_override_font_sizes/normal_font_size = 31
 scroll_active = false
 script = ExtResource("5_2fc2m")
 metadata/_edit_use_anchors_ = true
+
+[node name="Oscar Rocket" type="AnimatedSprite2D" parent="Area2D/CollisionShape2D/Shop Background" unique_id=1657552850]
+light_mask = 16
+visibility_layer = 16
+z_index = 5
+position = Vector2(109.000015, 525)
+scale = Vector2(5.000001, 5.000001)
+sprite_frames = SubResource("SpriteFrames_bgiuf")
+script = ExtResource("9_1v8qu")
+
+[node name="Rocket Flames" type="AnimatedSprite2D" parent="Area2D/CollisionShape2D/Shop Background/Oscar Rocket" unique_id=1385225518]
+position = Vector2(0, 32)
+sprite_frames = SubResource("SpriteFrames_invmw")
 
 [node name="Shop Items" type="Node" parent="." unique_id=1333998334]
 script = ExtResource("6_ajxib")
