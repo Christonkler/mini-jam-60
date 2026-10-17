@@ -33,6 +33,9 @@ func _ready() -> void:
 	$Beyblade2.fysic.linear_velocity = Vector2(30, 0)
 	univ_ctr.x = 0
 	univ_ctr.y = 0
+	for upgrade in Global.upgrades:
+		$Beyblade.fysic.add_child(upgrade)
+		$Beyblade.fysic.setPhysicsForAttachment(upgrade)
 
 
 func proc_blade(blade: RigidBody2D) -> void:

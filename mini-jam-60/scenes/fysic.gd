@@ -19,10 +19,10 @@ func setPhysicsForAttachment(attachment: Attaché):
 # Example function of how to add an attachment to a beyblade. The add child would happen in the shop, and
 # we would need to have the necessary attributes of the item added with it
 func on_body_entered():
-	if not hit:
-		print("Collision")
-		var attachment = load("res://scenes/beyblade_attachment.tscn").instantiate()
-		self.add_child(attachment)
-		setPhysicsForAttachment(attachment)
-		hit = true
+	#if not hit:
+		#print("Collision")
+		#var attachment = load("res://scenes/beyblade_attachment.tscn").instantiate()
+		#self.add_child(attachment)
+		#setPhysicsForAttachment(attachment)
+		#hit = true
 	pass

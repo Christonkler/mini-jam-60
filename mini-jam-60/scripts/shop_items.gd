@@ -29,12 +29,13 @@ func purchaseItem(shopItem: Node2D):
 	if (not item_purchased):
 		item_purchased = true
 		shopItem.purchaseItem()
+		var attachment: Attaché = Attaché.create(shopItem.get_child(0).texture_normal)
+		Global.upgrades.append(attachment)
 		close_shop.emit()
 	pass
 	
 	
 func setRandomItemTexture(textureButton: TextureButton):
 	var index = randi() % itemTextures.size()
-	var texture = itemTextures.get(index)
-	textureButton.set_texture_normal(texture)
+	textureButton.set_texture_normal(itemTextures.get(index))
 	itemTextures.remove_at(index)
