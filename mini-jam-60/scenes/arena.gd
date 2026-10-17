@@ -112,13 +112,17 @@ func _process(delta: float) -> void:
 	$needle2.rotation_degrees = 90 + 90 * abs(enemy.fysic.angular_velocity / init_avel2)
 
 	if dead_flag:
-		if not music_started: # TODO: Play different music on loss
-			$MatchResultScreen/ResultMusicPlayer.play(0.3)
-			music_started = true
+		
 		if enemy.dead:
 			$MatchResultScreen.displayMatchResultMessage('WINNER')
+			if not music_started:
+				$MatchResultScreen/ResultMusicPlayer.play_results_music(true)
+				music_started = true
 		else:
 			$MatchResultScreen.displayMatchResultMessage('LOSER')
+			if not music_started:
+				$MatchResultScreen/ResultMusicPlayer.play_results_music(false)
+				music_started = true
 	if dead_flag and not death_time:
 		death_time = Time.get_ticks_msec()
 	if dead_flag and mse(death_time) > 5000:
