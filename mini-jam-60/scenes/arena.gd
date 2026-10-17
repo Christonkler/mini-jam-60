@@ -129,7 +129,7 @@ func _process(delta: float) -> void:
 		Engine.time_scale = 1 # Resets game speed if fast forwarding
 		Global.reset_arena_stuf()
 		if enemy.dead:
-			get_tree().change_scene_to_file("res://scenes/map.tscn")
+			get_tree().change_scene_to_file("res://scenes/shop.tscn")
 		else:
 			get_tree().change_scene_to_file("res://scenes/mainu.tscn")
 			
