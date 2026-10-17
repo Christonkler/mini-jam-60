@@ -116,7 +116,6 @@ offset_top = 86.0
 offset_right = 128.0
 offset_bottom = 116.0
 theme_override_font_sizes/normal_font_size = 31
-text = "Don’t worry sweetie, you’re treasure to me"
 scroll_active = false
 script = ExtResource("5_2fc2m")
 metadata/_edit_use_anchors_ = true
