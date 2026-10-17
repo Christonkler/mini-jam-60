@@ -52,6 +52,7 @@ func apply_pull(blade: RigidBody2D) -> void:
 		blade.apply_central_force(walk_mag(blade) * walk_dir(blade))
 
 func apply_joik(blade: RigidBody2D, other: RigidBody2D) -> void:
+	$SoundEffects.play_collision_sound()
 	var outward_dir = (other.global_position - blade.global_position).normalized()
 	outward_dir = Vector2.from_angle(outward_dir.angle() + 0.1*(randf()-0.5))
 	blade.apply_central_force(20 * abs(blade.angular_velocity) * outward_dir)
