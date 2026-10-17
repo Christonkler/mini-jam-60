@@ -3,13 +3,13 @@ extends Control
 @export var win: bool
 
 # process vars
-var fysic_1: RigidBody2D
-var fysic_2: RigidBody2D
-var push_temp: Vector2
+var start_time: int
 var univ_ctr: Vector2
+var hitbox: Area2D
 
 
-
+func ms_elapsed() -> int:
+	return Time.get_ticks_msec() - start_time
 
 func d_curve(dist: float) -> float:
 	# how does the arena pull force diminish with distance
@@ -27,28 +27,22 @@ func apply_pull(blade: RigidBody2D) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	# find our blades
-	fysic_1 = $Beyblade.fysic
-	fysic_2 = $Beyblade2.fysic
-	push_temp.x = -30
-	push_temp.y = 0
-	fysic_1.set_axis_velocity(push_temp)
-	push_temp.x = 30
-	push_temp.y = 0
-	fysic_2.set_axis_velocity(push_temp)
+	start_time = Time.get_ticks_msec()
+	hitbox = $TextureRect/Area2D
+	$Beyblade.fysic.linear_velocity = Vector2(300, 0)
+	$Beyblade2.fysic.linear_velocity = Vector2(30, 0)
 	univ_ctr.x = 0
 	univ_ctr.y = 0
-	
-	fysic_1.contact_monitor = true
-	fysic_1.max_contacts_reported = 1
-	
-	fysic_2.contact_monitor = true
-	fysic_2.max_contacts_reported = 1
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func proc_blade(blade: RigidBody2D) -> void:
+	apply_pull(blade)
+	if ms_elapsed() > 50 and not hitbox.overlaps_body(blade):
+		blade.get_parent().falling = true
+
+
 func _process(delta: float) -> void:
-	apply_pull(fysic_1)
-	fysic_1.apply_torque(30000 * delta)
-	apply_pull(fysic_2)
-	fysic_2.apply_torque(30000 * delta)
+	for child in self.get_children():
+		if is_instance_of(child, Blade):
+			child.fysic.apply_torque(30000 * delta)
+			proc_blade(child.fysic)

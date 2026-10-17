@@ -76,11 +76,10 @@ autoplay = "default"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Control/TextureRect/Area2D" unique_id=1149927039]
 position = Vector2(0.5, 0)
 shape = SubResource("CircleShape2D_mq0dr")
-disabled = true
 
 [node name="Beyblade" parent="Control" unique_id=1377562879 instance=ExtResource("2_wl4x5")]
 z_index = 2
-position = Vector2(27, -102)
+position = Vector2(-109, 1)
 
 [node name="Beyblade2" parent="Control" unique_id=312525177 instance=ExtResource("2_wl4x5")]
 z_index = 2
