@@ -118,6 +118,6 @@ texture_pressed = ExtResource("6_dpxgc")
 script = ExtResource("7_dpxgc")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=396469902]
-zoom = Vector2(2, 2)
+zoom = Vector2(1.25, 1.25)
 
 [connection signal="pressed" from="Control/FastForwardButton" to="Control/FastForwardButton" method="_on_pressed"]
