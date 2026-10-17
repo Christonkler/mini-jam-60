@@ -12,3 +12,4 @@ func displayMatchResultMessage(matchResult: String):
 		$TextureRect.texture = preload("res://assets/EndText/victory.png")
 	else:
 		$TextureRect.texture = preload("res://assets/EndText/defeat.png")
+	

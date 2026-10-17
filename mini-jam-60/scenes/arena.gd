@@ -11,6 +11,7 @@ var init_avel: float
 var init_avel2: float
 var enemy : Blade
 var dead_flag: bool = false
+var music_started: bool = false
 
 
 func mse(tim: int) -> int:
@@ -106,10 +107,14 @@ func _process(delta: float) -> void:
 			proc_blade(child.fysic)
 			if child.dead:
 				dead_flag = true
+
 	$needle.rotation_degrees = -90 * abs($PlayerBeyblade.fysic.angular_velocity / init_avel)
 	$needle2.rotation_degrees = 90 + 90 * abs(enemy.fysic.angular_velocity / init_avel2)
 
 	if dead_flag:
+		if not music_started: # TODO: Play different music on loss
+			$MatchResultScreen/ResultMusicPlayer.play(0.3)
+			music_started = true
 		if enemy.dead:
 			$MatchResultScreen.displayMatchResultMessage('WINNER')
 		else:
