@@ -66,15 +66,12 @@ func _ready() -> void:
 	hitbox = $TextureRect/Area2D
 	$needle.pivot_offset = Vector2(64, 20)
 	$needle2.pivot_offset = Vector2(64, 20)
-<<<<<<< Updated upstream
 	$PlayerBeyblade.fysic.linear_velocity = Vector2(80, 0)
 	enemy.fysic.linear_velocity = Vector2(-80, 0)
 	$PlayerBeyblade.fysic.angular_velocity = 50
-=======
 	$Beyblade.fysic.linear_velocity = Vector2(180, 0)
 	enemy.fysic.linear_velocity = Vector2(-180, 0)
 	$Beyblade.fysic.angular_velocity = 50
->>>>>>> Stashed changes
 	enemy.fysic.angular_velocity = 50
 	enemy.position = Vector2(84,-93)
 	init_avel = $PlayerBeyblade.fysic.angular_velocity
@@ -88,17 +85,14 @@ func _ready() -> void:
 
 func proc_blade(blade: RigidBody2D) -> void:
 	apply_pull(blade)
-<<<<<<< Updated upstream
 	var blade_parent = blade.get_parent()
 	if (blade_parent.name == "PlayerAndAttachedItem"):
 		blade_parent = blade_parent.get_parent()
 
-=======
 	var others = blade.get_colliding_bodies()
 	for other in others:
 		if other.get_parent() is Blade:
 			apply_joik(blade, other)
->>>>>>> Stashed changes
 	if mse(start_time) > 50 and not hitbox.overlaps_body(blade):
 		blade_parent.falling = true
 		blade_parent.dead = true
