@@ -54,8 +54,10 @@ func _process(delta: float) -> void:
 			proc_blade(child.fysic)
 			if child.dead:
 				dead_flag = true
-#				TODO: Display result depending on which beyblade died
-				$MatchResultScreen.displayMatchResultMessage('WINNER')
+				if child.name == "Beyblade":
+					$MatchResultScreen.displayMatchResultMessage('LOSER')
+				else:
+					$MatchResultScreen.displayMatchResultMessage('WINNER')
 	if dead_flag and not death_time:
 		death_time = Time.get_ticks_msec()
 	if dead_flag and mse(death_time) > 5000:
