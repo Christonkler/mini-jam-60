@@ -161,6 +161,45 @@ const path_map_options : Array[Array] = [
 	]
 ]
 
+const enemy_options = [
+	[ # Level 0
+		"res://scenes/car_tire.tscn",
+		"res://scenes/inception_top.tscn",
+		"res://scenes/gem.tscn",
+		"res://scenes/scooter_wheel.tscn"
+	],
+	[ # Level 1
+		"res://scenes/car_tire.tscn",
+		"res://scenes/inception_top.tscn",
+		"res://scenes/gem.tscn",
+		"res://scenes/scooter_wheel.tscn"
+	],
+	[
+		"res://scenes/car_tire.tscn",
+		"res://scenes/inception_top.tscn",
+		"res://scenes/gem.tscn",
+		"res://scenes/scooter_wheel.tscn"
+	],
+	[
+		"res://scenes/car_tire.tscn",
+		"res://scenes/inception_top.tscn",
+		"res://scenes/gem.tscn",
+		"res://scenes/scooter_wheel.tscn"
+	],
+	[
+		"res://scenes/car_tire.tscn",
+		"res://scenes/inception_top.tscn",
+		"res://scenes/gem.tscn",
+		"res://scenes/scooter_wheel.tscn"
+	],
+	[
+		"res://scenes/car_tire.tscn",
+		"res://scenes/inception_top.tscn",
+		"res://scenes/gem.tscn",
+		"res://scenes/scooter_wheel.tscn"
+	]
+]
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Wait for the scene to finish loading so we have the size given to us by the container
@@ -265,18 +304,17 @@ func generate_nodes() -> void:
 		map_data.trash_heap_nodes.append(level_nodes)
 		
 func start_battle(node) -> void:
+	var arena_pack = load("res://scenes/arena.tscn")
+	var arena = arena_pack.instantiate()
+	var enemies_available = len(enemy_options[map_data.level])
+	var enemy = load(enemy_options[map_data.level][int(rng.randf_range(0, enemies_available))]).instantiate()
+
+	arena.get_node("Control").enemy = enemy
+	arena.get_node("Control").add_child(enemy)
+	
 	map_data.level += 1
 	map_data.beaten_nodes.append(node)
 	ResourceSaver.save(map_data, "user://map_data.res")
-	
-	var arena_pack = load("res://scenes/arena.tscn")
-	var arena = arena_pack.instantiate()
-	
-	var enemy = load("res://scenes/car_tire.tscn").instantiate()
-	
-	arena.get_node("Control").enemy = enemy
-	
-	arena.get_node("Control").add_child(enemy)
 	get_tree().change_scene_to_node(arena)
 		
 func create_button(pos: Vector2, texture_hover: Texture2D, texture_normal: Texture2D) -> TextureButton:
