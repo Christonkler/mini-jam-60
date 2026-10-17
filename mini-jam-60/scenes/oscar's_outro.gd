@@ -20,6 +20,9 @@ func _process(delta: float) -> void:
 	if (display):
 		visible_ratio += .8*delta
 
-func writeMessage():
-	text = messages.pick_random()
+func writeMessage(message: String):
+	if (message == ""):
+		text = messages.pick_random()
+	else:
+		text = message
 	display = true

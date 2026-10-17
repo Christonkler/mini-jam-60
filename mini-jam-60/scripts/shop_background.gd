@@ -1,5 +1,6 @@
 extends TextureRect
 
+var write_goodbye_message = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -7,15 +8,17 @@ func _ready() -> void:
 	$"Oscar Animated Sprite".oscar_flies.connect(oscarFlies)
 
 func close_shop():
-	#if ()
-	$"Oscar's Intro".clear()
-	$"Oscar's Outro".writeMessage()
-	$"Oscar Animated Sprite".play_backwards("oscar_greeting")
+	# NOTE: The shop still waits to exit after Oscar leaves
+	if (write_goodbye_message):
+		$"Oscar's Intro".clear()
+		$"Oscar's Outro".writeMessage("")
+		$"Oscar Animated Sprite".play_backwards("oscar_greeting")
 
 func oscarFlies():
 	$"Oscar Animated Sprite".play_backwards("oscar_greeting")
-	# TODO: Wait to launch the rocket until the animation ends
+	write_goodbye_message = false
 	$"Oscar's Intro".clear()
 	$"Oscar Animated Sprite".visible = false
 	$"Oscar Rocket".visible = true
+	$"Oscar's Outro".writeMessage("I don't want to live on this planet\n     anymore")
 	$"Oscar Rocket".play("default")
