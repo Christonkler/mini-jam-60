@@ -268,7 +268,17 @@ func start_battle(node) -> void:
 	map_data.level += 1
 	map_data.beaten_nodes.append(node)
 	ResourceSaver.save(map_data, "user://map_data.res")
-	get_tree().change_scene_to_file("res://scenes/arena.tscn")
+	
+	var arena_pack = load("res://scenes/arena.tscn")
+	var arena = arena_pack.instantiate()
+	
+	var enemy = load("res://scenes/car_tire.tscn").instantiate()
+	
+	arena.get_node("Control").enemy = enemy
+	
+	get_tree().root.add_child(enemy)
+	get_tree().root.add_child(arena)
+	queue_free()
 		
 func create_button(pos: Vector2, texture_hover: Texture2D, texture_normal: Texture2D) -> TextureButton:
 	var new_node : TextureButton
