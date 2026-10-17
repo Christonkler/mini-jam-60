@@ -53,11 +53,12 @@ func _process(delta: float) -> void:
 			child.fysic.apply_torque(30000 * delta)
 			proc_blade(child.fysic)
 			if child.dead:
-				dead_flag = true
-				if child.name == "Beyblade":
+				if not dead_flag and child.name == "Beyblade":
 					$MatchResultScreen.displayMatchResultMessage('LOSER')
-				else:
+				elif not dead_flag:
 					$MatchResultScreen.displayMatchResultMessage('WINNER')
+				dead_flag = true
+
 	if dead_flag and not death_time:
 		death_time = Time.get_ticks_msec()
 	if dead_flag and mse(death_time) > 5000:
