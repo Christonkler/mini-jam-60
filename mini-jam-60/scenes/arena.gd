@@ -7,8 +7,11 @@ var start_time: int = 0
 var death_time: int = 0
 var univ_ctr: Vector2
 var hitbox: Area2D
+var init_avel: float
+var init_avel2: float
 
 var enemy : Blade
+
 
 func mse(tim: int) -> int:
 	return Time.get_ticks_msec() - tim
@@ -30,6 +33,7 @@ func pull_dir(blade: RigidBody2D) -> Vector2:
 	return (univ_ctr - blade.global_position).normalized()
 
 func walk_mag(blade: RigidBody2D) -> float:
+	return 0
 	if not randi() % 30:
 		return 30 * blade.angular_velocity
 	return 0
@@ -52,11 +56,15 @@ func _ready() -> void:
 		remove_child($Beyblade2)
 	start_time = Time.get_ticks_msec()
 	hitbox = $TextureRect/Area2D
+	$needle.pivot_offset = Vector2(64, 20)
+	$needle2.pivot_offset = Vector2(64, 20)
 	$Beyblade.fysic.linear_velocity = Vector2(80, 0)
 	enemy.fysic.linear_velocity = Vector2(-80, 0)
 	$Beyblade.fysic.angular_velocity = 50
 	enemy.fysic.angular_velocity = 50
 	enemy.position = Vector2(84,-93)
+	init_avel = $Beyblade.fysic.angular_velocity
+	init_avel2 = enemy.fysic.angular_velocity
 	univ_ctr.x = 0
 	univ_ctr.y = 0
 	for upgrade in Global.upgrades:
@@ -85,9 +93,12 @@ func _process(delta: float) -> void:
 				elif not dead_flag:
 					$MatchResultScreen.displayMatchResultMessage('WINNER')
 				dead_flag = true
+	$needle.rotation_degrees = -90 * abs($Beyblade.fysic.angular_velocity / init_avel)
+	$needle2.rotation_degrees = 90 + 90 * abs(enemy.fysic.angular_velocity / init_avel2)
 
 	if dead_flag and not death_time:
 		death_time = Time.get_ticks_msec()
 	if dead_flag and mse(death_time) > 5000:
 		Engine.time_scale = 1 # Resets game speed if fast forwarding
+		Global.reset_arena_stuf()
 		get_tree().change_scene_to_file("res://scenes/map.tscn")
