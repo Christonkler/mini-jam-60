@@ -3,15 +3,6 @@ class_name Attaché
 
 signal item_attached
 
-#const itemTextures: Array[Resource] = [
-	#preload("res://assets/Banana Peel.png"),
-	#preload("res://assets/Apple Core.png"),
-	#preload("res://assets/Garbage Bag.png"),
-	#preload("res://assets/Moldy Cheese.png"),
-	#preload("res://assets/Old Can.png"),
-	#preload("res://assets/Pistachio.png"),
-	#preload("res://assets/Wad of Paper.png")
-#]
 var use_this_texture: Resource
 
 
