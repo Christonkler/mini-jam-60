@@ -1,16 +1,12 @@
 [gd_scene format=3 uid="uid://b0vdo612jokyh"]
 
-[ext_resource type="Script" uid="uid://w3r5hv2h3d0j" path="res://scenes/beyblade.gd" id="1_3dmh2"]
-[ext_resource type="Script" uid="uid://du3padgbnc5mn" path="res://scenes/fysic.gd" id="2_pg1xk"]
-[ext_resource type="Texture2D" uid="uid://btousx646q2mw" path="res://assets/Apple Spritesheet.png" id="3_a7wfc"]
-[ext_resource type="Script" uid="uid://b8jyh1iqniyq5" path="res://scenes/apple_consumption.gd" id="4_pg1xk"]
+[ext_resource type="Script" uid="uid://be2cy7roxt31f" path="res://scenes/beyblade.gd" id="1_3dmh2"]
+[ext_resource type="Script" uid="uid://c2u7pc75n8cxb" path="res://scenes/fysic.gd" id="2_pg1xk"]
+[ext_resource type="Texture2D" uid="uid://c6e1hbvadu4ac" path="res://assets/Apple Spritesheet.png" id="3_a7wfc"]
+[ext_resource type="Script" uid="uid://kpsfbihiukga" path="res://scenes/blade_decay.gd" id="4_pg1xk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kxxqw"]
 radius = 16.0
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_13qtx"]
-atlas = ExtResource("3_a7wfc")
-region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pg1xk"]
 atlas = ExtResource("3_a7wfc")
@@ -94,7 +90,7 @@ animations = [{
 }],
 "loop": 0,
 "name": &"default",
-"speed": 0.0
+"speed": 1.0
 }]
 
 [node name="Node2D" type="Node2D" unique_id=815957910]
@@ -118,10 +114,8 @@ offset_top = -16.0
 offset_right = 16.0
 offset_bottom = 16.0
 pivot_offset = Vector2(16, 16)
-texture = SubResource("AtlasTexture_13qtx")
 metadata/_edit_use_anchors_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="fysic" unique_id=1715415090]
 sprite_frames = SubResource("SpriteFrames_1oqaa")
-speed_scale = 0.0
 script = ExtResource("4_pg1xk")

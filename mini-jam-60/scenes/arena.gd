@@ -55,6 +55,8 @@ func apply_joik(blade: RigidBody2D, other: RigidBody2D) -> void:
 	var outward_dir = (other.global_position - blade.global_position).normalized()
 	outward_dir = Vector2.from_angle(outward_dir.angle() + 0.1*(randf()-0.5))
 	blade.apply_central_force(20 * abs(blade.angular_velocity) * outward_dir)
+	blade.on_body_entered()
+	other.on_body_entered()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -78,7 +80,6 @@ func _ready() -> void:
 	for upgrade in Global.upgrades:
 		$PlayerBeyblade.fysic.add_child(upgrade)
 		$PlayerBeyblade.fysic.setPhysicsForAttachment(upgrade)
-
 
 func proc_blade(blade: RigidBody2D) -> void:
 	apply_pull(blade)
