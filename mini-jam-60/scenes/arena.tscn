@@ -7,6 +7,8 @@
 [ext_resource type="Texture2D" uid="uid://bs8vb4l42fspa" path="res://assets/Fast Forward Unpressed.png" id="5_4ag8t"]
 [ext_resource type="Texture2D" uid="uid://cr8lvkkt6w2re" path="res://assets/Fast Forward Pressed.png" id="6_dpxgc"]
 [ext_resource type="Script" uid="uid://b2bp7pe331p0x" path="res://scenes/fast_forward_button.gd" id="7_dpxgc"]
+[ext_resource type="Texture2D" uid="uid://b7e8ixjhhyyys" path="res://assets/Tacho/TachoTopLeft.png" id="8_naajo"]
+[ext_resource type="Texture2D" uid="uid://8a0ln5yiwbtm" path="res://assets/Tacho/TachoNeedle.png" id="9_41jku"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xdvfk"]
 atlas = ExtResource("2_olpmc")
@@ -109,13 +111,42 @@ text = "YOU LOST"
 [node name="FastForwardButton" type="TextureButton" parent="Control" unique_id=1010230549]
 layout_mode = 0
 offset_left = -16.0
-offset_top = 129.0
+offset_top = 202.0
 offset_right = 16.0
-offset_bottom = 161.0
+offset_bottom = 234.0
 toggle_mode = true
 texture_normal = ExtResource("5_4ag8t")
 texture_pressed = ExtResource("6_dpxgc")
 script = ExtResource("7_dpxgc")
+
+[node name="gauge" type="TextureRect" parent="Control" unique_id=630922882]
+layout_mode = 0
+offset_left = -256.0
+offset_top = -256.0
+offset_right = -128.0
+offset_bottom = -128.0
+texture = ExtResource("8_naajo")
+
+[node name="needle" type="TextureRect" parent="Control" unique_id=154918396]
+layout_mode = 0
+offset_left = -320.0
+offset_top = -275.0
+offset_right = -192.0
+offset_bottom = -147.0
+offset_transform_enabled = true
+offset_transform_pivot = Vector2(0, -45)
+texture = ExtResource("9_41jku")
+
+[node name="gauge2" type="TextureRect" parent="Control" unique_id=593217429]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="needle2" type="TextureRect" parent="Control" unique_id=1457756583]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("9_41jku")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=396469902]
 zoom = Vector2(1.25, 1.25)

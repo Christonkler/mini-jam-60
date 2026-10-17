@@ -119,6 +119,7 @@ script = ExtResource("1_032fp")
 [node name="Area2D" type="Area2D" parent="." unique_id=365175581]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=2119509834]
+position = Vector2(-283, -5)
 shape = SubResource("RectangleShape2D_dxqae")
 
 [node name="Shop Background" type="TextureRect" parent="Area2D/CollisionShape2D" unique_id=341868381]
@@ -212,10 +213,10 @@ sprite_frames = SubResource("SpriteFrames_invmw")
 script = ExtResource("6_ajxib")
 
 [node name="ShopItem" parent="Shop Items" unique_id=96194411 instance=ExtResource("6_8r1wq")]
-position = Vector2(736, 171)
+position = Vector2(455, 161)
 
 [node name="ShopItem2" parent="Shop Items" unique_id=519855894 instance=ExtResource("6_8r1wq")]
-position = Vector2(522, 165)
+position = Vector2(241, 155)
 
 [node name="ShopItem3" parent="Shop Items" unique_id=519441591 instance=ExtResource("6_8r1wq")]
-position = Vector2(314, 167)
+position = Vector2(33, 157)
