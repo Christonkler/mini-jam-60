@@ -51,11 +51,12 @@ func pull_dir(blade: RigidBody2D) -> Vector2:
 	return (univ_ctr - blade.global_position).normalized()
 
 func walk_mag(blade: RigidBody2D) -> float:
+	var retval = 0
 	if not randi() % 30:
-		return 20 * blade.angular_velocity
-	if not randi() % 40:
-		return -20 * blade.angular_velocity
-	return 0
+		retval = 20 * blade.angular_velocity
+	elif not randi() % 40:
+		retval = -20 * blade.angular_velocity
+	return blade.get_parent().walkin_spd * retval
 
 func walk_dir(blade: RigidBody2D) -> Vector2:
 	var ctr_dir: Vector2 = (univ_ctr - blade.global_position).normalized()
@@ -79,7 +80,7 @@ func apply_joik(blade: RigidBody2D, other: RigidBody2D) -> void:
 	
 func get_bar_prog() -> float:
 	var speed = 1500
-	return float(abs(mse(start_time) % (speed * 2) - speed)) / speed
+	return float(abs((mse(start_time) + speed) % (speed * 2) - speed)) / speed
 	
 func set_launch_bar_pos() -> void:
 	var prog: float = get_bar_prog()
@@ -174,7 +175,15 @@ func _ready() -> void:
 			upgrade.pin_joint = pin_joint
 			playa.fysic.setPhysicsForAttachment(upgrade)
 		elif is_instance_of(upgrade,TipAttaché):
-			pass
+			match upgrade.scene_file_path:
+				"res://scenes/eraser_tip.tscn":
+					playa.walkin_spd *= 1.5
+				"res://scenes/pencil_tip.tscn":
+					playa.walkin_spd *= 0.66
+					playa.fysic.linear_damp *= 0.9
+					playa.fysic.angular_damp *= 0.75
+				"res://scenes/tip.tscn":
+					pass
 
 func proc_blade(blade: RigidBody2D) -> void:
 	apply_pull(blade)

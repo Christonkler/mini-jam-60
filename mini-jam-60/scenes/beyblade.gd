@@ -10,8 +10,13 @@ class_name Blade
 @export var skins: Array[TextureRect] = []
 var death_pos: Array[Vector2] = []
 var death_vcs: Array[Vector2] = []
+
+# top 10 modifiers of all time
 @export var dmg: float = 1
 @export var bounciness: float = 1
+@export var dmg_rst: float = 1
+@export var bounce_rst: float = 1
+@export var walkin_spd: float = 1
 @export var init_vel: int = 40
 @export var init_spin: int = 60
 @export var pos_mod: Vector2 = Vector2(0, 0)
@@ -27,7 +32,7 @@ func _ready() -> void:
 	dead = false
 	match self.scene_file_path:
 		"res://scenes/apple.tscn":
-			pass
+			dmg = 2
 		"res://scenes/car_tire.tscn":
 			pass
 		"res://scenes/inception_top.tscn":
