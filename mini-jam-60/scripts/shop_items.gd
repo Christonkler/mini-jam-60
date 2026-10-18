@@ -37,6 +37,7 @@ func purchaseItem(shopItem: Node2D):
 		else:
 			attachment = Attaché.create(shopItem.get_child(0).texture_normal)
 		Global.upgrades.append(attachment)
+		disableOtherItems(shopItem)
 		close_shop.emit()
 	pass
 	
@@ -45,3 +46,9 @@ func setRandomItemTexture(textureButton: TextureButton):
 	var index = randi() % itemTextures.size()
 	textureButton.set_texture_normal(itemTextures.get(index))
 	itemTextures.remove_at(index)
+
+
+func disableOtherItems(shopItem: Node2D):
+	for child in get_children():
+		if (child != shopItem):
+			child.visible = false
