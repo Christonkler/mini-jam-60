@@ -194,19 +194,19 @@ const enemy_options = [
 		},
 		{
 			"character_image" : "res://assets/people/hatman.png",
-			"blade": "res://scenes/car_tire.tscn",
-			"description": ""
+			"blade": "res://scenes/fidget_spinner.tscn",
+			"description": "Keeps me calm"
 		}
 	],
 	[ # Level 3
 		{
 			"character_image" : "res://assets/people/hatman.png",
-			"blade": "res://scenes/gem.tscn",
+			"blade": "res://scenes/bird.tscn",
 			"description": ""
 		},
 		{
 			"character_image" : "res://assets/people/hatman.png",
-			"blade": "res://scenes/car_tire.tscn",
+			"blade": "res://scenes/turtle_shell.tscn",
 			"description": ""
 		}
 	],
@@ -226,7 +226,7 @@ const enemy_options = [
 		{
 			"character_image" : "res://assets/people/OldMan.png",
 			"blade": "res://scenes/inception_top.tscn",
-			"description": ""
+			"description": "Final boss baby"
 		}
 	]
 ]
