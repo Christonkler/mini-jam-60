@@ -23,6 +23,7 @@ var spin_mod: float
 var has_upgrades : bool
 
 var immune_start : int
+var last_boss : bool = false
 
 var enemy_pos_1 = Vector2(180, -130)
 var enemy_pos_2 = Vector2(90, -90)
@@ -233,7 +234,10 @@ func _process(delta: float) -> void:
 			Engine.time_scale = 1 # Resets game speed if fast forwarding
 			Global.reset_arena_stuf()
 			if enemy.dead:
-				get_tree().change_scene_to_file("res://scenes/shop.tscn")
+				if last_boss:
+					get_tree().change_scene_to_file("res://scenes/map.tscn")
+				else:
+					get_tree().change_scene_to_file("res://scenes/shop.tscn")
 			else:
 				get_tree().change_scene_to_file("res://scenes/mainu.tscn")
 			

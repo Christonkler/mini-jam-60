@@ -19,6 +19,7 @@ const DEBUG = false
 signal node_visible
 signal node_invisible
 signal move_desc
+signal end_game
 
 var trash_heap_sprites = {
 	1: preload("res://assets/TrashHeap1.png"),
@@ -239,6 +240,9 @@ func _ready() -> void:
 	await get_tree().process_frame
 	map_data = ResourceLoader.load("user://map_data.res")
 	if map_data:
+		if map_data.level == NUM_LEVELS:
+			end_game.emit()
+			
 		var new_node : TextureButton
 		var i : int = 0
 		for level in map_data.trash_heap_nodes:
@@ -352,6 +356,8 @@ func start_battle(node) -> void:
 	if not DEBUG:
 		map_data.level += 1
 		map_data.beaten_nodes.append(node)
+	if map_data.level == NUM_LEVELS:
+		arena.get_node("Control").last_boss = true
 	ResourceSaver.save(map_data, "user://map_data.res")
 	get_tree().change_scene_to_node(arena)
 		
@@ -399,71 +405,4 @@ func generate_map() -> void:
 				map_data.trash_heap_map.append(line_start)
 				map_data.trash_heap_map.append(line_end)
 	
-	#self.add_random_trash_heaps()
 	self.queue_redraw()
-	
-func add_random_trash_heaps() -> void:
-	var points : Array[Vector2]
-	var _current_map : Dictionary
-	
-	for i in range(len(map_data.trash_heap_nodes)-1):
-		_current_map = map_data.level_map[i]
-		points = []
-		
-		if len(map_data.trash_heap_nodes[i]) == 1 and len(map_data.trash_heap_nodes[i+1]) == 1:
-			continue
-
-		for input_node in map_data.level_map[i].keys():
-			points.append(map_data.trash_heap_nodes[i][input_node-1])
-				
-			for output_node in map_data.level_map[i][input_node]:
-				points.append(map_data.trash_heap_nodes[i+1][output_node-1])
-				if len(points) > 2:
-					fill_triangle_with_trash(points)
-					points.remove_at(0)
-
-func fill_triangle_with_trash(points: Array[Vector2]):
-	var point1 : Vector2 = points[0]
-	var point2 : Vector2 = points[1]
-	var point3 : Vector2 = points[2]
-	var trash_heap : TextureRect 
-	var random_trash_heap_texture : int
-	
-	var start_x = min(point1.x, point2.x, point3.x) + 20
-	var end_x = max(point1.x, point2.x, point3.x) - 20
-	var start_y = min(point1.y, point2.y, point3.y) + 20
-	var end_y = max(point1.y, point2.y, point3.y) - 20
-	
-	for x in range(start_x, end_x, 30):
-		for y in range(start_y, end_y, 30):
-			if in_bounds(Vector2(x,y), point1, point2, point3):
-				trash_heap = TextureRect.new()
-				trash_heap.position = Vector2(x,y)
-				trash_heap.size = Vector2(1,1)
-				
-				random_trash_heap_texture = int(rng.randf_range(1, NUM_TRASH_HEAP_TEXTURES))
-				trash_heap.texture = trash_heap_sprites[random_trash_heap_texture]
-				self.add_child(trash_heap)
-	
-func in_bounds (pt: Vector2, v1: Vector2, v2: Vector2, v3: Vector2) -> bool:
-	var d1 : float
-	var d2 : float 
-	var d3 : float 
-	var has_neg : bool
-	var has_pos : bool
-
-	d1 = get_sign(pt, v1, v2);
-	d2 = get_sign(pt, v2, v3);
-	d3 = get_sign(pt, v3, v1);
-
-	has_neg = (d1 < 0) || (d2 < 0) || (d3 < 0);
-	has_pos = (d1 > 0) || (d2 > 0) || (d3 > 0);
-
-	return !(has_neg && has_pos);
-	
-func get_sign (p1: Vector2, p2: Vector2, p3: Vector2) -> float:
-	return (p1.x - p3.x) * (p2.y - p3.y) - (p2.x - p3.x) * (p1.y - p3.y);
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta: float) -> void:
-	pass

@@ -10,6 +10,7 @@ func press_button():
 	if txt == "LET IT RIP":
 		if FileAccess.file_exists("user://map_data.res"):
 			DirAccess.remove_absolute("user://map_data.res")
+		Global.upgrades = []
 		get_tree().change_scene_to_file("res://scenes/map.tscn")
 	elif txt == "CREDITS":
 		$"../Credits".visible = true

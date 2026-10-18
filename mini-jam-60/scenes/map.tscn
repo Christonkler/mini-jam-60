@@ -2,17 +2,18 @@
 
 [ext_resource type="Script" uid="uid://cdy6bl1oqrtsj" path="res://scenes/map_root.gd" id="1_0cso3"]
 [ext_resource type="Script" uid="uid://dh6454vx7wyb3" path="res://scripts/margin_container.gd" id="1_paxxb"]
-[ext_resource type="Script" uid="uid://fk1f5iwahoil" path="res://scripts/map.gd" id="2_gldc4"]
+[ext_resource type="Script" uid="uid://clumhdpl8mfrs" path="res://scripts/map.gd" id="2_gldc4"]
 [ext_resource type="Script" uid="uid://daltdt34t4suk" path="res://scripts/map_resource.gd" id="3_gldc4"]
 [ext_resource type="Script" uid="uid://cmufk2x24ofyc" path="res://scenes/enemy_desc.gd" id="5_2klcf"]
 [ext_resource type="AudioStream" uid="uid://chgv4x5566it7" path="res://assets/music/map.wav" id="6_2lpho"]
+[ext_resource type="Texture2D" uid="uid://byq8nng82soen" path="res://assets/endscreen_button.png" id="7_jh32y"]
+[ext_resource type="Texture2D" uid="uid://cn40633ewqf2c" path="res://assets/endscreen.png" id="8_be0no"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wijl4"]
 bg_color = Color(0.2136743, 0.08445477, 0.0036598383, 1)
 
 [sub_resource type="Resource" id="Resource_paxxb"]
 script = ExtResource("3_gldc4")
-metadata/_custom_type_script = "uid://b2k7gq6bm0mn8"
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1oqaa"]
 
@@ -103,3 +104,32 @@ vertical_alignment = 1
 stream = ExtResource("6_2lpho")
 volume_db = -8.0
 autoplay = true
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=414646373]
+visible = false
+visibility_layer = 2
+z_index = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_be0no")
+
+[node name="Button" type="TextureButton" parent="TextureRect" unique_id=1929009463]
+top_level = true
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -232.0
+offset_top = -62.0
+grow_horizontal = 0
+grow_vertical = 0
+texture_normal = ExtResource("7_jh32y")
+
+[connection signal="end_game" from="MarginContainer/Control" to="." method="_on_control_end_game"]
+[connection signal="pressed" from="TextureRect/Button" to="." method="_on_button_pressed"]
