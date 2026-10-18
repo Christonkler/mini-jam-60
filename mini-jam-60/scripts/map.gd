@@ -14,6 +14,8 @@ const X_SPACE : float = (1.0 / NUM_LEVELS)
 
 const NUM_TRASH_HEAP_TEXTURES = 3
 
+const DEBUG = true
+
 signal node_visible
 signal node_invisible
 signal move_desc
@@ -241,7 +243,12 @@ func _ready() -> void:
 		var i : int = 0
 		for level in map_data.trash_heap_nodes:
 			for node in level:
-				if node in map_data.beaten_nodes:
+				if DEBUG:
+					new_node = create_button(node, map_battle_button_hover, map_battle_button)
+					new_node.pressed.connect(start_battle.bind(node))
+					new_node.mouse_entered.connect(make_visible.bind(node))
+					new_node.mouse_exited.connect(make_invisible.bind())
+				elif node in map_data.beaten_nodes:
 					new_node = create_button(node, map_battle_beaten_button, map_battle_beaten_button)
 				elif i < map_data.level:
 					new_node = create_button(node, map_used_battle_button, map_used_battle_button)					
