@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://c5qu3wwcucx3j" path="res://assets/sign.png" id="2_ojm1d"]
 [ext_resource type="Script" uid="uid://dgh8qbld8u3ei" path="res://scenes/mainu_btn.gd" id="3_ojm1d"]
 [ext_resource type="AudioStream" uid="uid://jt8nv8ls7kkx" path="res://assets/music/title.wav" id="4_aujhm"]
+[ext_resource type="Texture2D" uid="uid://unsgxn2hckyk" path="res://assets/spintop.png" id="4_dktdq"]
+[ext_resource type="Script" uid="uid://cdjdiw04bcopb" path="res://scenes/title_screen.gd" id="5_f6u0s"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_mq0dr"]
 
@@ -148,6 +150,13 @@ offset_left = 2.9999962
 offset_right = 42.999996
 offset_bottom = 40.0
 scale = Vector2(4.648671, 1.600504)
+
+[node name="TitleScreen" type="TextureRect" parent="Area2D/CollisionShape2D" unique_id=1685283176]
+visibility_layer = 2
+offset_right = 640.0
+offset_bottom = 641.0
+texture = ExtResource("4_dktdq")
+script = ExtResource("5_f6u0s")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1540919907]
 stream = ExtResource("4_aujhm")
