@@ -15,12 +15,12 @@ var itemTextures: Array[Resource] = [
 
 var texture_to_scene: Dictionary[String, String] = {
 	"res://assets/Banana Peel.png": "res://scenes/banana_peel.tscn",
-	"res://assets/Apple Core.png": "res://scenes/banana_peel.tscn",
-	"res://assets/Garbage Bag.png": "res://scenes/banana_peel.tscn",
-	"res://assets/Moldy Cheese.png": "res://scenes/banana_peel.tscn",
-	"res://assets/Old Can.png": "res://scenes/banana_peel.tscn",
-	"res://assets/Pistachio.png": "res://scenes/banana_peel.tscn",
-	"res://assets/Wad of Paper.png": "res://scenes/banana_peel.tscn",
+	"res://assets/Apple Core.png": "res://scenes/apple_core.tscn",
+	"res://assets/Garbage Bag.png": "res://scenes/garbage_bag.tscn",
+	"res://assets/Moldy Cheese.png": "res://scenes/moldy_cheese.tscn",
+	"res://assets/Old Can.png": "res://scenes/old_can.tscn",
+	"res://assets/Pistachio.png": "res://scenes/pistachio.tscn",
+	"res://assets/Wad of Paper.png": "res://scenes/wad_of_paper.tscn",
 	"res://assets/Straw.png": "res://scenes/straw_attachment.tscn"
 }
 

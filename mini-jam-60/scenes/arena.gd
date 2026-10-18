@@ -62,8 +62,6 @@ func walk_dir(blade: RigidBody2D) -> Vector2:
 	
 func apply_pull(blade: RigidBody2D) -> void:
 	var blade_parent = blade.get_parent()
-	if (blade_parent.name == "PlayerAndAttachedItem"):
-		blade_parent = blade_parent.get_parent()
 	if not blade_parent.dead:
 		blade.apply_central_force(pull_mag(blade) * pull_dir(blade))
 		blade.apply_central_force(walk_mag(blade) * walk_dir(blade))
@@ -159,14 +157,17 @@ func _ready() -> void:
 	univ_ctr.x = 0
 	univ_ctr.y = 0
 	for upgrade in Global.upgrades:
+		var pin_joint : PinJoint2D = PinJoint2D.new()
+		pin_joint.node_a = playa.fysic.get_path()
+		playa.fysic.add_child(pin_joint)
 		playa.fysic.add_child(upgrade)
+		pin_joint.node_b = upgrade.get_path()
+		upgrade.pin_joint = pin_joint
 		playa.fysic.setPhysicsForAttachment(upgrade)
 
 func proc_blade(blade: RigidBody2D) -> void:
 	apply_pull(blade)
 	var blade_parent = blade.get_parent()
-	if (blade_parent.name == "PlayerAndAttachedItem"):
-		blade_parent = blade_parent.get_parent()
 
 	var others = blade.get_colliding_bodies()
 	for other in others:

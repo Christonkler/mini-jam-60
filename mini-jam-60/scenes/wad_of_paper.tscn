@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://cgysinob8wa8m"]
+
+[ext_resource type="Script" uid="uid://djhnafto86rib" path="res://scenes/droppable_attachment.gd" id="1_2o0xm"]
+[ext_resource type="Texture2D" uid="uid://brjio0j32mk6g" path="res://assets/Wad of Paper.png" id="2_wj5jv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xwdqq"]
+size = Vector2(30, 29)
+
+[node name="Node2D" type="RigidBody2D" unique_id=249236805]
+mass = 0.01
+gravity_scale = 0.0
+script = ExtResource("1_2o0xm")
+metadata/_custom_type_script = "uid://djhnafto86rib"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1937318764]
+position = Vector2(5, -14.5)
+shape = SubResource("RectangleShape2D_xwdqq")
+
+[node name="TextureRect" type="TextureRect" parent="CollisionShape2D" unique_id=201826594]
+offset_left = -14.0
+offset_top = -15.5
+offset_right = 18.0
+offset_bottom = 48.5
+texture = ExtResource("2_wj5jv")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true

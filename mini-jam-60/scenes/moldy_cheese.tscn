@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://bkhf3qj8gka30"]
+
+[ext_resource type="Script" uid="uid://djhnafto86rib" path="res://scenes/droppable_attachment.gd" id="1_b8njc"]
+[ext_resource type="Texture2D" uid="uid://d3f7an20jak1t" path="res://assets/Moldy Cheese.png" id="2_o2h5u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h76po"]
+size = Vector2(30, 29)
+
+[node name="Node2D" type="RigidBody2D" unique_id=2089972013]
+mass = 0.02
+gravity_scale = 0.0
+script = ExtResource("1_b8njc")
+metadata/_custom_type_script = "uid://djhnafto86rib"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=746234746]
+position = Vector2(5, -14.5)
+shape = SubResource("RectangleShape2D_h76po")
+
+[node name="TextureRect" type="TextureRect" parent="CollisionShape2D" unique_id=717459756]
+offset_left = -14.0
+offset_top = -15.5
+offset_right = 18.0
+offset_bottom = 48.5
+texture = ExtResource("2_o2h5u")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true

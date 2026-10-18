@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://c0boohahxa3tp"]
+
+[ext_resource type="Script" uid="uid://djhnafto86rib" path="res://scenes/droppable_attachment.gd" id="1_b4ln8"]
+[ext_resource type="Texture2D" uid="uid://rm270h6hwjms" path="res://assets/Apple Core.png" id="2_7581g"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sjmm5"]
+size = Vector2(27.232372, 30)
+
+[node name="Node2D" type="RigidBody2D" unique_id=1258441226]
+mass = 0.001
+gravity_scale = 0.0
+script = ExtResource("1_b4ln8")
+metadata/_custom_type_script = "uid://djhnafto86rib"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2042196416]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_sjmm5")
+
+[node name="TextureRect" type="TextureRect" parent="CollisionShape2D" unique_id=1923605975]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -17.0
+offset_top = -17.5
+offset_right = 15.0
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_7581g")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true
