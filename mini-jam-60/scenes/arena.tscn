@@ -205,10 +205,10 @@ script = ExtResource("18_6joey")
 [node name="Label" type="Label" parent="Control" unique_id=182351153]
 visible = false
 layout_mode = 0
-offset_left = -250.0
-offset_top = 194.0
-offset_right = -7.0
-offset_bottom = 217.0
+offset_left = -107.0
+offset_top = 216.0
+offset_right = 136.0
+offset_bottom = 239.0
 theme_override_font_sizes/font_size = 14
 text = "Press any key to litter"
 

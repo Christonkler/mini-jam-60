@@ -218,9 +218,8 @@ func _ready() -> void:
 					playa.fysic.angular_damp *= 0.75
 					playa.dmg_rst *= 0.95
 				"res://scenes/tip.tscn":
-					pass
+					playa.dmg_rst *= 1.06
 		elif is_instance_of(upgrade,WheelAttaché):
-			print(upgrade.scene_file_path)
 			for img in Shitems.texture_to_scene:
 				if Shitems.texture_to_scene[img] == upgrade.scene_file_path:
 					playa.fysic.get_child(1).texture = load(img)
@@ -231,6 +230,10 @@ func _ready() -> void:
 					playa.dmg_rst *= 1.5
 					playa.dmg *= 1.5
 					playa.fysic.linear_damp *= 1.5
+				"res://assets/Wheels/plate.png":
+					playa.fysic.mass *= .25
+				"res://assets/Wheels/basketball.png":
+					playa.bounciness = 3
 
 func proc_blade(blade: RigidBody2D) -> void:
 	apply_pull(blade)
