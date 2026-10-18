@@ -1,4 +1,4 @@
-extends Panel
+extends TextureRect
 
 func _ready():
 	$"MarginContainer/Control".node_visible.connect($"VBoxContainer".make_visible)

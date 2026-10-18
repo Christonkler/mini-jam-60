@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://kawikisgykye"]
 
 [ext_resource type="Script" uid="uid://cdy6bl1oqrtsj" path="res://scenes/map_root.gd" id="1_0cso3"]
+[ext_resource type="Texture2D" uid="uid://bnpn6uy500r5f" path="res://assets/trashscreen.png" id="1_be0no"]
 [ext_resource type="Script" uid="uid://dh6454vx7wyb3" path="res://scripts/margin_container.gd" id="1_paxxb"]
 [ext_resource type="Script" uid="uid://clumhdpl8mfrs" path="res://scripts/map.gd" id="2_gldc4"]
 [ext_resource type="Script" uid="uid://daltdt34t4suk" path="res://scripts/map_resource.gd" id="3_gldc4"]
@@ -9,9 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://byq8nng82soen" path="res://assets/endscreen_button.png" id="7_jh32y"]
 [ext_resource type="Texture2D" uid="uid://cn40633ewqf2c" path="res://assets/endscreen.png" id="8_be0no"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wijl4"]
-bg_color = Color(0.2136743, 0.08445477, 0.0036598383, 1)
-
 [sub_resource type="Resource" id="Resource_paxxb"]
 script = ExtResource("3_gldc4")
 
@@ -19,13 +17,13 @@ script = ExtResource("3_gldc4")
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2klcf"]
 
-[node name="Panel" type="Panel" unique_id=1700366192 groups=["map_data"]]
+[node name="Panel" type="TextureRect" unique_id=1846097577 groups=["map_data"]]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_wijl4")
+texture = ExtResource("1_be0no")
 script = ExtResource("1_0cso3")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1161221415]
