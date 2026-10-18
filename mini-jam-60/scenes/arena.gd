@@ -174,7 +174,7 @@ func _ready() -> void:
 			playa.fysic.add_child(upgrade)
 			pin_joint.node_b = upgrade.get_path()
 			upgrade.pin_joint = pin_joint
-			playa.fysic.setPhysicsForAttachment(upgrade)
+			playa.fysic.add_upgrade(upgrade)
 		elif is_instance_of(upgrade,TipAttaché):
 			print('upjadee? ', upgrade.scene_file_path)
 			match upgrade.scene_file_path:
@@ -200,9 +200,22 @@ func proc_blade(blade: RigidBody2D) -> void:
 			apply_joik(blade, other)
 	if mse(start_time) > 50 and not hitbox.overlaps_body(blade) and mse(immune_start) > 50:
 		blade_parent.falling = true
+		blade.disable_collision()
 		blade_parent.dead = true
 	if blade.angular_velocity < 3:
 		blade_parent.dead = true
+		
+func proc_upgrade(upgrade: RigidBody2D) -> void:
+	var fysic = upgrade.get_parent()
+
+	var others = upgrade.get_colliding_bodies()
+	for other in others:
+		if other.get_parent() is Blade:
+			apply_joik(upgrade, other)
+	if mse(start_time) > 50 and not hitbox.overlaps_body(upgrade) and mse(immune_start) > 50 and \
+		(upgrade.attached == false or fysic.get_parent().falling == true):
+		upgrade.falling = true
+		upgrade.disable_collision()
 
 func _process(delta: float) -> void:
 	if not launched:
@@ -213,6 +226,8 @@ func _process(delta: float) -> void:
 		for child in self.get_children():
 			if is_instance_of(child, Blade):
 				proc_blade(child.fysic)
+				for upgrade in child.fysic.upgrades:
+					proc_upgrade(upgrade)
 				if child.dead:
 					dead_flag = true
 		$needle.rotation_degrees = -90 * abs(playa.fysic.angular_velocity / init_avel)
