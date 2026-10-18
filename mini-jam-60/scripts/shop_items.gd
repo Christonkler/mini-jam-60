@@ -30,7 +30,12 @@ func purchaseItem(shopItem: Node2D):
 	if (not item_purchased):
 		item_purchased = true
 		shopItem.purchaseItem()
-		var attachment: Attaché = Attaché.create(shopItem.get_child(0).texture_normal)
+		var attachment: Attaché
+#		TODO: Check this in a better way
+		if shopItem.get_child(0).texture_normal.resource_path == "res://assets/Straw.png":
+			attachment = StrawAttaché.create(shopItem.get_child(0).texture_normal)
+		else:
+			attachment = Attaché.create(shopItem.get_child(0).texture_normal)
 		Global.upgrades.append(attachment)
 		close_shop.emit()
 	pass

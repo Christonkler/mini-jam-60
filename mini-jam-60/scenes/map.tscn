@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://kawikisgykye"]
 
-[ext_resource type="Script" uid="uid://clbduy5lfp4j4" path="res://scenes/map_root.gd" id="1_0cso3"]
+[ext_resource type="Script" uid="uid://cdy6bl1oqrtsj" path="res://scenes/map_root.gd" id="1_0cso3"]
 [ext_resource type="Script" uid="uid://dh6454vx7wyb3" path="res://scripts/margin_container.gd" id="1_paxxb"]
-[ext_resource type="Script" uid="uid://beqnfsxfhisp" path="res://scripts/map.gd" id="2_gldc4"]
+[ext_resource type="Script" uid="uid://clumhdpl8mfrs" path="res://scripts/map.gd" id="2_gldc4"]
 [ext_resource type="Script" uid="uid://daltdt34t4suk" path="res://scripts/map_resource.gd" id="3_gldc4"]
-[ext_resource type="Script" uid="uid://b3p6ruirakc1n" path="res://scenes/enemy_desc.gd" id="5_2klcf"]
+[ext_resource type="Script" uid="uid://cmufk2x24ofyc" path="res://scenes/enemy_desc.gd" id="5_2klcf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wijl4"]
 bg_color = Color(0.2136743, 0.08445477, 0.0036598383, 1)

@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://iwyntc00t1cl"]
+
+[ext_resource type="Script" uid="uid://drnhyeag1py71" path="res://scenes/beyblade.gd" id="1_gi74w"]
+[ext_resource type="Script" uid="uid://bnswbjdwk01kv" path="res://scenes/fysic.gd" id="2_tefgk"]
+[ext_resource type="Texture2D" uid="uid://brh3dckavqxuw" path="res://assets/explosives.png" id="3_pta4h"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hvatx"]
+radius = 14.0
+
+[node name="Node2D" type="Node2D" unique_id=1584636138]
+script = ExtResource("1_gi74w")
+
+[node name="fysic" type="RigidBody2D" parent="." unique_id=1527988814]
+gravity_scale = 0.0
+linear_damp_mode = 1
+linear_damp = 0.3
+angular_damp_mode = 1
+angular_damp = 0.05
+script = ExtResource("2_tefgk")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="fysic" unique_id=1570018615]
+shape = SubResource("CircleShape2D_hvatx")
+
+[node name="TextureRect" type="TextureRect" parent="fysic" unique_id=2086229860]
+offset_left = -16.0
+offset_top = -18.0
+offset_right = 16.0
+offset_bottom = 14.0
+pivot_offset = Vector2(16, 16)
+texture = ExtResource("3_pta4h")
+metadata/_edit_use_anchors_ = true

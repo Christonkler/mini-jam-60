@@ -14,7 +14,7 @@ func setPhysicsForAttachment(attachment: Attaché):
 	# Good enough for a start
 	if get_parent().name == "PlayerAndAttachedItem":
 		self.get_parent().get_parent().skins.append(attachment.get_child(0).get_child(0).get_child(0))
-		get_parent().node_b = attachment.get_path()
+		get_parent().add_attachment(attachment)
 
 
 # Example function of how to add an attachment to a beyblade. The add child would happen in the shop, and

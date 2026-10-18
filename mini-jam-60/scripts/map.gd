@@ -14,6 +14,8 @@ const X_SPACE : float = (1.0 / NUM_LEVELS)
 
 const NUM_TRASH_HEAP_TEXTURES = 3
 
+const DEBUG = true
+
 signal node_visible
 signal node_invisible
 signal move_desc
@@ -194,26 +196,26 @@ const enemy_options = [
 		},
 		{
 			"character_image" : "res://assets/people/hatman.png",
-			"blade": "res://scenes/car_tire.tscn",
-			"description": ""
+			"blade": "res://scenes/fidget_spinner.tscn",
+			"description": "Keeps me calm"
 		}
 	],
 	[ # Level 3
 		{
 			"character_image" : "res://assets/people/hatman.png",
-			"blade": "res://scenes/gem.tscn",
+			"blade": "res://scenes/bird.tscn",
 			"description": ""
 		},
 		{
 			"character_image" : "res://assets/people/hatman.png",
-			"blade": "res://scenes/car_tire.tscn",
+			"blade": "res://scenes/turtle_shell.tscn",
 			"description": ""
 		}
 	],
 	[ # Level 4
 		{
-			"character_image" : "res://assets/people/hatman.png",
-			"blade": "res://scenes/gem.tscn",
+			"character_image" : "res://assets/people/OldMan.png",
+			"blade": "res://scenes/explosives.tscn",
 			"description": ""
 		},
 		{
@@ -225,8 +227,8 @@ const enemy_options = [
 	[ # Final boss
 		{
 			"character_image" : "res://assets/people/OldMan.png",
-			"blade": "res://scenes/inception_top.tscn",
-			"description": ""
+			"blade": "res://scenes/earth.tscn",
+			"description": "Final boss baby"
 		}
 	]
 ]
@@ -241,7 +243,12 @@ func _ready() -> void:
 		var i : int = 0
 		for level in map_data.trash_heap_nodes:
 			for node in level:
-				if node in map_data.beaten_nodes:
+				if DEBUG:
+					new_node = create_button(node, map_battle_button_hover, map_battle_button)
+					new_node.pressed.connect(start_battle.bind(node))
+					new_node.mouse_entered.connect(make_visible.bind(node))
+					new_node.mouse_exited.connect(make_invisible.bind())
+				elif node in map_data.beaten_nodes:
 					new_node = create_button(node, map_battle_beaten_button, map_battle_beaten_button)
 				elif i < map_data.level:
 					new_node = create_button(node, map_used_battle_button, map_used_battle_button)					
@@ -256,11 +263,6 @@ func _ready() -> void:
 					new_node = create_button(node, map_used_battle_button, map_used_battle_button)
 				self.add_child(new_node)
 			i += 1
-			
-		if map_data.level > 3:
-			move_desc.emit("Left")
-		elif map_data.level <= 3:
-			move_desc.emit("Right")
 			
 		self.queue_redraw()
 	else:
@@ -347,8 +349,9 @@ func start_battle(node) -> void:
 	arena.get_node("Control").enemy = enemy
 	arena.get_node("Control").add_child(enemy)
 	
-	map_data.level += 1
-	map_data.beaten_nodes.append(node)
+	if not DEBUG:
+		map_data.level += 1
+		map_data.beaten_nodes.append(node)
 	ResourceSaver.save(map_data, "user://map_data.res")
 	get_tree().change_scene_to_node(arena)
 		
