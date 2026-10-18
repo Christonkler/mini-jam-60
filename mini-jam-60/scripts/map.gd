@@ -191,12 +191,12 @@ const enemy_options = [
 	],
 	[ # Level 2
 		{
-			"character_image" : "res://assets/people/bodybuilder.png", # TODO: Cruise guy
+			"character_image" : "res://assets/people/cruiser.png",
 			"blade": "res://scenes/pineapple.tscn",
 			"description": "Somehow always finds a way to make a margarita. Don't ask about the ingredients"
 		},
 		{
-			"character_image" : "res://assets/people/hatman.png", # TODO: Doctor
+			"character_image" : "res://assets/people/doctor.png",
 			"blade": "res://scenes/apple.tscn",
 			"description": "No one knows if he's a real doctor or not"
 		}
@@ -220,7 +220,7 @@ const enemy_options = [
 			"description": "You're in for a BOOM"
 		},
 		{
-			"character_image" : "res://assets/people/OldMan.png", # TODO: Leo
+			"character_image" : "res://assets/people/prettyboy.png",
 			"blade": "res://scenes/inception_top.tscn",
 			"description": "Leo always has a cool prop from his past for us to look at"
 		}
