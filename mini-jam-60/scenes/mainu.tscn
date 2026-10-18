@@ -163,7 +163,6 @@ texture = ExtResource("4_dktdq")
 script = ExtResource("5_f6u0s")
 
 [node name="Credits" type="TextureRect" parent="Area2D/MainMenuArea" unique_id=2095296881]
-visible = false
 light_mask = 2
 visibility_layer = 2
 offset_top = -1.0
@@ -189,7 +188,7 @@ Armstrong O'Connell
 Chris Abrego                                           
 
 Background Music:                                      
-John Grunow                                         
+John Grunow IG: @johnathongrunow
 
 Victory Music:                                               
 Short Lived Victory - Trent Zulkiewicz
