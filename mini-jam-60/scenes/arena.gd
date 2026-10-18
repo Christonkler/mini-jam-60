@@ -21,6 +21,8 @@ var launch_force: float
 var sped_mod: float
 var spin_mod: float
 
+var immune_start : int
+
 var enemy_pos_1 = Vector2(180, -130)
 var enemy_pos_2 = Vector2(90, -90)
 var playa_pos_1 = Vector2(-180, 130)
@@ -170,7 +172,7 @@ func proc_blade(blade: RigidBody2D) -> void:
 	for other in others:
 		if other.get_parent() is Blade:
 			apply_joik(blade, other)
-	if mse(start_time) > 50 and not hitbox.overlaps_body(blade):
+	if mse(start_time) > 50 and not hitbox.overlaps_body(blade) and mse(immune_start) > 50:
 		blade_parent.falling = true
 		blade_parent.dead = true
 	if blade.angular_velocity < 3:

@@ -11,6 +11,7 @@ func _unhandled_input(event):
 func drop():
 	if attached and get_tree().current_scene.get_node("/root/Arena/Control").launched: 
 		attached = false
+		get_tree().current_scene.get_node("/root/Arena/Control").immune_start = Time.get_ticks_msec()
 		var fysic = self.get_parent()
 		var pinJoin = fysic.get_parent()
 		fysic.call_deferred("reparent", pinJoin.get_parent())

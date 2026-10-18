@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://b0vdo612jokyh"]
 
-[ext_resource type="Script" uid="uid://be2cy7roxt31f" path="res://scenes/beyblade.gd" id="1_3dmh2"]
-[ext_resource type="Script" uid="uid://c2u7pc75n8cxb" path="res://scenes/fysic.gd" id="2_pg1xk"]
-[ext_resource type="Texture2D" uid="uid://c6e1hbvadu4ac" path="res://assets/Apple Spritesheet.png" id="3_a7wfc"]
-[ext_resource type="Script" uid="uid://kpsfbihiukga" path="res://scenes/blade_decay.gd" id="4_pg1xk"]
+[ext_resource type="Script" uid="uid://drnhyeag1py71" path="res://scenes/beyblade.gd" id="1_3dmh2"]
+[ext_resource type="Script" uid="uid://bnswbjdwk01kv" path="res://scenes/fysic.gd" id="2_pg1xk"]
+[ext_resource type="Texture2D" uid="uid://bvt0q2ywtt67d" path="res://assets/Apple Spritesheet.png" id="3_a7wfc"]
+[ext_resource type="Script" uid="uid://d2eu7lf2vlcbe" path="res://scenes/blade_decay.gd" id="4_pg1xk"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kxxqw"]
 radius = 16.0
@@ -93,9 +93,8 @@ animations = [{
 "speed": 1.0
 }]
 
-[node name="Node2D" type="Node2D" unique_id=815957910]
+[node name="Node2D2" type="Node2D" unique_id=815957910]
 script = ExtResource("1_3dmh2")
-metadata/_custom_type_script = "uid://w3r5hv2h3d0j"
 
 [node name="fysic" type="RigidBody2D" parent="." unique_id=372758385]
 gravity_scale = 0.0
