@@ -14,3 +14,5 @@ func drop():
 		get_tree().current_scene.get_node("/root/Arena/Control").immune_start = Time.get_ticks_msec()
 		self.pin_joint.queue_free()
 		self.linear_velocity = Vector2(0,0)
+		
+		self.mass = 1
