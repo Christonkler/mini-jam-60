@@ -359,6 +359,8 @@ func start_battle(node) -> void:
 		map_data.beaten_nodes.append(node)
 	if map_data.level == NUM_LEVELS:
 		arena.get_node("Control").last_boss = true
+	if 'apple' in map_data.enemy_data[node]["blade"]:
+		arena.get_node("Control").apple_mode = true
 	ResourceSaver.save(map_data, "user://map_data.res")
 	get_tree().change_scene_to_node(arena)
 		

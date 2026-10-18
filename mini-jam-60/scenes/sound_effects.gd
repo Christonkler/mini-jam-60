@@ -16,6 +16,12 @@ const break_sounds: Array[Resource] = [
 	preload("res://assets/audio/break5.mp3")
 ]
 
+const apple_sounds: Array[Resource] = [
+	preload("res://assets/audio/apple1.mp3"),
+	preload("res://assets/audio/apple2.mp3"),
+	preload("res://assets/audio/apple3.mp3")
+]
+
 func play_collision_sound():
 	var sound = sounds.pick_random()
 	stream = sound
@@ -23,5 +29,10 @@ func play_collision_sound():
 
 func play_break_sound():
 	var sound = break_sounds.pick_random()
+	stream = sound
+	play()
+	
+func play_apple_sound():
+	var sound = apple_sounds.pick_random()
 	stream = sound
 	play()
