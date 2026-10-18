@@ -4,6 +4,7 @@ extends Control
 
 # process vars
 var start_time: int = 0
+var lunch_time: int = 0
 var death_time: int = 0
 var univ_ctr: Vector2
 var hitbox: Area2D
@@ -13,6 +14,14 @@ var playa: Blade
 var enemy: Blade
 var dead_flag: bool = false
 var music_started: bool = false
+var launched: bool = false
+var launch_in_prog: bool = false
+
+var enemy_pos_1 = Vector2(180, -130)
+var enemy_pos_2 = Vector2(90, -90)
+var playa_pos_1 = Vector2(-180, 130)
+var playa_pos_2 = Vector2(-90, 90)
+
 
 
 func mse(tim: int) -> int:
@@ -21,7 +30,7 @@ func mse(tim: int) -> int:
 func d_curve(dist: float) -> float:
 	# how does the arena pull force diminish with distance
 	var R = 140
-	var curve: int
+	var curve: float
 	if dist >= R:
 		curve = dist
 	else:
@@ -60,8 +69,66 @@ func apply_joik(blade: RigidBody2D, other: RigidBody2D) -> void:
 	blade.apply_central_force(20 * abs(blade.angular_velocity) * outward_dir)
 	blade.on_body_entered()
 	other.on_body_entered()
+	
+func set_launch_bar_pos() -> void:
+	var speed = 1500
+	var prog: float = float(abs(mse(start_time) % (speed * 2) - speed)) / speed
+	var x_start = $bar.global_position.x + $barslider.texture.get_width()
+	var x_end = x_start + $bar.texture.get_width() - $barslider.texture.get_width()
+	var y_start = $bar.global_position.y + $bar.texture.get_height() / 2 - 4
+	var ctr_pos = Vector2(x_start + prog*(x_end-x_start), y_start)
+	$barslider.global_position = ctr_pos - $barslider.texture.get_size() / 2
+	
+func set_dont_lower_vel(blade: RigidBody2D, new_vel: Vector2) -> void:
+	var cur_mag = blade.linear_velocity.length()
+	if new_vel.length() < cur_mag:
+		blade.linear_velocity = cur_mag * new_vel.normalized()
+	else:
+		blade.linear_velocity = new_vel
+		
+func fancy_pants_spline_vel(cur_vel: float, end_vel: float, dist: float, tim_left: float, delta: float) -> float:
+	var c = (end_vel - cur_vel) / (dist/tim_left - cur_vel) - 1
+	print(c)
+	var retval = cur_vel + (end_vel - cur_vel) * (delta / tim_left) ** c
+	print(retval)
+	return retval
+	
 
-# Called when the node enters the scene tree for the first time.
+func set_launch_in_prog_pos(delta: float) -> void:
+	var lunch_len = 500
+	var time_now = mse(lunch_time)
+	if time_now <= lunch_len:
+		var prog: float = float(time_now) / lunch_len
+		var s_left: float = max(0.1, float(lunch_len - time_now) / 1000)
+		playa.fysic.linear_velocity = (playa_pos_2 - playa.fysic.global_position) / s_left
+		enemy.fysic.linear_velocity = (enemy_pos_2 - enemy.fysic.global_position) / s_left
+		playa.fysic.angular_velocity = prog * playa.init_spin
+		enemy.fysic.angular_velocity = prog * enemy.init_spin
+	else:
+		launch_in_prog = false
+		$bar.visible = false
+		$barslider.visible = false
+		set_vars_post_launch()
+
+func set_vars_post_launch() -> void:
+	playa.fysic.linear_velocity = playa.init_vel * Vector2(1, 0)
+	enemy.fysic.linear_velocity = enemy.init_vel * Vector2(-1, 0)
+	playa.fysic.angular_velocity = playa.init_spin
+	enemy.fysic.angular_velocity = enemy.init_spin
+	init_avel = playa.fysic.angular_velocity
+	init_avel2 = enemy.fysic.angular_velocity
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey or event is InputEventMouseButton or event is InputEventJoypadButton:
+		#if event.keycode == KEY_SPACE:  # gonna leave out particular key for now
+		if not event.pressed:  # wait for release
+			if not launched:
+				lunch_time = Time.get_ticks_msec()
+				launched = true
+				launch_in_prog = true
+
+
 func _ready() -> void:
 	if enemy == null:
 		enemy = $Beyblade2
@@ -72,13 +139,8 @@ func _ready() -> void:
 	hitbox = $TextureRect/Area2D
 	$needle.pivot_offset = Vector2(64, 20)
 	$needle2.pivot_offset = Vector2(64, 20)
-	playa.fysic.linear_velocity = playa.init_vel * Vector2(1, 0)
-	enemy.fysic.linear_velocity = enemy.init_vel * Vector2(-1, 0)
-	playa.fysic.angular_velocity = playa.init_spin
-	enemy.fysic.angular_velocity = enemy.init_spin
-	enemy.position = Vector2(84,-93)
-	init_avel = playa.fysic.angular_velocity
-	init_avel2 = enemy.fysic.angular_velocity
+	playa.position = playa_pos_1
+	enemy.position = enemy_pos_1
 	univ_ctr.x = 0
 	univ_ctr.y = 0
 	for upgrade in Global.upgrades:
@@ -104,34 +166,36 @@ func proc_blade(blade: RigidBody2D) -> void:
 
 
 func _process(delta: float) -> void:
-	for child in self.get_children():
-		if is_instance_of(child, Blade):
-			proc_blade(child.fysic)
-			if child.dead:
-				dead_flag = true
-
-	$needle.rotation_degrees = -90 * abs(playa.fysic.angular_velocity / init_avel)
-	$needle2.rotation_degrees = 90 + 90 * abs(enemy.fysic.angular_velocity / init_avel2)
-
-	if dead_flag:
-		
-		if enemy.dead:
-			$MatchResultScreen.displayMatchResultMessage('WINNER')
-			if not music_started:
-				$MatchResultScreen/ResultMusicPlayer.play_results_music(true)
-				music_started = true
-		else:
-			$MatchResultScreen.displayMatchResultMessage('LOSER')
-			if not music_started:
-				$MatchResultScreen/ResultMusicPlayer.play_results_music(false)
-				music_started = true
-	if dead_flag and not death_time:
-		death_time = Time.get_ticks_msec()
-	if dead_flag and mse(death_time) > 5000:
-		Engine.time_scale = 1 # Resets game speed if fast forwarding
-		Global.reset_arena_stuf()
-		if enemy.dead:
-			get_tree().change_scene_to_file("res://scenes/shop.tscn")
-		else:
-			get_tree().change_scene_to_file("res://scenes/mainu.tscn")
+	if not launched:
+		set_launch_bar_pos()
+	elif launch_in_prog:
+		set_launch_in_prog_pos(delta)
+	else:
+		for child in self.get_children():
+			if is_instance_of(child, Blade):
+				proc_blade(child.fysic)
+				if child.dead:
+					dead_flag = true
+		$needle.rotation_degrees = -90 * abs(playa.fysic.angular_velocity / init_avel)
+		$needle2.rotation_degrees = 90 + 90 * abs(enemy.fysic.angular_velocity / init_avel2)
+		if dead_flag:
+			if enemy.dead:
+				$MatchResultScreen.displayMatchResultMessage('WINNER')
+				if not music_started:
+					$MatchResultScreen/ResultMusicPlayer.play_results_music(true)
+					music_started = true
+			else:
+				$MatchResultScreen.displayMatchResultMessage('LOSER')
+				if not music_started:
+					$MatchResultScreen/ResultMusicPlayer.play_results_music(false)
+					music_started = true
+		if dead_flag and not death_time:
+			death_time = Time.get_ticks_msec()
+		if dead_flag and mse(death_time) > 5000:
+			Engine.time_scale = 1 # Resets game speed if fast forwarding
+			Global.reset_arena_stuf()
+			if enemy.dead:
+				get_tree().change_scene_to_file("res://scenes/shop.tscn")
+			else:
+				get_tree().change_scene_to_file("res://scenes/mainu.tscn")
 			
