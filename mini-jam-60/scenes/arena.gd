@@ -14,6 +14,7 @@ var playa: Blade
 var enemy: Blade
 var dead_flag: bool = false
 var music_started: bool = false
+var player_lost: bool = false
 var launched: bool = false
 var launch_in_prog: bool = false
 
@@ -181,14 +182,18 @@ func _process(delta: float) -> void:
 		if dead_flag:
 			if enemy.dead:
 				$MatchResultScreen.displayMatchResultMessage('WINNER')
-				if not music_started:
+				if not music_started or player_lost:
 					$MatchResultScreen/ResultMusicPlayer.play_results_music(true)
 					music_started = true
+					player_lost = false
+					$BattleMusicPlayer.stop()
 			else:
 				$MatchResultScreen.displayMatchResultMessage('LOSER')
 				if not music_started:
 					$MatchResultScreen/ResultMusicPlayer.play_results_music(false)
 					music_started = true
+					player_lost = true
+					$BattleMusicPlayer.stop()
 		if dead_flag and not death_time:
 			death_time = Time.get_ticks_msec()
 		if dead_flag and mse(death_time) > 5000:
