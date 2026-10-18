@@ -148,6 +148,24 @@ func _unhandled_input(event: InputEvent) -> void:
 				spin_mod = 0.8 + 0.4 * launch_force
 				sped_mod = 0.8 + 0.4 * launch_force
 
+func count(lis, type):
+	var total: int = 0
+	for item in lis:
+		if is_instance_of(item, type):
+			total += 1
+	return total
+	
+func remove_first(lis, type):
+	var found = false
+	var rmv_idx = 0
+	for idx in range(lis.size()):
+		if is_instance_of(lis[idx], type):
+			rmv_idx = idx
+			found = true
+			break
+	if found:
+		lis.remove_at(rmv_idx)
+
 
 func _ready() -> void:
 	if enemy == null:
@@ -165,6 +183,8 @@ func _ready() -> void:
 	enemy_pos_2 += enemy.pos_mod
 	univ_ctr.x = 0
 	univ_ctr.y = 0
+	while count(Global.upgrades, WheelAttaché) > 1:
+		remove_first(Global.upgrades, WheelAttaché)
 	for upgrade in Global.upgrades:
 		if is_instance_of(upgrade, BreakableAttaché) or is_instance_of(upgrade, DroppableAttaché):
 			has_upgrades = true
@@ -176,7 +196,6 @@ func _ready() -> void:
 			upgrade.pin_joint = pin_joint
 			playa.fysic.add_upgrade(upgrade)
 		elif is_instance_of(upgrade,TipAttaché):
-			print('upjadee? ', upgrade.scene_file_path)
 			match upgrade.scene_file_path:
 				"res://scenes/eraser_tip.tscn":
 					playa.walkin_spd *= 1.5
@@ -188,7 +207,17 @@ func _ready() -> void:
 				"res://scenes/tip.tscn":
 					pass
 		elif is_instance_of(upgrade,WheelAttaché):
-			pass
+			print(upgrade.scene_file_path)
+			for img in Shitems.texture_to_scene:
+				if Shitems.texture_to_scene[img] == upgrade.scene_file_path:
+					playa.fysic.get_child(1).texture = load(img)
+			match upgrade.scene_file_path:
+				"res://scenes/fan.tscn":
+					playa.can_fly = true
+				"res://scenes/brake_rotor.tscn":
+					playa.dmg_rst *= 1.5
+					playa.dmg *= 1.5
+					playa.fysic.linear_damp *= 1.5
 
 func proc_blade(blade: RigidBody2D) -> void:
 	apply_pull(blade)
@@ -198,7 +227,7 @@ func proc_blade(blade: RigidBody2D) -> void:
 	for other in others:
 		if other.get_parent() is Blade:
 			apply_joik(blade, other)
-	if mse(start_time) > 50 and not hitbox.overlaps_body(blade) and mse(immune_start) > 50:
+	if mse(start_time) > 50 and not hitbox.overlaps_body(blade) and mse(immune_start) > 50 and not blade_parent.can_fly:
 		blade_parent.falling = true
 		blade.disable_collision()
 		blade_parent.dead = true
