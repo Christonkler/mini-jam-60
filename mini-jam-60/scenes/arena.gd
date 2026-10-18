@@ -17,6 +17,9 @@ var music_started: bool = false
 var player_lost: bool = false
 var launched: bool = false
 var launch_in_prog: bool = false
+var launch_force: float
+var sped_mod: float
+var spin_mod: float
 
 var enemy_pos_1 = Vector2(180, -130)
 var enemy_pos_2 = Vector2(90, -90)
@@ -71,9 +74,12 @@ func apply_joik(blade: RigidBody2D, other: RigidBody2D) -> void:
 	blade.on_body_entered()
 	other.on_body_entered()
 	
-func set_launch_bar_pos() -> void:
+func get_bar_prog() -> float:
 	var speed = 1500
-	var prog: float = float(abs(mse(start_time) % (speed * 2) - speed)) / speed
+	return float(abs(mse(start_time) % (speed * 2) - speed)) / speed
+	
+func set_launch_bar_pos() -> void:
+	var prog: float = get_bar_prog()
 	var x_start = $bar.global_position.x + $barslider.texture.get_width()
 	var x_end = x_start + $bar.texture.get_width() - $barslider.texture.get_width()
 	var y_start = $bar.global_position.y + $bar.texture.get_height() / 2 - 4
@@ -87,11 +93,8 @@ func set_dont_lower_vel(blade: RigidBody2D, new_vel: Vector2) -> void:
 	else:
 		blade.linear_velocity = new_vel
 		
-func fancy_pants_spline_vel(cur_vel: float, end_vel: float, dist: float, tim_left: float, delta: float) -> float:
-	var c = (end_vel - cur_vel) / (dist/tim_left - cur_vel) - 1
-	print(c)
-	var retval = cur_vel + (end_vel - cur_vel) * (delta / tim_left) ** c
-	print(retval)
+func fancy_pants_spline_vel(end_vel: float, dist: float, tim_left: float) -> float:
+	var retval: float = 2 * dist / tim_left / 2 - end_vel
 	return retval
 	
 
@@ -101,9 +104,15 @@ func set_launch_in_prog_pos(delta: float) -> void:
 	if time_now <= lunch_len:
 		var prog: float = float(time_now) / lunch_len
 		var s_left: float = max(0.1, float(lunch_len - time_now) / 1000)
-		playa.fysic.linear_velocity = (playa_pos_2 - playa.fysic.global_position) / s_left
-		enemy.fysic.linear_velocity = (enemy_pos_2 - enemy.fysic.global_position) / s_left
-		playa.fysic.angular_velocity = prog * playa.init_spin
+		# I tried to get fancy here but physics is kicking me in my fancy pants
+		# if the launching fails try reverting back to the commented out code
+		#playa.fysic.linear_velocity = (playa_pos_2 - playa.fysic.global_position) / s_left
+		#enemy.fysic.linear_velocity = (enemy_pos_2 - enemy.fysic.global_position) / s_left
+		var playa_offset = playa_pos_2 - playa.fysic.global_position
+		playa.fysic.linear_velocity = fancy_pants_spline_vel(playa.init_vel * sped_mod, playa_offset.length(), s_left) * playa_offset.normalized()
+		var enemy_offset = enemy_pos_2 - enemy.fysic.global_position
+		enemy.fysic.linear_velocity = fancy_pants_spline_vel(enemy.init_vel, enemy_offset.length(), s_left) * enemy_offset.normalized()
+		playa.fysic.angular_velocity = prog * playa.init_spin * spin_mod
 		enemy.fysic.angular_velocity = prog * enemy.init_spin
 	else:
 		launch_in_prog = false
@@ -112,11 +121,11 @@ func set_launch_in_prog_pos(delta: float) -> void:
 		set_vars_post_launch()
 
 func set_vars_post_launch() -> void:
-	playa.fysic.linear_velocity = playa.init_vel * Vector2(1, 0)
+	playa.fysic.linear_velocity = playa.init_vel * sped_mod * Vector2(1, 0)
 	enemy.fysic.linear_velocity = enemy.init_vel * Vector2(-1, 0)
-	playa.fysic.angular_velocity = playa.init_spin
+	playa.fysic.angular_velocity = playa.init_spin * spin_mod
 	enemy.fysic.angular_velocity = enemy.init_spin
-	init_avel = playa.fysic.angular_velocity
+	init_avel = playa.fysic.angular_velocity * spin_mod
 	init_avel2 = enemy.fysic.angular_velocity
 
 
@@ -128,6 +137,9 @@ func _unhandled_input(event: InputEvent) -> void:
 				lunch_time = Time.get_ticks_msec()
 				launched = true
 				launch_in_prog = true
+				launch_force = get_bar_prog()
+				spin_mod = 0.8 + 0.4 * launch_force
+				sped_mod = 0.8 + 0.4 * launch_force
 
 
 func _ready() -> void:
