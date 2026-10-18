@@ -73,9 +73,9 @@ func apply_joik(blade: RigidBody2D, other: RigidBody2D) -> void:
 	$SoundEffects.play_collision_sound()
 	var outward_dir = (other.global_position - blade.global_position).normalized()
 	outward_dir = Vector2.from_angle(outward_dir.angle() + 0.1*(randf()-0.5))
-	blade.apply_central_force(20 * other.get_parent().bounciness * abs(blade.angular_velocity) * outward_dir)
-	if other.get_parent().dmg != 1:
-		blade.angular_velocity /= other.get_parent().dmg
+	blade.apply_central_force(20 * other.get_parent().bounciness / blade.get_parent().bounce_rst * abs(blade.angular_velocity) * outward_dir)
+	if blade.get_parent().dmg_rst != 1 or other.get_parent().dmg != 1:
+		blade.angular_velocity /= other.get_parent().dmg / blade.get_parent().dmg_rst
 	blade.on_body_entered()
 	other.on_body_entered()
 	
@@ -176,6 +176,7 @@ func _ready() -> void:
 			upgrade.pin_joint = pin_joint
 			playa.fysic.setPhysicsForAttachment(upgrade)
 		elif is_instance_of(upgrade,TipAttaché):
+			print('upjadee? ', upgrade.scene_file_path)
 			match upgrade.scene_file_path:
 				"res://scenes/eraser_tip.tscn":
 					playa.walkin_spd *= 1.5
@@ -183,8 +184,9 @@ func _ready() -> void:
 					playa.walkin_spd *= 0.66
 					playa.fysic.linear_damp *= 0.9
 					playa.fysic.angular_damp *= 0.75
+					playa.dmg_rst *= 0.95
 				"res://scenes/tip.tscn":
-					pass
+					playa.dmg_rst *= 1.06
 
 func proc_blade(blade: RigidBody2D) -> void:
 	apply_pull(blade)
