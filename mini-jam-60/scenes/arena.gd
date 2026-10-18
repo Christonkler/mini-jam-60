@@ -221,6 +221,10 @@ func _ready() -> void:
 					playa.dmg_rst *= 0.95
 				"res://scenes/tip.tscn":
 					playa.dmg_rst *= 1.06
+				"res://assets/Tips/Gluestick.png":
+					playa.fysic.linear_damp *= 2
+				"res://assets/Tips/Icecube.png":
+					playa.fysic.angular_damp *= 0.5
 		elif is_instance_of(upgrade,WheelAttaché):
 			for img in Shitems.texture_to_scene:
 				if Shitems.texture_to_scene[img] == upgrade.scene_file_path:
