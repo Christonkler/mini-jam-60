@@ -5,19 +5,19 @@
 [ext_resource type="PackedScene" uid="uid://bharswpihsav5" path="res://scenes/beyblade.tscn" id="2_wl4x5"]
 [ext_resource type="PackedScene" uid="uid://dnmqwrrhrsmp7" path="res://scenes/PlayerBeyblade.tscn" id="3_k1k1x"]
 [ext_resource type="Script" uid="uid://bohqfu3qhkhk" path="res://scenes/match_result_screen.gd" id="4_xdvfk"]
-[ext_resource type="Texture2D" uid="uid://bfax3bsxduqk5" path="res://assets/Fast Forward Unpressed.png" id="5_4ag8t"]
-[ext_resource type="Texture2D" uid="uid://rg3qsp2uag3e" path="res://assets/EndText/victory.png" id="6_ajq0i"]
-[ext_resource type="Texture2D" uid="uid://1ljdbwj4liqt" path="res://assets/Fast Forward Pressed.png" id="6_dpxgc"]
+[ext_resource type="Texture2D" uid="uid://bs8vb4l42fspa" path="res://assets/Fast Forward Unpressed.png" id="5_4ag8t"]
+[ext_resource type="Texture2D" uid="uid://no2unlal4oiq" path="res://assets/EndText/victory.png" id="6_ajq0i"]
+[ext_resource type="Texture2D" uid="uid://cr8lvkkt6w2re" path="res://assets/Fast Forward Pressed.png" id="6_dpxgc"]
 [ext_resource type="Script" uid="uid://4xpe2pul28y0" path="res://scenes/fast_forward_button.gd" id="7_dpxgc"]
 [ext_resource type="AudioStream" uid="uid://dxbo0x2ns883r" path="res://assets/music/12. Let_s Roll - Droodle.wav" id="7_ixwup"]
 [ext_resource type="Script" uid="uid://cxmec0a8x2oux" path="res://scenes/result_music_player.gd" id="8_ixwup"]
-[ext_resource type="Texture2D" uid="uid://d0k3ybct7lk8e" path="res://assets/Tacho/TachoTopLeft.png" id="8_naajo"]
-[ext_resource type="Texture2D" uid="uid://bn47ktu334gq7" path="res://assets/Tacho/TachoNeedle.png" id="9_41jku"]
-[ext_resource type="Texture2D" uid="uid://56hy5x6xbu61" path="res://assets/Tacho/TachoBottomRight.png" id="10_41jku"]
+[ext_resource type="Texture2D" uid="uid://b7e8ixjhhyyys" path="res://assets/Tacho/TachoTopLeft.png" id="8_naajo"]
+[ext_resource type="Texture2D" uid="uid://8a0ln5yiwbtm" path="res://assets/Tacho/TachoNeedle.png" id="9_41jku"]
+[ext_resource type="Texture2D" uid="uid://0wiy4vgqdfgg" path="res://assets/Tacho/TachoBottomRight.png" id="10_41jku"]
 [ext_resource type="Script" uid="uid://bdf3jfbyuih18" path="res://scenes/sound_effects.gd" id="12_ajq0i"]
 [ext_resource type="Texture2D" uid="uid://cnxg8w5yimoya" path="res://assets/bar.png" id="16_ow1aj"]
 [ext_resource type="Texture2D" uid="uid://ddy5a0edfwkja" path="res://assets/barslider.png" id="17_6joey"]
-[ext_resource type="Script" uid="uid://c3xxhhwb0r1h3" path="res://scenes/battle_music.gd" id="18_6joey"]
+[ext_resource type="Script" uid="uid://h83wp0tm85pl" path="res://scenes/battle_music.gd" id="18_6joey"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xdvfk"]
 atlas = ExtResource("2_olpmc")
@@ -198,6 +198,16 @@ stretch_mode = 2
 volume_db = -8.0
 autoplay = true
 script = ExtResource("18_6joey")
+
+[node name="Label" type="Label" parent="Control" unique_id=182351153]
+visible = false
+layout_mode = 0
+offset_left = -250.0
+offset_top = 194.0
+offset_right = -7.0
+offset_bottom = 217.0
+theme_override_font_sizes/font_size = 14
+text = "Press any key to drop items"
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=396469902]
 zoom = Vector2(1.25, 1.25)

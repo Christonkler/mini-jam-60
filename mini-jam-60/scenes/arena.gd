@@ -20,6 +20,7 @@ var launch_in_prog: bool = false
 var launch_force: float
 var sped_mod: float
 var spin_mod: float
+var has_upgrades : bool
 
 var immune_start : int
 
@@ -136,6 +137,8 @@ func _unhandled_input(event: InputEvent) -> void:
 			if not launched:
 				lunch_time = Time.get_ticks_msec()
 				launched = true
+				if has_upgrades:
+					$Label.visible = true
 				launch_in_prog = true
 				launch_force = get_bar_prog()
 				spin_mod = 0.8 + 0.4 * launch_force
@@ -157,6 +160,7 @@ func _ready() -> void:
 	univ_ctr.x = 0
 	univ_ctr.y = 0
 	for upgrade in Global.upgrades:
+		has_upgrades = true
 		var pin_joint : PinJoint2D = PinJoint2D.new()
 		pin_joint.node_a = playa.fysic.get_path()
 		playa.fysic.add_child(pin_joint)
