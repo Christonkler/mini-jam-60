@@ -174,8 +174,6 @@ func remove_first(lis, type):
 func face_the_blade(guy: TextureRect, blade: Blade, offset: float) -> void:
 	var guy_ctr = guy.global_position + guy.get_global_rect().size * guy.scale / 2
 	var blade_ctr = blade.fysic.global_position
-	if guy == $them:
-		print(guy_ctr, ' : ', blade_ctr)
 	guy.rotation = (blade_ctr-guy_ctr).angle() + offset
 
 
