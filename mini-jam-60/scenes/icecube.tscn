@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://oxavmidhn2ic"]
+
+[ext_resource type="Script" uid="uid://cscy3lq460iou" path="res://scripts/tips_attachment.gd" id="1_15q6n"]
+
+[node name="Node2D" type="RigidBody2D" unique_id=684489260]
+script = ExtResource("1_15q6n")
+metadata/_custom_type_script = "uid://cscy3lq460iou"
