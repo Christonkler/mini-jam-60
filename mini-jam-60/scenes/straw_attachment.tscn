@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://b5p1esl8qucg0"]
 
-[ext_resource type="Script" uid="uid://c05nijt6pfqc" path="res://scripts/straw_attachment.gd" id="1_57skb"]
+[ext_resource type="Script" uid="uid://c05nijt6pfqc" path="res://scripts/breakable_attachment.gd" id="1_57skb"]
 [ext_resource type="Texture2D" uid="uid://bsap14jbu7sr0" path="res://assets/Straw.png" id="1_tb0m5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dxqae"]
