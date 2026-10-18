@@ -164,14 +164,17 @@ func _ready() -> void:
 	univ_ctr.x = 0
 	univ_ctr.y = 0
 	for upgrade in Global.upgrades:
-		has_upgrades = true
-		var pin_joint : PinJoint2D = PinJoint2D.new()
-		pin_joint.node_a = playa.fysic.get_path()
-		playa.fysic.add_child(pin_joint)
-		playa.fysic.add_child(upgrade)
-		pin_joint.node_b = upgrade.get_path()
-		upgrade.pin_joint = pin_joint
-		playa.fysic.setPhysicsForAttachment(upgrade)
+		if is_instance_of(upgrade, BreakableAttaché) or is_instance_of(upgrade, DroppableAttaché):
+			has_upgrades = true
+			var pin_joint : PinJoint2D = PinJoint2D.new()
+			pin_joint.node_a = playa.fysic.get_path()
+			playa.fysic.add_child(pin_joint)
+			playa.fysic.add_child(upgrade)
+			pin_joint.node_b = upgrade.get_path()
+			upgrade.pin_joint = pin_joint
+			playa.fysic.setPhysicsForAttachment(upgrade)
+		elif is_instance_of(upgrade,TipAttaché):
+			pass
 
 func proc_blade(blade: RigidBody2D) -> void:
 	apply_pull(blade)

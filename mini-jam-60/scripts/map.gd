@@ -14,7 +14,7 @@ const X_SPACE : float = (1.0 / NUM_LEVELS)
 
 const NUM_TRASH_HEAP_TEXTURES = 3
 
-const DEBUG = true
+const DEBUG = false
 
 signal node_visible
 signal node_invisible

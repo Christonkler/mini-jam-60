@@ -29,7 +29,7 @@ func _ready() -> void:
 		"res://scenes/apple.tscn":
 			pass
 		"res://scenes/car_tire.tscn":
-			self.friction = 1.5
+			pass
 		"res://scenes/inception_top.tscn":
 			pos_mod = Vector2(-90, 90)
 			init_spin = 100
