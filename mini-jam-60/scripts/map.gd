@@ -1,4 +1,5 @@
 extends Control
+class_name Mappy
 
 # Packed vector array to draw
 @export var map_data : MapData

@@ -167,11 +167,23 @@ func remove_first(lis, type):
 		lis.remove_at(rmv_idx)
 
 
+func face_the_blade(guy: TextureRect, blade: Blade, offset: float) -> void:
+	var guy_ctr = guy.global_position + guy.get_global_rect().size * guy.scale / 2
+	var blade_ctr = blade.fysic.global_position
+	if guy == $them:
+		print(guy_ctr, ' : ', blade_ctr)
+	guy.rotation = (blade_ctr-guy_ctr).angle() + offset
+
+
 func _ready() -> void:
 	if enemy == null:
 		enemy = $Beyblade2
 	else:
 		remove_child($Beyblade2)
+	for lis in Mappy.enemy_options:
+		for dic in lis:
+			if dic["blade"] == enemy.scene_file_path:
+				$them.texture = load(dic["character_image"])
 	playa = $PlayerBeyblade
 	start_time = Time.get_ticks_msec()
 	hitbox = $TextureRect/Area2D
@@ -248,6 +260,8 @@ func proc_upgrade(upgrade: RigidBody2D) -> void:
 		upgrade.disable_collision()
 
 func _process(delta: float) -> void:
+	face_the_blade($us, playa, -PI/2)
+	face_the_blade($them, enemy, PI)
 	if not launched:
 		set_launch_bar_pos()
 	elif launch_in_prog:
