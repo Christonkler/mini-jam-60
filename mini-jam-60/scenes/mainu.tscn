@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://ch0n3j3n2eyev"]
 
-[ext_resource type="Texture2D" uid="uid://vcbd74tdgkqu" path="res://assets/trashscreen.png" id="1_6uexj"]
-[ext_resource type="Texture2D" uid="uid://mpfknsv6qn0l" path="res://assets/sign.png" id="2_ojm1d"]
+[ext_resource type="Texture2D" uid="uid://cxbq6dwsu0041" path="res://assets/trashscreen.png" id="1_6uexj"]
+[ext_resource type="Texture2D" uid="uid://c5qu3wwcucx3j" path="res://assets/sign.png" id="2_ojm1d"]
 [ext_resource type="Script" uid="uid://dgh8qbld8u3ei" path="res://scenes/mainu_btn.gd" id="3_ojm1d"]
+[ext_resource type="AudioStream" uid="uid://jt8nv8ls7kkx" path="res://assets/music/title.wav" id="4_aujhm"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_mq0dr"]
 
@@ -147,3 +148,8 @@ offset_left = 2.9999962
 offset_right = 42.999996
 offset_bottom = 40.0
 scale = Vector2(4.648671, 1.600504)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1540919907]
+stream = ExtResource("4_aujhm")
+volume_db = -8.0
+autoplay = true

@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://cdy6bl1oqrtsj" path="res://scenes/map_root.gd" id="1_0cso3"]
 [ext_resource type="Script" uid="uid://dh6454vx7wyb3" path="res://scripts/margin_container.gd" id="1_paxxb"]
-[ext_resource type="Script" uid="uid://clumhdpl8mfrs" path="res://scripts/map.gd" id="2_gldc4"]
+[ext_resource type="Script" uid="uid://fk1f5iwahoil" path="res://scripts/map.gd" id="2_gldc4"]
 [ext_resource type="Script" uid="uid://daltdt34t4suk" path="res://scripts/map_resource.gd" id="3_gldc4"]
 [ext_resource type="Script" uid="uid://cmufk2x24ofyc" path="res://scenes/enemy_desc.gd" id="5_2klcf"]
+[ext_resource type="AudioStream" uid="uid://chgv4x5566it7" path="res://assets/music/map.wav" id="6_2lpho"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wijl4"]
 bg_color = Color(0.2136743, 0.08445477, 0.0036598383, 1)
@@ -97,3 +98,8 @@ layout_mode = 2
 theme_override_font_sizes/normal_font_size = 14
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2122588960]
+stream = ExtResource("6_2lpho")
+volume_db = -8.0
+autoplay = true
