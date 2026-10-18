@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://bnswbjdwk01kv" path="res://scenes/fysic.gd" id="1_84ww1"]
 [ext_resource type="Script" uid="uid://drnhyeag1py71" path="res://scenes/beyblade.gd" id="1_wyofc"]
-[ext_resource type="Script" uid="uid://dm3l0t2jeqxcw" path="res://scenes/pin_joint_2d.gd" id="2_wyofc"]
 [ext_resource type="Texture2D" uid="uid://bt1u7okj05hrg" path="res://assets/Trash Can Lid.png" id="2_yhp3e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wyofc"]
@@ -30,7 +29,3 @@ offset_bottom = 16.0
 pivot_offset = Vector2(16, 16)
 texture = ExtResource("2_yhp3e")
 metadata/_edit_use_anchors_ = true
-
-[node name="PlayerAndAttachedItem" type="PinJoint2D" parent="." unique_id=173561149]
-node_a = NodePath("../fysic")
-script = ExtResource("2_wyofc")
