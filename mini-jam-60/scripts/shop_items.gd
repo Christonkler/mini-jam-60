@@ -67,6 +67,7 @@ func purchaseItem(shopItem: Node2D):
 		attachment = Attaché.create(texture_to_scene[shopItem.get_child(0).texture_normal.resource_path],shopItem.get_child(0).texture_normal)
 		Global.upgrades.append(attachment)
 		disableOtherItems(shopItem)
+		$"../PurchaseSoundEffect".play()
 		close_shop.emit()
 	pass
 	
