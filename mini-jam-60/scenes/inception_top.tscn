@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://85qf2l0wqccj"]
 
-[ext_resource type="Script" uid="uid://w3r5hv2h3d0j" path="res://scenes/beyblade.gd" id="1_t28yp"]
-[ext_resource type="Script" uid="uid://du3padgbnc5mn" path="res://scenes/fysic.gd" id="2_ixwd4"]
-[ext_resource type="Texture2D" uid="uid://cv4h7v5btmft1" path="res://assets/Inception top.png" id="3_t7mep"]
+[ext_resource type="Script" uid="uid://drnhyeag1py71" path="res://scenes/beyblade.gd" id="1_t28yp"]
+[ext_resource type="Script" uid="uid://bnswbjdwk01kv" path="res://scenes/fysic.gd" id="2_ixwd4"]
+[ext_resource type="Texture2D" uid="uid://bocagyop4tmh1" path="res://assets/Wheels/thetop.png" id="3_t28yp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8g0t2"]
 radius = 8.0
@@ -12,7 +12,6 @@ font_size = 9
 
 [node name="Node2D" type="Node2D" unique_id=1663453165]
 script = ExtResource("1_t28yp")
-metadata/_custom_type_script = "uid://w3r5hv2h3d0j"
 
 [node name="fysic" type="RigidBody2D" parent="." unique_id=1932314458]
 gravity_scale = 0.0
@@ -31,7 +30,7 @@ offset_top = -16.0
 offset_right = 16.0
 offset_bottom = 16.0
 pivot_offset = Vector2(16, 16)
-texture = ExtResource("3_t7mep")
+texture = ExtResource("3_t28yp")
 metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="fysic/TextureRect" unique_id=1931690092]
