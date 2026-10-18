@@ -24,6 +24,6 @@ func on_body_entered():
 		$"AnimatedSprite2D".load_next_frame()
 	
 	for node in get_children():
-		if is_instance_of(node, Attaché):
+		if is_instance_of(node, BreakableAttaché):
 			node.on_body_entered()
 	pass

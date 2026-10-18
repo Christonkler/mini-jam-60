@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bytft6bvditoc"]
 
-[ext_resource type="Script" uid="uid://ds4q81frble6j" path="res://scenes/arena.gd" id="1_olpmc"]
-[ext_resource type="Texture2D" uid="uid://bp5q1obmgu4x1" path="res://assets/rocket_start.png" id="2_olpmc"]
+[ext_resource type="Script" uid="uid://c8tyfo7wcewvy" path="res://scenes/arena.gd" id="1_olpmc"]
+[ext_resource type="Texture2D" uid="uid://d3cyax1a3jl7g" path="res://assets/rocket_start.png" id="2_olpmc"]
 [ext_resource type="PackedScene" uid="uid://bharswpihsav5" path="res://scenes/beyblade.tscn" id="2_wl4x5"]
 [ext_resource type="PackedScene" uid="uid://dnmqwrrhrsmp7" path="res://scenes/PlayerBeyblade.tscn" id="3_k1k1x"]
 [ext_resource type="Script" uid="uid://bohqfu3qhkhk" path="res://scenes/match_result_screen.gd" id="4_xdvfk"]
@@ -76,9 +76,11 @@ radius = 63.387695
 
 [node name="Control" type="Control" parent="." unique_id=1075877202]
 layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("1_olpmc")
 
 [node name="TextureRect" type="AnimatedSprite2D" parent="Control" unique_id=519051354]

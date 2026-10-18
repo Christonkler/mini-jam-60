@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://cspl8r5k38w3l"]
 
-[ext_resource type="Script" uid="uid://bufcsdlv7005g" path="res://scripts/beyblade_attachment.gd" id="1_je5nc"]
+[ext_resource type="Script" uid="uid://djhnafto86rib" path="res://scenes/droppable_attachment.gd" id="1_je5nc"]
 [ext_resource type="Texture2D" uid="uid://dxqpv66n072lt" path="res://assets/Banana Peel.png" id="2_njkd3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_401yk"]
 size = Vector2(27.232372, 30)
 
-[node name="Node2D" type="RigidBody2D" unique_id=2025807250]
+[node name="Node2D" type="RigidBody2D" unique_id=572417720]
 mass = 0.001
 gravity_scale = 0.0
 script = ExtResource("1_je5nc")
-metadata/_custom_type_script = "uid://bufcsdlv7005g"
+metadata/_custom_type_script = "uid://djhnafto86rib"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=828481437]
 position = Vector2(0, -10)
