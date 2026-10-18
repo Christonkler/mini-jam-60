@@ -14,4 +14,8 @@ func _ready() -> void:
 	setItem(use_this_texture)
 	
 func setItem(texture: Resource):
+	
 	$CollisionShape2D/TextureRect.set_texture(texture)
+	$CollisionShape2D/TextureRect.set_size(texture.get_size())
+	$CollisionShape2D.shape.set_size(texture.get_size())
+	

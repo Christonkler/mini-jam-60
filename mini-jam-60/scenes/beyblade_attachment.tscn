@@ -11,7 +11,7 @@ gravity_scale = 0.0
 script = ExtResource("1_88731")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1759327712]
-position = Vector2(0, -28)
+position = Vector2(0, -26)
 shape = SubResource("RectangleShape2D_dxqae")
 
 [node name="TextureRect" type="TextureRect" parent="CollisionShape2D" unique_id=1575138842]
@@ -19,5 +19,6 @@ offset_left = -16.0
 offset_top = -16.0
 offset_right = 16.0
 offset_bottom = 16.0
+offset_transform_enabled = true
 texture = ExtResource("1_rojun")
 metadata/_edit_use_anchors_ = true
