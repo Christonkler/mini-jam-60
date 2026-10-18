@@ -1,0 +1,2 @@
+extends Attaché
+class_name WheelAttaché

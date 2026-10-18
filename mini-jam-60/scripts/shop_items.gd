@@ -13,7 +13,9 @@ var itemTextures: Array[Resource] = [
 	preload("res://assets/Straw.png"),
 	preload("res://assets/Tips/Eraser.png"),
 	preload("res://assets/Tips/Pencil.png"),
-	preload("res://assets/Tips/Tip.png")
+	preload("res://assets/Tips/Tip.png"),
+	preload("res://assets/Wheels/fan.png"),
+	preload("res://assets/Wheels/brake rotor.png")
 ]
 
 var texture_to_scene: Dictionary[String, String] = {
@@ -27,7 +29,9 @@ var texture_to_scene: Dictionary[String, String] = {
 	"res://assets/Straw.png": "res://scenes/straw_attachment.tscn",
 	"res://assets/Tips/Eraser.png": "res://scenes/eraser_tip.tscn",
 	"res://assets/Tips/Pencil.png": "res://scenes/pencil_tip.tscn",
-	"res://assets/Tips/Tip.png": "res://scenes/tip.tscn"
+	"res://assets/Tips/Tip.png": "res://scenes/tip.tscn",
+	"res://assets/Wheels/fan.png": "res://scenes/fan.tscn",
+	"res://assets/Wheels/brake rotor.png": "res://scenes/brake_rotor.tscn"
 }
 
 var item_purchased = false

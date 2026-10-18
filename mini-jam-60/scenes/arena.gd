@@ -186,7 +186,9 @@ func _ready() -> void:
 					playa.fysic.angular_damp *= 0.75
 					playa.dmg_rst *= 0.95
 				"res://scenes/tip.tscn":
-					playa.dmg_rst *= 1.06
+					pass
+		elif is_instance_of(upgrade,WheelAttaché):
+			pass
 
 func proc_blade(blade: RigidBody2D) -> void:
 	apply_pull(blade)

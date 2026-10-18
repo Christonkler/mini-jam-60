@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cmu88spvxtf4"]
+
+[ext_resource type="Script" uid="uid://nle35byh1pgs" path="res://scripts/wheel_attachment.gd" id="1_hxqw2"]
+
+[node name="Node2D" type="RigidBody2D" unique_id=718380261]
+script = ExtResource("1_hxqw2")
+metadata/_custom_type_script = "uid://nle35byh1pgs"

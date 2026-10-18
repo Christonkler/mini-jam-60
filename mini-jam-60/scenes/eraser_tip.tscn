@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bs7aduntx8pgb"]
 
-[ext_resource type="Script" uid="uid://cscy3lq460iou" path="res://scripts/tips.gd" id="1_1maaf"]
+[ext_resource type="Script" uid="uid://cscy3lq460iou" path="res://scripts/tips_attachment.gd" id="1_1maaf"]
 
-[node name="Node2D" type="RigidBody2D" unique_id=1459506411]
+[node name="Node2D2" type="RigidBody2D" unique_id=1459506411]
 script = ExtResource("1_1maaf")
 metadata/_custom_type_script = "uid://bufcsdlv7005g"
