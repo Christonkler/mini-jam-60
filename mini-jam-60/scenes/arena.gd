@@ -71,7 +71,9 @@ func apply_joik(blade: RigidBody2D, other: RigidBody2D) -> void:
 	$SoundEffects.play_collision_sound()
 	var outward_dir = (other.global_position - blade.global_position).normalized()
 	outward_dir = Vector2.from_angle(outward_dir.angle() + 0.1*(randf()-0.5))
-	blade.apply_central_force(20 * abs(blade.angular_velocity) * outward_dir)
+	blade.apply_central_force(20 * other.get_parent().bounciness * abs(blade.angular_velocity) * outward_dir)
+	if other.get_parent().dmg != 1:
+		blade.angular_velocity /= other.get_parent().dmg
 	blade.on_body_entered()
 	other.on_body_entered()
 	
@@ -157,6 +159,8 @@ func _ready() -> void:
 	$needle2.pivot_offset = Vector2(64, 20)
 	playa.position = playa_pos_1
 	enemy.position = enemy_pos_1
+	playa_pos_2 += playa.pos_mod
+	enemy_pos_2 += enemy.pos_mod
 	univ_ctr.x = 0
 	univ_ctr.y = 0
 	for upgrade in Global.upgrades:
