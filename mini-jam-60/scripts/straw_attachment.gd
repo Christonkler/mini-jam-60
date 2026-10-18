@@ -1,12 +1,11 @@
 extends Attaché
 
-class_name StrawAttaché
+var attached = true
 
-static func create(texture: Resource) -> Attaché:
-	var scene = preload("res://scenes/straw_attachment.tscn")
-	var instance = scene.instantiate() as StrawAttaché
-	return instance
-
-func _ready() -> void:
-	
-	pass
+func on_body_entered():
+	if attached: 
+		attached = false
+		var fysic = self.get_parent()
+		var pinJoin = fysic.get_parent()
+		fysic.reparent(pinJoin.get_parent())
+		pinJoin.queue_free()

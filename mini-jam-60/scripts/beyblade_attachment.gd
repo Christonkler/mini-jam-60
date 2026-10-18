@@ -13,3 +13,6 @@ static func create(scene_to_load: String, texture: Resource) -> Attaché:
 func _ready() -> void:
 	pass
 	
+func on_collision() -> void:
+	pass
+	
