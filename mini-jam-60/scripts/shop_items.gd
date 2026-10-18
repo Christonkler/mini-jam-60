@@ -10,7 +10,10 @@ var itemTextures: Array[Resource] = [
 	preload("res://assets/Old Can.png"),
 	preload("res://assets/Pistachio.png"),
 	preload("res://assets/Wad of Paper.png"),
-	preload("res://assets/Straw.png")
+	preload("res://assets/Straw.png"),
+	preload("res://assets/Tips/Eraser.png"),
+	preload("res://assets/Tips/Pencil.png"),
+	preload("res://assets/Tips/Tip.png")
 ]
 
 var texture_to_scene: Dictionary[String, String] = {
@@ -21,7 +24,10 @@ var texture_to_scene: Dictionary[String, String] = {
 	"res://assets/Old Can.png": "res://scenes/old_can.tscn",
 	"res://assets/Pistachio.png": "res://scenes/pistachio.tscn",
 	"res://assets/Wad of Paper.png": "res://scenes/wad_of_paper.tscn",
-	"res://assets/Straw.png": "res://scenes/straw_attachment.tscn"
+	"res://assets/Straw.png": "res://scenes/straw_attachment.tscn",
+	"res://assets/Tips/Eraser.png": "res://scenes/eraser_tip.tscn",
+	"res://assets/Tips/Pencil.png": "res://scenes/pencil_tip.tscn",
+	"res://assets/Tips/Tip.png": "res://scenes/tip.tscn"
 }
 
 var item_purchased = false
