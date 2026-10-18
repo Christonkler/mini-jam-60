@@ -13,6 +13,17 @@ var itemTextures: Array[Resource] = [
 	preload("res://assets/Straw.png")
 ]
 
+var texture_to_scene: Dictionary[String, String] = {
+	"res://assets/Banana Peel.png": "res://scenes/banana_peel.tscn",
+	"res://assets/Apple Core.png": "res://scenes/banana_peel.tscn",
+	"res://assets/Garbage Bag.png": "res://scenes/banana_peel.tscn",
+	"res://assets/Moldy Cheese.png": "res://scenes/banana_peel.tscn",
+	"res://assets/Old Can.png": "res://scenes/banana_peel.tscn",
+	"res://assets/Pistachio.png": "res://scenes/banana_peel.tscn",
+	"res://assets/Wad of Paper.png": "res://scenes/banana_peel.tscn",
+	"res://assets/Straw.png": "res://scenes/straw_attachment.tscn"
+}
+
 var item_purchased = false
 
 # Called when the node enters the scene tree for the first time.
@@ -31,11 +42,8 @@ func purchaseItem(shopItem: Node2D):
 		item_purchased = true
 		shopItem.purchaseItem()
 		var attachment: Attaché
-#		TODO: Check this in a better way
-		if shopItem.get_child(0).texture_normal.resource_path == "res://assets/Straw.png":
-			attachment = StrawAttaché.create(shopItem.get_child(0).texture_normal)
-		else:
-			attachment = Attaché.create(shopItem.get_child(0).texture_normal)
+
+		attachment = Attaché.create(texture_to_scene[shopItem.get_child(0).texture_normal.resource_path],shopItem.get_child(0).texture_normal)
 		Global.upgrades.append(attachment)
 		disableOtherItems(shopItem)
 		close_shop.emit()

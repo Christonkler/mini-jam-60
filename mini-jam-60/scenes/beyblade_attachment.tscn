@@ -1,14 +1,14 @@
 [gd_scene format=3 uid="uid://bm850mruhohu0"]
 
-[ext_resource type="Script" uid="uid://ecnf8ht4cj33" path="res://scripts/beyblade_attachment.gd" id="1_88731"]
-[ext_resource type="Texture2D" uid="uid://cu6eo0pvm5ga8" path="res://assets/Apple Core.png" id="1_rojun"]
+[ext_resource type="Script" uid="uid://bufcsdlv7005g" path="res://scripts/beyblade_attachment.gd" id="1_88731"]
+[ext_resource type="Texture2D" uid="uid://rm270h6hwjms" path="res://assets/Apple Core.png" id="1_rojun"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dxqae"]
 size = Vector2(20, 31.5)
 
-[node name="BeybladeAttachment" type="RigidBody2D" unique_id=1663268664]
-gravity_scale = 0.0
+[node name="BeybladeAttachment" type="RigidBody2D" unique_id=83100554]
 script = ExtResource("1_88731")
+metadata/_custom_type_script = "uid://bufcsdlv7005g"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1759327712]
 position = Vector2(0, -26)

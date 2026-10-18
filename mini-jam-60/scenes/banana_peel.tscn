@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://cspl8r5k38w3l"]
+
+[ext_resource type="Script" uid="uid://bufcsdlv7005g" path="res://scripts/beyblade_attachment.gd" id="1_je5nc"]
+[ext_resource type="Texture2D" uid="uid://dxqpv66n072lt" path="res://assets/Banana Peel.png" id="2_njkd3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_401yk"]
+size = Vector2(27.232372, 30)
+
+[node name="Node2D" type="RigidBody2D" unique_id=2025807250]
+gravity_scale = 0.0
+script = ExtResource("1_je5nc")
+metadata/_custom_type_script = "uid://bufcsdlv7005g"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=828481437]
+position = Vector2(0, -10)
+shape = SubResource("RectangleShape2D_401yk")
+
+[node name="TextureRect" type="TextureRect" parent="CollisionShape2D" unique_id=868434141]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -17.0
+offset_top = -17.5
+offset_right = 15.0
+offset_bottom = 46.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_njkd3")
+stretch_mode = 2
+metadata/_edit_use_anchors_ = true

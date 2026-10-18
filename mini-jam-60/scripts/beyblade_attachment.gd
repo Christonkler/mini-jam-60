@@ -1,21 +1,15 @@
-extends Node2D
+extends RigidBody2D
 class_name Attaché
 
 var use_this_texture: Resource
 
 
-static func create(texture: Resource) -> Attaché:
-	var scene = preload("res://scenes/beyblade_attachment.tscn")
+static func create(scene_to_load: String, texture: Resource) -> Attaché:
+	var scene = load(scene_to_load)
 	var instance = scene.instantiate() as Attaché
 	instance.use_this_texture = texture
 	return instance
 
 func _ready() -> void:
-	setItem(use_this_texture)
-	
-func setItem(texture: Resource):
-	
-	$CollisionShape2D/TextureRect.set_texture(texture)
-	$CollisionShape2D/TextureRect.set_size(texture.get_size())
-	$CollisionShape2D.shape.set_size(texture.get_size())
+	pass
 	
