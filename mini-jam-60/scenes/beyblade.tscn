@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bharswpihsav5"]
 
 [ext_resource type="Script" uid="uid://drnhyeag1py71" path="res://scenes/beyblade.gd" id="1_fykyv"]
-[ext_resource type="Texture2D" uid="uid://cxak7ygqx5c0b" path="res://assets/Trash Can Lid.png" id="2_qfx1t"]
+[ext_resource type="Texture2D" uid="uid://bt1u7okj05hrg" path="res://assets/Trash Can Lid.png" id="2_qfx1t"]
 [ext_resource type="Script" uid="uid://bnswbjdwk01kv" path="res://scenes/fysic.gd" id="2_v4apf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dxqae"]

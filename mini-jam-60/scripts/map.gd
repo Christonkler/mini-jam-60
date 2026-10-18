@@ -167,68 +167,68 @@ const enemy_options = [
 	[ # Level 0
 		{
 			"character_image" : "res://assets/people/charlie.png",
-			"blade": "res://scenes/scooter_wheel.tscn",
-			"description": "Mommy's boyfriend broke my scooter, but I found another use for it!"
-		},
-		{
-			"character_image" : "res://assets/people/charlie.png",
-			"blade": "res://scenes/apple.tscn",
-			"description": "I was going to have this for lunch... but beating you is more important!"
-		},
+			"blade": "res://scenes/beyblade.tscn",
+			"description": "You gotta start somewhere, even if it's beating up little kids."
+		}
 	],
 	[ # Level 1
 		{
-			"character_image" : "res://assets/people/charlie.png",
+			"character_image" : "res://assets/people/hatman.png",
 			"blade": "res://scenes/car_tire.tscn",
-			"description": "People say vandalism isn't for kids, but I thought it was great!"
+			"description": "This guy lives in the junkyard, and has a weird obsession with cars..."
 		},
 		{
-			"character_image" : "res://assets/people/charlie.png",
-			"blade": "res://scenes/pineapple.tscn",
-			"description": "I HATE pineapples"
+			"character_image" : "res://assets/people/OldMan.png",
+			"blade": "res://scenes/scooter_wheel.tscn",
+			"description": "Some say he remembers the time before the junkyards"
+		},
+		{
+			"character_image" : "res://assets/people/fidgetman.png",
+			"blade": "res://scenes/fidget_spinner.tscn",
+			"description": "The kind of guy you'd want to be friends with!"
 		}
 	],
 	[ # Level 2
 		{
-			"character_image" : "res://assets/people/hatman.png",
-			"blade": "res://scenes/gem.tscn",
-			"description": "I have a lot of tricks, see?"
+			"character_image" : "res://assets/people/bodybuilder.png", # TODO: Cruise guy
+			"blade": "res://scenes/pineapple.tscn",
+			"description": "Somehow always finds a way to make a margarita. Don't ask about the ingredients"
 		},
 		{
-			"character_image" : "res://assets/people/hatman.png",
-			"blade": "res://scenes/fidget_spinner.tscn",
-			"description": "Keeps me calm"
+			"character_image" : "res://assets/people/hatman.png", # TODO: Doctor
+			"blade": "res://scenes/apple.tscn",
+			"description": "No one knows if he's a real doctor or not"
 		}
 	],
 	[ # Level 3
 		{
-			"character_image" : "res://assets/people/hatman.png",
+			"character_image" : "res://assets/people/bodybuilder.png",
 			"blade": "res://scenes/bird.tscn",
-			"description": ""
+			"description": "Made friends with a pet bird. 30 years ago."
 		},
 		{
-			"character_image" : "res://assets/people/hatman.png",
+			"character_image" : "res://assets/people/turtleguy.png",
 			"blade": "res://scenes/turtle_shell.tscn",
-			"description": ""
+			"description": "You're lucky he's out of red shells!"
 		}
 	],
 	[ # Level 4
 		{
-			"character_image" : "res://assets/people/OldMan.png",
+			"character_image" : "res://assets/people/bombo.png",
 			"blade": "res://scenes/explosives.tscn",
-			"description": ""
+			"description": "You're in for a BOOM"
 		},
 		{
-			"character_image" : "res://assets/people/OldMan.png",
+			"character_image" : "res://assets/people/OldMan.png", # TODO: Leo
 			"blade": "res://scenes/inception_top.tscn",
-			"description": "Leo would be proud"
+			"description": "Leo always has a cool prop from his past for us to look at"
 		}
 	],
 	[ # Final boss
 		{
-			"character_image" : "res://assets/people/OldMan.png",
+			"character_image" : "res://assets/people/World Man.png",
 			"blade": "res://scenes/earth.tscn",
-			"description": "Final boss baby"
+			"description": "You don't want to beat this guy"
 		}
 	]
 ]
