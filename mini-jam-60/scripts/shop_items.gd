@@ -1,4 +1,5 @@
 extends Node
+class_name Shitems
 
 signal close_shop
 
@@ -18,7 +19,7 @@ var itemTextures: Array[Resource] = [
 	preload("res://assets/Wheels/brake rotor.png")
 ]
 
-var texture_to_scene: Dictionary[String, String] = {
+static var texture_to_scene: Dictionary[String, String] = {
 	"res://assets/Banana Peel.png": "res://scenes/banana_peel.tscn",
 	"res://assets/Apple Core.png": "res://scenes/apple_core.tscn",
 	"res://assets/Garbage Bag.png": "res://scenes/garbage_bag.tscn",
