@@ -349,8 +349,9 @@ func start_battle(node) -> void:
 	arena.get_node("Control").enemy = enemy
 	arena.get_node("Control").add_child(enemy)
 	
-	map_data.level += 1
-	map_data.beaten_nodes.append(node)
+	if not DEBUG:
+		map_data.level += 1
+		map_data.beaten_nodes.append(node)
 	ResourceSaver.save(map_data, "user://map_data.res")
 	get_tree().change_scene_to_node(arena)
 		
