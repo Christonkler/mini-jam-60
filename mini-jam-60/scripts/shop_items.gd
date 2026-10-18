@@ -15,8 +15,13 @@ var itemTextures: Array[Resource] = [
 	preload("res://assets/Tips/Eraser.png"),
 	preload("res://assets/Tips/Pencil.png"),
 	preload("res://assets/Tips/Tip.png"),
+	preload("res://assets/Tips/blade.png"),
+	preload("res://assets/Tips/Gluestick.png"),
+	preload("res://assets/Tips/Icecube.png"),
 	preload("res://assets/Wheels/fan.png"),
-	preload("res://assets/Wheels/brake rotor.png")
+	preload("res://assets/Wheels/brake rotor.png"),
+	preload("res://assets/Wheels/plate.png"),
+	preload("res://assets/Wheels/basketball.png")
 ]
 
 static var texture_to_scene: Dictionary[String, String] = {
