@@ -20,7 +20,7 @@ var launch_in_prog: bool = false
 var launch_force: float
 var sped_mod: float
 var spin_mod: float
-var has_upgrades : bool
+var has_upgrades : bool = false
 
 var immune_start : int
 var last_boss : bool = false
@@ -186,8 +186,9 @@ func _ready() -> void:
 	while count(Global.upgrades, WheelAttaché) > 1:
 		remove_first(Global.upgrades, WheelAttaché)
 	for upgrade in Global.upgrades:
-		if is_instance_of(upgrade, BreakableAttaché) or is_instance_of(upgrade, DroppableAttaché):
+		if is_instance_of(upgrade, DroppableAttaché):
 			has_upgrades = true
+		if is_instance_of(upgrade, BreakableAttaché) or is_instance_of(upgrade, DroppableAttaché):
 			var pin_joint : PinJoint2D = PinJoint2D.new()
 			pin_joint.node_a = playa.fysic.get_path()
 			playa.fysic.add_child(pin_joint)
