@@ -164,8 +164,6 @@ func proc_blade(blade: RigidBody2D) -> void:
 	if blade.angular_velocity < 3:
 		blade_parent.dead = true
 
-
-
 func _process(delta: float) -> void:
 	if not launched:
 		set_launch_bar_pos()

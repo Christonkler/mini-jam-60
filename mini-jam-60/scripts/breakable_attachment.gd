@@ -1,4 +1,5 @@
 extends Attaché
+class_name BreakableAttaché
 
 var attached = true
 
