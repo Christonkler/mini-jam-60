@@ -38,7 +38,7 @@ static var texture_to_scene: Dictionary[String, String] = {
 	"res://assets/Tips/Tip.png": "res://scenes/tip.tscn",
 	"res://assets/Tips/blade.png": "res://scenes/blade.tscn",
 	"res://assets/Tips/Gluestick.png": "res://scenes/gluestick.tscn",
-	"res://assets/Tips/Icecube.png": "res://scnees/icecube.tscn",
+	"res://assets/Tips/Icecube.png": "res://scenes/icecube.tscn",
 	"res://assets/Wheels/fan.png": "res://scenes/fan.tscn",
 	"res://assets/Wheels/brake rotor.png": "res://scenes/brake_rotor.tscn",
 	"res://assets/Wheels/plate.png": "res://scenes/plate.tscn",
