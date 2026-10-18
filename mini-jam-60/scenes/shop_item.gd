@@ -17,3 +17,12 @@ func purchaseItemRequest():
 func purchaseItem():
 	print("item purchased")
 	purchase_complete.emit()
+
+
+func _on_texture_button_mouse_entered() -> void:
+	$PointLight2D.enabled = true
+
+
+
+func _on_texture_button_mouse_exited() -> void:
+		$PointLight2D.enabled = false

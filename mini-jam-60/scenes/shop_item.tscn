@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://pqadbbht67gp" path="res://scenes/shop_item.gd" id="1_6gmg1"]
 [ext_resource type="Texture2D" uid="uid://dgmoicnqcgqvl" path="res://assets/Item Background.png" id="1_btjjm"]
 [ext_resource type="Script" uid="uid://kngl15ru041o" path="res://scenes/check_button.gd" id="1_lrx6i"]
+[ext_resource type="Texture2D" uid="uid://cu6eo0pvm5ga8" path="res://assets/Apple Core.png" id="2_xcw7k"]
 
 [node name="ShopItem" type="Node2D" unique_id=96194411]
 script = ExtResource("1_6gmg1")
@@ -10,6 +11,16 @@ script = ExtResource("1_6gmg1")
 [node name="TextureButton" type="TextureButton" parent="." unique_id=414863713]
 offset_right = 168.0
 offset_bottom = 189.0
-texture_normal = ExtResource("1_btjjm")
+texture_normal = ExtResource("2_xcw7k")
 stretch_mode = 0
 script = ExtResource("1_lrx6i")
+
+[node name="PointLight2D" type="PointLight2D" parent="." unique_id=1825939668]
+position = Vector2(84, 94.5)
+scale = Vector2(4.882353, 4.6750007)
+enabled = false
+energy = 0.15
+texture = ExtResource("1_btjjm")
+
+[connection signal="mouse_entered" from="TextureButton" to="." method="_on_texture_button_mouse_entered"]
+[connection signal="mouse_exited" from="TextureButton" to="." method="_on_texture_button_mouse_exited"]
