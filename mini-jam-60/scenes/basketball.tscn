@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://c86uyuq0x1kv4"]
+
+[ext_resource type="Script" uid="uid://nle35byh1pgs" path="res://scripts/wheel_attachment.gd" id="1_al20g"]
+
+[node name="Node2D" type="RigidBody2D" unique_id=595448789]
+script = ExtResource("1_al20g")
+metadata/_custom_type_script = "uid://nle35byh1pgs"
