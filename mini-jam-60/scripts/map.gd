@@ -177,6 +177,11 @@ const enemy_options = [
 		{
 			"character_image" : "res://assets/people/hatman.png",
 			"blade": "res://scenes/car_tire.tscn",
+			"description": "Shiny shiny"
+		},
+		{
+			"character_image" : "res://assets/people/hatman.png",
+			"blade": "res://scenes/gem.tscn",
 			"description": "This guy lives in the junkyard, and has a weird obsession with cars..."
 		},
 		{
