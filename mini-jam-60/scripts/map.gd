@@ -212,8 +212,8 @@ const enemy_options = [
 	],
 	[ # Level 4
 		{
-			"character_image" : "res://assets/people/hatman.png",
-			"blade": "res://scenes/gem.tscn",
+			"character_image" : "res://assets/people/OldMan.png",
+			"blade": "res://scenes/explosives.tscn",
 			"description": ""
 		},
 		{
@@ -225,7 +225,7 @@ const enemy_options = [
 	[ # Final boss
 		{
 			"character_image" : "res://assets/people/OldMan.png",
-			"blade": "res://scenes/inception_top.tscn",
+			"blade": "res://scenes/earth.tscn",
 			"description": "Final boss baby"
 		}
 	]
@@ -256,11 +256,6 @@ func _ready() -> void:
 					new_node = create_button(node, map_used_battle_button, map_used_battle_button)
 				self.add_child(new_node)
 			i += 1
-			
-		if map_data.level > 3:
-			move_desc.emit("Left")
-		elif map_data.level <= 3:
-			move_desc.emit("Right")
 			
 		self.queue_redraw()
 	else:
