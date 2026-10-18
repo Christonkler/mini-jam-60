@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" uid="uid://clbduy5lfp4j4" path="res://scenes/map_root.gd" id="1_0cso3"]
 [ext_resource type="Script" uid="uid://dh6454vx7wyb3" path="res://scripts/margin_container.gd" id="1_paxxb"]
-[ext_resource type="Script" uid="uid://dtxatga6wftfv" path="res://scripts/map.gd" id="2_gldc4"]
-[ext_resource type="Script" uid="uid://b2k7gq6bm0mn8" path="res://scripts/map_resource.gd" id="3_gldc4"]
-[ext_resource type="Script" uid="uid://cha4hpd4qe8fn" path="res://scenes/enemy_desc.gd" id="5_2klcf"]
+[ext_resource type="Script" uid="uid://beqnfsxfhisp" path="res://scripts/map.gd" id="2_gldc4"]
+[ext_resource type="Script" uid="uid://daltdt34t4suk" path="res://scripts/map_resource.gd" id="3_gldc4"]
+[ext_resource type="Script" uid="uid://b3p6ruirakc1n" path="res://scenes/enemy_desc.gd" id="5_2klcf"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wijl4"]
 bg_color = Color(0.2136743, 0.08445477, 0.0036598383, 1)
@@ -12,6 +12,10 @@ bg_color = Color(0.2136743, 0.08445477, 0.0036598383, 1)
 [sub_resource type="Resource" id="Resource_paxxb"]
 script = ExtResource("3_gldc4")
 metadata/_custom_type_script = "uid://b2k7gq6bm0mn8"
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1oqaa"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2klcf"]
 
 [node name="Panel" type="Panel" unique_id=1700366192 groups=["map_data"]]
 anchors_preset = 15
@@ -42,23 +46,54 @@ script = ExtResource("2_gldc4")
 map_data = SubResource("Resource_paxxb")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=715582902]
+visible = false
+custom_minimum_size = Vector2(128, 256)
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -276.0
-offset_top = -514.0
-offset_bottom = 514.0
+offset_left = -64.0
+offset_top = -2.0
+offset_bottom = 2.0
 grow_horizontal = 0
 grow_vertical = 2
 script = ExtResource("5_2klcf")
 
-[node name="TextureRect" type="TextureRect" parent="VBoxContainer" unique_id=1302284026]
+[node name="Character Picture" type="Panel" parent="VBoxContainer" unique_id=1393458917]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_1oqaa")
 
-[node name="TextureRect2" type="TextureRect" parent="VBoxContainer" unique_id=1690726805]
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Character Picture" unique_id=2026715518]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_paxxb")
+
+[node name="Image" type="TextureRect" parent="VBoxContainer/Character Picture/MarginContainer" unique_id=1979723948]
+layout_mode = 2
+
+[node name="Character Description" type="Panel" parent="VBoxContainer" unique_id=2102989772]
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_2klcf")
+
+[node name="MarginContainer" type="MarginContainer" parent="VBoxContainer/Character Description" unique_id=1059673884]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_paxxb")
+
+[node name="Description" type="RichTextLabel" parent="VBoxContainer/Character Description/MarginContainer" unique_id=1962146810]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 14
+horizontal_alignment = 1
+vertical_alignment = 1

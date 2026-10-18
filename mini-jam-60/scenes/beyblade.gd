@@ -10,6 +10,10 @@ class_name Blade
 @export var skins: Array[TextureRect] = []
 var death_pos: Array[Vector2] = []
 var death_vcs: Array[Vector2] = []
+@export var friction: float = 1
+@export var bounciness: float = 1
+@export var init_vel: int = 40
+@export var init_spin: int = 60
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -19,6 +23,19 @@ func _ready() -> void:
 	fysic.max_contacts_reported = 10
 	falling = false
 	dead = false
+	match self.scene_file_path:
+		"res://scenes/car_tire.tscn":
+			self.friction = 1.5
+		"res://scenes/inception_top.tscn":
+			pass
+		"res://scenes/gem.tscn":
+			pass
+		"res://scenes/scooter_wheel.tscn":
+			self.bounciness = 1.2
+		"res://scenes/pineapple.tscn":
+			pass
+		"res://scenes/apple.tscn":
+			pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

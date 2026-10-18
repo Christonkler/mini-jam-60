@@ -11,4 +11,4 @@ func close_shop():
 	$"Area2D/CollisionShape2D/Shop Background".close_shop()
 	shop_closed.emit()
 	await get_tree().create_timer(1.8).timeout
-	get_tree().change_scene_to_file("res://scenes/arena.tscn")
+	get_tree().change_scene_to_file("res://scenes/map.tscn")
