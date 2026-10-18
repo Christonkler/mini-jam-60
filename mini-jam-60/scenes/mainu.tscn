@@ -1,13 +1,14 @@
 [gd_scene format=3 uid="uid://ch0n3j3n2eyev"]
 
 [ext_resource type="Script" uid="uid://c1sd6ps4884d4" path="res://scripts/main_menu_area.gd" id="1_5p8pn"]
-[ext_resource type="Texture2D" uid="uid://bnpn6uy500r5f" path="res://assets/trashscreen.png" id="1_6uexj"]
-[ext_resource type="Texture2D" uid="uid://cpncin5k5ojiu" path="res://assets/sign.png" id="2_ojm1d"]
-[ext_resource type="Script" uid="uid://dy86ewssegwvg" path="res://scenes/mainu_btn.gd" id="3_ojm1d"]
+[ext_resource type="Texture2D" uid="uid://cxbq6dwsu0041" path="res://assets/trashscreen.png" id="1_6uexj"]
+[ext_resource type="Texture2D" uid="uid://c5qu3wwcucx3j" path="res://assets/sign.png" id="2_ojm1d"]
+[ext_resource type="Script" uid="uid://dgh8qbld8u3ei" path="res://scenes/mainu_btn.gd" id="3_ojm1d"]
 [ext_resource type="AudioStream" uid="uid://jt8nv8ls7kkx" path="res://assets/music/title.wav" id="4_aujhm"]
 [ext_resource type="Texture2D" uid="uid://unsgxn2hckyk" path="res://assets/spintop.png" id="4_dktdq"]
-[ext_resource type="Script" uid="uid://waogp0db8hft" path="res://scenes/credits.gd" id="5_5p8pn"]
-[ext_resource type="Script" uid="uid://c2373t311mfvm" path="res://scenes/title_screen.gd" id="5_f6u0s"]
+[ext_resource type="Script" uid="uid://d335onev38nru" path="res://scenes/credits.gd" id="5_5p8pn"]
+[ext_resource type="Script" uid="uid://cdjdiw04bcopb" path="res://scenes/title_screen.gd" id="5_f6u0s"]
+[ext_resource type="Script" uid="uid://3o2slxvypk2o" path="res://scenes/menu_music.gd" id="9_v6ecp"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_mq0dr"]
 
@@ -23,6 +24,7 @@ script = ExtResource("1_5p8pn")
 offset_right = 640.0
 offset_bottom = 640.0
 texture = ExtResource("1_6uexj")
+metadata/_edit_use_anchors_ = true
 
 [node name="Play" type="TextureRect" parent="Area2D/MainMenuArea" unique_id=1526536601]
 anchors_preset = 8
@@ -38,6 +40,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_ojm1d")
 script = ExtResource("3_ojm1d")
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Area2D/MainMenuArea/Play" unique_id=2082363222]
 layout_mode = 1
@@ -59,6 +62,7 @@ theme_override_font_sizes/font_size = 33
 text = "LET IT RIP"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="TextureButton" type="TextureButton" parent="Area2D/MainMenuArea/Play" unique_id=624506968]
 layout_mode = 0
@@ -67,6 +71,7 @@ offset_top = -1.0
 offset_right = 43.0
 offset_bottom = 39.0
 scale = Vector2(4.648671, 1.600504)
+metadata/_edit_use_anchors_ = true
 
 [node name="Settings" type="TextureRect" parent="Area2D/MainMenuArea" unique_id=1400937145]
 anchors_preset = 8
@@ -82,6 +87,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_ojm1d")
 script = ExtResource("3_ojm1d")
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Area2D/MainMenuArea/Settings" unique_id=1923524679]
 layout_mode = 1
@@ -103,6 +109,7 @@ theme_override_font_sizes/font_size = 33
 text = "CREDITS"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="TextureButton" type="TextureButton" parent="Area2D/MainMenuArea/Settings" unique_id=390527066]
 layout_mode = 0
@@ -110,6 +117,7 @@ offset_left = 2.9999962
 offset_right = 42.999996
 offset_bottom = 40.0
 scale = Vector2(4.648671, 1.600504)
+metadata/_edit_use_anchors_ = true
 
 [node name="Exit" type="TextureRect" parent="Area2D/MainMenuArea" unique_id=681107295]
 anchors_preset = 8
@@ -125,6 +133,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("2_ojm1d")
 script = ExtResource("3_ojm1d")
+metadata/_edit_use_anchors_ = true
 
 [node name="Label" type="Label" parent="Area2D/MainMenuArea/Exit" unique_id=1588733502]
 layout_mode = 1
@@ -146,6 +155,7 @@ theme_override_font_sizes/font_size = 33
 text = "QUIT"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="TextureButton" type="TextureButton" parent="Area2D/MainMenuArea/Exit" unique_id=1307678673]
 layout_mode = 0
@@ -153,6 +163,7 @@ offset_left = 2.9999962
 offset_right = 42.999996
 offset_bottom = 40.0
 scale = Vector2(4.648671, 1.600504)
+metadata/_edit_use_anchors_ = true
 
 [node name="TitleScreen" type="TextureRect" parent="Area2D/MainMenuArea" unique_id=1685283176]
 visible = false
@@ -199,7 +210,8 @@ Let's Roll - Droodle                                "
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1540919907]
+[node name="MenuMusic" type="AudioStreamPlayer" parent="." unique_id=1540919907]
 stream = ExtResource("4_aujhm")
 volume_db = -8.0
 autoplay = true
+script = ExtResource("9_v6ecp")

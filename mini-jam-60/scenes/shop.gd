@@ -6,6 +6,10 @@ signal shop_closed
 func _ready() -> void:
 	$"Shop Items".close_shop.connect(close_shop)
 
+func _process(delta: float) -> void:
+	if not $AudioStreamPlayer.playing:
+		$AudioStreamPlayer.play()
+
 
 func close_shop():
 	$"Area2D/CollisionShape2D/Shop Background".close_shop()

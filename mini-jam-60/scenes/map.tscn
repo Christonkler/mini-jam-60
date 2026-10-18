@@ -1,14 +1,15 @@
 [gd_scene format=3 uid="uid://kawikisgykye"]
 
 [ext_resource type="Script" uid="uid://cdy6bl1oqrtsj" path="res://scenes/map_root.gd" id="1_0cso3"]
-[ext_resource type="Texture2D" uid="uid://bnpn6uy500r5f" path="res://assets/trashscreen.png" id="1_be0no"]
+[ext_resource type="Texture2D" uid="uid://cxbq6dwsu0041" path="res://assets/trashscreen.png" id="1_be0no"]
 [ext_resource type="Script" uid="uid://dh6454vx7wyb3" path="res://scripts/margin_container.gd" id="1_paxxb"]
-[ext_resource type="Script" uid="uid://clumhdpl8mfrs" path="res://scripts/map.gd" id="2_gldc4"]
+[ext_resource type="Script" uid="uid://fk1f5iwahoil" path="res://scripts/map.gd" id="2_gldc4"]
 [ext_resource type="Script" uid="uid://daltdt34t4suk" path="res://scripts/map_resource.gd" id="3_gldc4"]
 [ext_resource type="Script" uid="uid://cmufk2x24ofyc" path="res://scenes/enemy_desc.gd" id="5_2klcf"]
 [ext_resource type="AudioStream" uid="uid://chgv4x5566it7" path="res://assets/music/map.wav" id="6_2lpho"]
 [ext_resource type="Texture2D" uid="uid://byq8nng82soen" path="res://assets/endscreen_button.png" id="7_jh32y"]
 [ext_resource type="Texture2D" uid="uid://cn40633ewqf2c" path="res://assets/endscreen.png" id="8_be0no"]
+[ext_resource type="Script" uid="uid://btetg6ebbjue5" path="res://scenes/map_music.gd" id="8_blm8a"]
 
 [sub_resource type="Resource" id="Resource_paxxb"]
 script = ExtResource("3_gldc4")
@@ -24,6 +25,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_be0no")
+stretch_mode = 2
 script = ExtResource("1_0cso3")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1161221415]
@@ -98,10 +100,11 @@ theme_override_font_sizes/normal_font_size = 14
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2122588960]
+[node name="MapMusic" type="AudioStreamPlayer" parent="." unique_id=2122588960]
 stream = ExtResource("6_2lpho")
 volume_db = -8.0
 autoplay = true
+script = ExtResource("8_blm8a")
 
 [node name="TextureRect" type="TextureRect" parent="." unique_id=414646373]
 visible = false
