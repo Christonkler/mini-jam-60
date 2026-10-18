@@ -225,6 +225,8 @@ func _ready() -> void:
 					playa.fysic.linear_damp *= 2
 				"res://assets/Tips/Icecube.png":
 					playa.fysic.angular_damp *= 0.5
+				"res://assets/Tips/blade.png":
+					playa.dmg *= 1.35
 		elif is_instance_of(upgrade,WheelAttaché):
 			for img in Shitems.texture_to_scene:
 				if Shitems.texture_to_scene[img] == upgrade.scene_file_path:
