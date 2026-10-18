@@ -1,8 +1,9 @@
 [gd_scene format=3 uid="uid://dnmqwrrhrsmp7"]
 
-[ext_resource type="Script" uid="uid://du3padgbnc5mn" path="res://scenes/fysic.gd" id="1_84ww1"]
-[ext_resource type="Script" uid="uid://b6rjuj7ievpqq" path="res://scripts/player_beyblade.gd" id="1_yhp3e"]
-[ext_resource type="Texture2D" uid="uid://c0d3gkbw4krlm" path="res://assets/Trash Can Lid.png" id="2_yhp3e"]
+[ext_resource type="Script" uid="uid://bnswbjdwk01kv" path="res://scenes/fysic.gd" id="1_84ww1"]
+[ext_resource type="Script" uid="uid://catf41comwiyt" path="res://scripts/player_beyblade.gd" id="1_yhp3e"]
+[ext_resource type="Script" uid="uid://b34icwbb5gvnj" path="res://scenes/pin_joint_2d.gd" id="2_wyofc"]
+[ext_resource type="Texture2D" uid="uid://cxak7ygqx5c0b" path="res://assets/Trash Can Lid.png" id="2_yhp3e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wyofc"]
 radius = 16.0
@@ -11,6 +12,8 @@ radius = 16.0
 script = ExtResource("1_yhp3e")
 
 [node name="PlayerAndAttachedItem" type="PinJoint2D" parent="." unique_id=173561149]
+node_a = NodePath("fysic")
+script = ExtResource("2_wyofc")
 
 [node name="fysic" type="RigidBody2D" parent="PlayerAndAttachedItem" unique_id=1153520575]
 gravity_scale = 0.0

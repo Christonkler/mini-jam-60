@@ -1,23 +1,23 @@
 [gd_scene format=3 uid="uid://bm850mruhohu0"]
 
-[ext_resource type="Script" uid="uid://dpweodj0x5lne" path="res://scripts/beyblade_attachment.gd" id="1_88731"]
-[ext_resource type="Texture2D" uid="uid://cu7r0ovmt5e8l" path="res://assets/Apple Core.png" id="1_rojun"]
+[ext_resource type="Script" uid="uid://ecnf8ht4cj33" path="res://scripts/beyblade_attachment.gd" id="1_88731"]
+[ext_resource type="Texture2D" uid="uid://cu6eo0pvm5ga8" path="res://assets/Apple Core.png" id="1_rojun"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dxqae"]
-size = Vector2(20, 31)
+size = Vector2(20, 31.5)
 
-[node name="BeybladeAttachment" type="Node2D" unique_id=190399952]
+[node name="BeybladeAttachment" type="RigidBody2D" unique_id=1663268664]
+gravity_scale = 0.0
 script = ExtResource("1_88731")
 
-[node name="Area2D" type="Area2D" parent="." unique_id=1743486454]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1759327712]
-position = Vector2(7, 0)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1759327712]
+position = Vector2(0, -28)
 shape = SubResource("RectangleShape2D_dxqae")
 
-[node name="TextureRect" type="TextureRect" parent="Area2D/CollisionShape2D" unique_id=1575138842]
+[node name="TextureRect" type="TextureRect" parent="CollisionShape2D" unique_id=1575138842]
 offset_left = -16.0
 offset_top = -16.0
 offset_right = 16.0
 offset_bottom = 16.0
 texture = ExtResource("1_rojun")
+metadata/_edit_use_anchors_ = true

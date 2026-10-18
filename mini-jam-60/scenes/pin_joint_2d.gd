@@ -8,10 +8,8 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	#for 
-	#$Node2D.angular_velocity = $fysic.angular_velocity
-	pass
+	if (get_node(node_b) != null):
+		get_node(node_b).angular_velocity = $fysic.angular_velocity
 	
 func add_attachment(attachment: RigidBody2D):
-	#pass
 	self.node_b = attachment.get_path()
