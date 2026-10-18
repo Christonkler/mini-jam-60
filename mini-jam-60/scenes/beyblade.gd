@@ -20,7 +20,7 @@ var death_vcs: Array[Vector2] = []
 @export var init_vel: int = 40
 @export var init_spin: int = 60
 @export var pos_mod: Vector2 = Vector2(0, 0)
-@export var can_fly: bool = true
+@export var can_fly: bool = false
 
 
 # Called when the node enters the scene tree for the first time.
