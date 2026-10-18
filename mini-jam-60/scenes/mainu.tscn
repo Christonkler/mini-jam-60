@@ -1,10 +1,12 @@
 [gd_scene format=3 uid="uid://ch0n3j3n2eyev"]
 
+[ext_resource type="Script" uid="uid://c1sd6ps4884d4" path="res://scripts/main_menu_area.gd" id="1_5p8pn"]
 [ext_resource type="Texture2D" uid="uid://cxbq6dwsu0041" path="res://assets/trashscreen.png" id="1_6uexj"]
 [ext_resource type="Texture2D" uid="uid://c5qu3wwcucx3j" path="res://assets/sign.png" id="2_ojm1d"]
 [ext_resource type="Script" uid="uid://dgh8qbld8u3ei" path="res://scenes/mainu_btn.gd" id="3_ojm1d"]
 [ext_resource type="AudioStream" uid="uid://jt8nv8ls7kkx" path="res://assets/music/title.wav" id="4_aujhm"]
 [ext_resource type="Texture2D" uid="uid://unsgxn2hckyk" path="res://assets/spintop.png" id="4_dktdq"]
+[ext_resource type="Script" uid="uid://d335onev38nru" path="res://scenes/credits.gd" id="5_5p8pn"]
 [ext_resource type="Script" uid="uid://cdjdiw04bcopb" path="res://scenes/title_screen.gd" id="5_f6u0s"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_mq0dr"]
@@ -13,15 +15,16 @@
 
 [node name="Area2D" type="Area2D" parent="." unique_id=1839580195]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=208821046]
+[node name="MainMenuArea" type="CollisionShape2D" parent="Area2D" unique_id=208821046]
 shape = SubResource("WorldBoundaryShape2D_mq0dr")
+script = ExtResource("1_5p8pn")
 
-[node name="TextureRect" type="TextureRect" parent="Area2D/CollisionShape2D" unique_id=1158499125]
+[node name="TextureRect" type="TextureRect" parent="Area2D/MainMenuArea" unique_id=1158499125]
 offset_right = 640.0
 offset_bottom = 640.0
 texture = ExtResource("1_6uexj")
 
-[node name="Play" type="TextureRect" parent="Area2D/CollisionShape2D" unique_id=1526536601]
+[node name="Play" type="TextureRect" parent="Area2D/MainMenuArea" unique_id=1526536601]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -36,7 +39,7 @@ grow_vertical = 2
 texture = ExtResource("2_ojm1d")
 script = ExtResource("3_ojm1d")
 
-[node name="Label" type="Label" parent="Area2D/CollisionShape2D/Play" unique_id=2082363222]
+[node name="Label" type="Label" parent="Area2D/MainMenuArea/Play" unique_id=2082363222]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -57,7 +60,7 @@ text = "LET IT RIP"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureButton" type="TextureButton" parent="Area2D/CollisionShape2D/Play" unique_id=624506968]
+[node name="TextureButton" type="TextureButton" parent="Area2D/MainMenuArea/Play" unique_id=624506968]
 layout_mode = 0
 offset_left = 3.0
 offset_top = -1.0
@@ -65,7 +68,7 @@ offset_right = 43.0
 offset_bottom = 39.0
 scale = Vector2(4.648671, 1.600504)
 
-[node name="Settings" type="TextureRect" parent="Area2D/CollisionShape2D" unique_id=1400937145]
+[node name="Settings" type="TextureRect" parent="Area2D/MainMenuArea" unique_id=1400937145]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -80,7 +83,7 @@ grow_vertical = 2
 texture = ExtResource("2_ojm1d")
 script = ExtResource("3_ojm1d")
 
-[node name="Label" type="Label" parent="Area2D/CollisionShape2D/Settings" unique_id=1923524679]
+[node name="Label" type="Label" parent="Area2D/MainMenuArea/Settings" unique_id=1923524679]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -97,18 +100,18 @@ theme_override_colors/font_color = Color(0.35114843, 0.9495668, 0.4031567, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 theme_override_font_sizes/font_size = 33
-text = "SETTINGS"
+text = "CREDITS"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureButton" type="TextureButton" parent="Area2D/CollisionShape2D/Settings" unique_id=390527066]
+[node name="TextureButton" type="TextureButton" parent="Area2D/MainMenuArea/Settings" unique_id=390527066]
 layout_mode = 0
 offset_left = 2.9999962
 offset_right = 42.999996
 offset_bottom = 40.0
 scale = Vector2(4.648671, 1.600504)
 
-[node name="Exit" type="TextureRect" parent="Area2D/CollisionShape2D" unique_id=681107295]
+[node name="Exit" type="TextureRect" parent="Area2D/MainMenuArea" unique_id=681107295]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -123,7 +126,7 @@ grow_vertical = 2
 texture = ExtResource("2_ojm1d")
 script = ExtResource("3_ojm1d")
 
-[node name="Label" type="Label" parent="Area2D/CollisionShape2D/Exit" unique_id=1588733502]
+[node name="Label" type="Label" parent="Area2D/MainMenuArea/Exit" unique_id=1588733502]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -144,19 +147,57 @@ text = "QUIT"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="TextureButton" type="TextureButton" parent="Area2D/CollisionShape2D/Exit" unique_id=1307678673]
+[node name="TextureButton" type="TextureButton" parent="Area2D/MainMenuArea/Exit" unique_id=1307678673]
 layout_mode = 0
 offset_left = 2.9999962
 offset_right = 42.999996
 offset_bottom = 40.0
 scale = Vector2(4.648671, 1.600504)
 
-[node name="TitleScreen" type="TextureRect" parent="Area2D/CollisionShape2D" unique_id=1685283176]
+[node name="TitleScreen" type="TextureRect" parent="Area2D/MainMenuArea" unique_id=1685283176]
+visible = false
 visibility_layer = 2
 offset_right = 640.0
 offset_bottom = 641.0
 texture = ExtResource("4_dktdq")
 script = ExtResource("5_f6u0s")
+
+[node name="Credits" type="TextureRect" parent="Area2D/MainMenuArea" unique_id=2095296881]
+visible = false
+light_mask = 2
+visibility_layer = 2
+offset_top = -1.0
+offset_right = 640.0
+offset_bottom = 639.0
+texture = ExtResource("1_6uexj")
+script = ExtResource("5_5p8pn")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Area2D/MainMenuArea/Credits" unique_id=1092634663]
+layout_mode = 0
+offset_left = 26.0
+offset_top = 34.0
+offset_right = 543.0
+offset_bottom = 541.0
+theme_override_colors/default_color = Color(0.9954706, 0.91314876, 0.85273075, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0.69803923, 1)
+theme_override_colors/font_shadow_color = Color(0.25449494, 0.0006063512, 0.6206953, 1)
+theme_override_font_sizes/normal_font_size = 26
+text = "Developers:                                                   
+Matt Vogel                                              
+Peter Weiblen                                        
+Armstrong O'Connell                            
+Chris Abrego                                           
+
+Background Music:                                      
+Somebody                                               
+
+Victory Music:                                               
+Short Lived Victory - Trent Zulkiewicz
+
+Defeated Music:                                           
+Let's Roll - Droodle                                "
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1540919907]
 stream = ExtResource("4_aujhm")

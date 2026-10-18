@@ -11,8 +11,8 @@ func press_button():
 		if FileAccess.file_exists("user://map_data.res"):
 			DirAccess.remove_absolute("user://map_data.res")
 		get_tree().change_scene_to_file("res://scenes/map.tscn")
-	elif txt == "SETTINGS":
-		get_tree().change_scene_to_file("res://scenes/shop.tscn")
+	elif txt == "CREDITS":
+		$"../Credits".visible = true
 	elif txt == "QUIT":
 		get_tree().quit()
 
